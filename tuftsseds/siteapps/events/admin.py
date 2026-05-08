@@ -7,8 +7,6 @@ from django.http.response import HttpResponseRedirect
 from django.utils.text import slugify
 from django.shortcuts import render
 
-import pandas as pd
-
 from .models import Events
 from tuftsseds.siteapps.blog.models import Author
 
@@ -32,6 +30,7 @@ class EventsAdmin(admin.ModelAdmin):
 
     def upload_csv(self, request):
         if request.method == "POST":
+            import pandas as pd
             csv_files = request.FILES.getlist("csv_upload")
 
             for csv_file in csv_files:

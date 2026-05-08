@@ -5,8 +5,6 @@ from django.urls import path
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
 
-import pandas as pd
-
 from .models import (
     ExecMembers,
     BaseSEDSMember,
@@ -54,6 +52,7 @@ class AstrophotographyPhotosAdmin(admin.ModelAdmin):
 
     def upload_csv(self, request):
         if request.method == "POST":
+            import pandas as pd
             csv_files = request.FILES.getlist("csv_upload")
 
             for csv_file in csv_files:
@@ -120,6 +119,7 @@ class ExecMembersAdmin(admin.ModelAdmin):
 
     def upload_csv(self, request):
         if request.method == "POST":
+            import pandas as pd
             csv_files = request.FILES.getlist("csv_upload")
 
             for csv_file in csv_files:
