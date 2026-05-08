@@ -39,7 +39,12 @@ if not DEBUG:
         "django-server-production-0e38.up.railway.app",
         "https://sedstufts.org",
         "sedstufts.org",
+        ".vercel.app",
     ]
+    # Allow the deployment URL Vercel injects at build time
+    vercel_url = os.environ.get("VERCEL_URL")
+    if vercel_url:
+        ALLOWED_HOSTS.append(vercel_url)
 else:
     ALLOWED_HOSTS = ["localhost", "127.0.0.1", "127.0.0.1:8000"]
 
