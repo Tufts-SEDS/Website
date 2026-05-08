@@ -1,0 +1,54 @@
+{% extends '../dashboard-base.html' %}
+{% load static %}
+{% block pagecontent %}
+<div class="page-inner">
+	<div class="page-header">
+		<h4 class="page-title">Rocket Model Upload</h4>
+		<ul class="breadcrumbs">
+			<li class="nav-home">
+				<a>
+					<i class="flaticon-home"></i>
+				</a>
+			</li>
+			<li class="nav-item">
+				<a>Accpeted file formats include .ork, </a>
+			</li>
+		</ul>
+	</div>
+	<div class="card">
+		<div class="card-header">
+			<div class="card-title">Dropzone</div>
+		</div>
+		<div class="card-body">
+			<form id="frmTarget" action="{% url 'account:upload_rocket' %}" class="dropzone">
+				<div class="dz-message" data-dz-message="">
+					<div class="icon">
+						<i class="flaticon-file"></i>
+					</div>
+					<h4 class="message">Drag and Drop files here</h4>
+					<div class="note"></div>
+				</div>
+				{% csrf_token %}
+				<div class="fallback">
+					<input name="file" type="file" multiple="" multiple />
+				</div>
+			</form>
+			<button type="submit" id="button" class="btn btn-primary" style="position: relative; top: 10px; bottom: 0; left: 50%; transform: translateX(-50%); padding-bottom: 10px;">Submit</button>
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<!-- Dropzone -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/min/dropzone.min.js"></script>
+<script>
+	Dropzone.options.frmTarget = {
+	  paramName: 'file',  // The name of the input field
+	  maxFilesize: 20,    // Maximum file size (in MB)
+	  dictDefaultMessage: 'Drop files here or click to upload',
+	  acceptedFiles: '.ork,.csv,.env'
+	  // Add other Dropzone options as needed
+	};
+ </script>
+{% endblock %}

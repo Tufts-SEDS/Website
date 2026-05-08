@@ -1,0 +1,198 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} {{ blog.title }} | Tufts SEDS {% endblock %}
+{% block pagecontent %}
+<!-- Page Content-->
+<div class="apo-page">
+    <div class="container">
+        <main class="apo-section apo-section-thin">
+            <div class="apo-section apo-medium">
+                <!-- Article-->
+                <article class="apo-entry apo-single">
+                    <!-- Article Media-->
+                    <div class="apo-entry-media"><img
+                            style="width: 100%; height: 300px; object-fit: none; object-position: left bottom;"
+                            src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/NanoRacksCubeSatLaunch_ISS038-E-056389.jpg/1280px-NanoRacksCubeSatLaunch_ISS038-E-056389.jpg"
+                            alt=""></div>
+                    <!-- End of Article Media-->
+                    <!-- Article Content-->
+                    <div class="apo-entry-content-wrap">
+                        <header class="apo-entry-header">
+                            <h2 class="apo-entry-title">{{ blog.title }}</h2>
+                            <ul class="apo-entry-meta">
+                                <li>Author: <a href="#">{{ blog.author.author_name }}</a></li>
+                                <li>Published in: <a href="#">{{ blog.publish_date }}</a></li>
+                                <li>Categories:
+                                    {% for category in blog.category.all %}
+                                    <a href="{{ category.get_absolute_url }}">{{ category }}</a>,
+                                    {% endfor %}
+                                </li>
+                            </ul>
+                        </header>
+                        <div class="apo-entry-content">
+                            <p>After our <a href="https://youtu.be/tbuyRW1FYxgand">February</a> and <a
+                                    href="https://youtu.be/P4LRNWtIIF8April">April</a> test flights, the team was quite
+                                confident about our third and final <a href="https://youtu.be/OYpntMfaqYsMay">May test
+                                    flight</a>. After all, those flights had seen
+                                significant success, and
+                                the team was becoming very familiar with assembling, integrating, and preparing the
+                                rocket for flight. A new iteration of the custom onboard flight computers was set to fix
+                                previous data collection issues; the new and updated Booster 2 promised higher flight
+                                performance; and the recovery configuration was simplified to avoid the tangling on the
+                                previous flight.</p>
+                            <p>The launch was planned at a farm in Pine Island, NY, where the soft green sod promised to
+                                give CARM a pillowy touchdown. After a full day of preparation (and unexpected
+                                last-minute flight code GPS debugging efforts), CARM was on the pad and ready to go.
+                                With just minutes left in the FAA waiver, the rocket thundered upwards into the gray sky
+                                and elicited cheers as the drogue parachute deployed at apogee. Three seconds later,
+                                these were cut short, as the team watched the main parachute inflate nearly 3,000 feet
+                                higher than planned.</p>
+                            <h2 class="apo-section-title">Watching Dreams Float Away</h2>
+                            <p>Opening the main parachute at apogee risked carrying the rocket for miles and making it
+                                unrecoverable. Thankfully, after a little time it became evident the rocket was floating
+                                back towards the launch site and that it would fall somewhere within walking distance,
+                                but the wind was not done yet. As CARM floated towards the ground in slow, wide,
+                                graceful spirals, it drifted more and more towards the tree-lined river that cut through
+                                the farm. The team watched in horror as the rocket finally came to a stop in a
+                                70-foot-tall maple overhanging a river swollen by spring flooding.</p>
+                            <h2 class="apo-section-title">Thermal</h2>
+                            <p>The goal for Thermal is to develop a way to keep a regulated temperature inside and
+                                outside of the
+                                payload. There are two main methods: passive and active temperature control. Active
+                                systems require an
+                                input of power and allow for more precise control. Passive systems do not require an
+                                input of power and
+                                are simpler but would allow for much less control. The thermal team works to find the
+                                best material/
+                                system within these categories to regulate the temperature balance, and then implement
+                                them into the
+                                structure.</p>
+                            <h2 class="apo-section-title">Structures</h2>
+                            <p>The goal for Structures is to create a CAD model of the CubeSat that will be used in the
+                                construction
+                                of our product. The subteam considers the EnduroSat parts and helps in deciding what
+                                parts will be made
+                                in house and not. They will also design how they should be put together and how they
+                                should be optimally
+                                designed for weight and strength so that the efficiency is optimized. Then, they will
+                                construct the
+                                structures.</p>
+                            <h2 class="apo-section-title">Command and Data Handling (CDH)</h2>
+                            <p>The Command and Data Handling subteam is responsible for programming and executing tasks
+                                and commands
+                                with the Onboard Computer (OBC), data handling and storage of processed data from the
+                                CubeSAT's sensors
+                                and instruments, developing and implementing software to interpret and execute commands
+                                received from
+                                the ground station, working on protocols and procedures for transmitting telemetry data,
+                                receiving
+                                commands, and maintaining a reliable link. Furthermore, CDH must maintain reliable
+                                communication with
+                                our ground station, to be located hopefully heart at Tufts.</p>
+                            <h2 class="apo-section-title">Power</h2>
+                            <p>The goal for power is to be able to supply the components of the cubesat that require
+                                power with power.
+                                We will be wiring up and integrating solar panels that can provide power to the systems
+                                as well as
+                                batteries so the sat can run the systems while it is being eclipsed by Earth. We will
+                                also be designing
+                                a circuit diagram for the power systems. Additionally, the Power subteam is responsible
+                                for modeling the
+                                power consumption of the CubeSat and breakdowns of individual component power
+                                consumption. The Power
+                                subteam forms the backbone of ensuring that all components of the CubeSat have
+                                sufficient power supply
+                                to ensure that all components can run as efficiently as possible.</p>
+                            <h2 class="apo-section-title">Detumbling and Orbit</h2>
+                            <p>The goal of stabilizing the CubeSat as it tumbles from the NASA rocket into orbit and
+                                maintaining that
+                                stable orbit and trajectory is a complex engineering challenge that requires a
+                                combination of careful
+                                planning, precise calculations, and robust control systems. As for the technical side of
+                                things, this
+                                involves initial tumble stabilization when the CubeSAT is ejected from the rocket,
+                                counteracting the
+                                initial chaotic motion, determining orbit and orchestrating telemetry data alongside
+                                CDH, orbit
+                                maintenance, calculations of atmospheric drag and gravitational perturbations, control
+                                system design,
+                                planning for contingencies in the event of unforeseen anomalies, and testing and
+                                validation to ensure
+                                that the CubeSat can achieve its intended orbit and maintain stability.</p>
+                            <h2 class="apo-section-title">ELaNa Payload</h2>
+                            <p>As part of the NASA CubeSAT Launch Initiative (CLSI), a payload aligned with NASA's
+                                "Education,
+                                Science, or Technology Development" in NASA's strategic plan for the year. The goal for
+                                payload is to
+                                focus on the proposed experiment or purpose for the current cubeSat’s launch. Every
+                                CubeSat must be
+                                accompanied with a proposal in order to be launched, and part of the proposal outlines
+                                the team’s
+                                intentions with the CubeSat. This subteam concerns itself with enabling that payload,
+                                including hardware
+                                integrations with the bus, software capabilities and algorithms being worked on, etc as
+                                well as
+                                researching any additional supporting infrastructure that is necessary for the payload
+                                but not for the
+                                normal CubeSat.The plan for our first CLSI CubeSat launch is to do space debris
+                                detection and
+                                classification using image processing and computer vision methods. Therefore, computer
+                                vision software
+                                and algorithms towards that end comprise a majority of the current interaction of this
+                                subteam. </p>
+                            <p>For a more in depth description of our subteams and project, check out our page on <a
+                                    href="https://sedstufts.notion.site/CubeSat-Homepage-3ddf4a2110d34bf79a62e24674059bc7">Tufts
+                                    SEDS' wiki</a></p>
+                            <h2 class="apo-entry-title">SpacePort Collaboration with Tufts Rocketry</h2>
+                            <p>Tufts CubeSAT is partnering with the Tufts Rocketry team to design and build a functional
+                                2U CubeSAT
+                                (10cm x 10cm x 20cm) with two main objectives. The primary goal will be to monitor and
+                                collect data on
+                                atmospheric conditions such as temperature, humidity, pressure, and particulate matter.
+                                The secondary
+                                goal will be testing onboard Reaction Wheels designed, tested, prototyped, and
+                                fabricated by our own in
+                                house student efforts.
+                            </p>
+                            <p>
+                                Our payload will test the spacecraft shell, sensors, and flight code in launch
+                                environment and
+                                low-altitude flight environment. It will also demonstrate capability and precision of
+                                the reaction
+                                wheels to control the CubeSAT, validated by testing how the reaction wheels actuate
+                                based on measured
+                                inputs. Meanwhile, the atmospheric payload will be collecting data for later analysis
+                                during the
+                                entirety of the flight. Small vents in the payload section of the airframe will provide
+                                the CubeSAT with
+                                the necessary access to the outside atmosphere, enabling good data recording.
+                            </p>
+                        </div>
+                        <footer class="apo-entry-footer">
+                            <div class="row apo-table-row-md">
+                                <div class="col-md-6">
+                                    <div class="apo-inline-block">
+                                        <div class="apo-named-element"><span class="apo-named-element-caption">Tags:
+                                            </span>
+                                            <div class="apo-named-element-container">
+                                                <ul class="apo-entry-tags">
+                                                    {% for tag in blog.tags.names %}
+                                                    <li><a href="#">{{ tag }}</a></li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </footer>
+                    </div>
+                    <!-- End of Article Content-->
+                </article>
+                <!-- End Article-->
+            </div>
+            <hr>
+        </main>
+    </div>
+</div>
+<!-- End Page Content-->
+{% endblock %}

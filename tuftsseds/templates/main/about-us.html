@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} About Us | Tufts SEDS {% endblock %}
+{% block pagecontent %}
+
+{% block before_mainstyle %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
+<style>
+    .splide__slide {
+        position: relative;
+    }
+</style>
+{% endblock %}
+<!-- Page Content-->
+<div class="apo-page">
+  <div class="apo-page-header">
+    <div class="apo-page-header-column">
+        <h1 class="apo-page-title">About Us</h1>
+    </div>
+  </div>
+  <div class="apo-section">
+    <div class="apo-grid apo-cols-2">
+      <div class="apo-grid-col" style="padding: 4%">
+        <section id="image-carousel" class="splide" aria-label="Beautiful Images">
+          <div class="splide__track">
+            <ul class="splide__list">
+              <li class="splide__slide">
+                <img src="{% static 'images/holytrinity.jpg' %}" alt="">
+              </li>
+
+              <li class="splide__slide">
+                <img src="{% static 'images/machineboys.jpg' %}" alt="">
+              </li>
+            </ul>
+          </div>
+        </section>
+      </div>
+      <div class="apo-grid-col" style="padding: 4%">
+              <p>At Tufts University, our Students for the Exploration and Development of Space (SEDS) club offers an
+          inclusive community of enthusiastic aerospace-loving students. As part of our global network of SEDS
+          members, we provide a range of exciting opportunities. These include the chance to develop technical skills,
+          collaborate on team projects, participate in outreach initiatives, connect with industry professionals,
+          attend conferences, and immerse yourself in space-themed events.</p>
+          <p>Our diverse membership represents various academic backgrounds and experiences, with majors spanning
+              mechanical engineering to astrophysics to electrical engineering to international relations. 
+              We welcome anyone with a passion for space!</p>
+          <p>To join our community, simply attend our general meetings or reach out to us via email at <a
+                  href="mailto:support@sedstufts.org">support@sedstufts.org</a>. Ad astra!</p>
+      </div>
+    
+    <div class="apo-grid-col" style="padding: 4%">
+      <div class="apo-services">
+        <div class="apo-service">
+          <h4 class="apo-section-title">We aspire to cultivate within our members:</h4>
+          <p> <strong>Community</strong> among Jumbos with a shared passion for aerospace and discovery of the unknown.
+            Our chapter aims to foster a welcoming home for aerospace learners and engineers while facilitating
+            an environment that helps students to develop technical, project-based skills through engagement in hands-on
+            projects, engineering competitions, and outreach activities.</p>
+
+          <p> <strong>Curiosity </strong>and the desire to explore aerospace and the region beyond. Our techical projects invoke
+             innovation and creativity, allowing us to develop new technologies and approaches to problem-solving.</p>
+        </div>
+        <div class="apo-service">
+          <p> <strong>Collaboration and interpersonal skills, </strong>prioritizing the ability to
+            overcome political, cultural, and linguistic barriers and collaborate towards a shared goal.</p>
+          </div><br>
+      </div>
+    </div>
+    <div class="apo-grid-col" style="padding: 4%">
+      <img src="{% static 'images/main/predarkages-2018-spacevision-comp.jpg' %}" alt="">
+    </div>
+
+    <h2 class="apo-section-sub-title" style="text-align: center; padding: 4%">Tufts SEDS, a 501(c) nonprofit organization, is affiliated with SEDS-USA, a
+      national organization that empowers young people to participate in the space industry and promote space
+      exploration.</h2>
+  </div>
+  <!-- Content Section-->
+</div>
+  <!-- End Content Section-->
+</div>
+<!-- End Page Content-->
+{% endblock %}
+
+{% block extrascripts %}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    document.body.className = 'apo-page-dark-skin';
+  });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+<script src="
+https://cdn.jsdelivr.net/npm/@splidejs/splide-extension-video@0.8.0/dist/js/splide-extension-video.min.js
+"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var splide = new Splide('.splide', {
+            type: 'loop', // Carousel type: loop, slide, etc.
+            perPage: 1, // Number of slides per page
+            perMove: 1, // Number of slides to move on navigation
+            height: 450,
+            heightRatio: 0.5625, // 16:9 aspect ratio
+            cover: true, // Cover images/videos to fit slide
+            autoplay: true, // Enable autoplay
+            interval: 3000, // Autoplay interval in ms
+            pauseOnHover: true, // Pause autoplay on hover
+            pauseOnFocus: true, // Pause autoplay on focus
+            arrows: true, // Show next/prev arrows
+            pagination: true, // Show pagination dots
+            video: {
+                loop: true,
+                autoplay: true, // Autoplay videos
+                controls: true, // Show video controls
+            },
+        });
+
+        splide.mount(window.splide.Extensions);
+    });
+</script>
+
+{% endblock %}

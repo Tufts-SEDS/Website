@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} {{ searched }} Search Results | Tufts SEDS {% endblock %}
+
+{% block pagecontent %}
+<!-- Page Content-->
+<div class="apo-page">
+    <div class="container">
+        <!-- Page Header-->
+        <div class="apo-page-header apo-style-2">
+            <div class="apo-page-header-column">
+                <h1 class="apo-page-title">Search Results for...{{ searched }}</h1>
+            </div>
+        </div>
+        <!-- End Page Header-->
+        <div class="apo-section">
+            <!-- Isotope-->
+            <div data-isotope-layout="grid" data-isotope-filter="#isotope-filter"
+                class="apo-isotope apo-cols-3 apo-entries-container apo-style-3">
+                <div class="grid-sizer"></div>
+                {% for blog in blogresults %}
+                <div class="apo-item">
+                    <!-- Article-->
+                    <article class="apo-entry">
+                        <div class="apo-entry-inner">
+                            <div class="apo-entry-media"><a href="{{ blog.get_absolute_url }}"><img src="{{ blog.cover_image }}" alt=""></a></div>
+                            <div class="apo-entry-content-wrap">
+                                <div class="apo-aligner-outer">
+                                    <div class="apo-aligner-inner">
+                                        <header class="apo-entry-header">
+                                            <ul class="apo-entry-categories">
+                                                {% for category in blog.category.all %}
+                                                    <li><a href="{{ category.get_absolute_url }}">{{ category }}</a></li>
+                                                {% endfor %}
+                                            </ul>
+                                            <h2 class="apo-entry-title"><a href="{{ blog.get_absolute_url }}">{{ blog.title }}</a></h2>
+                                        </header>
+                                        <div class="apo-entry-content">
+                                            <p>{{ blog.short_description }}...</p>
+                                        </div>
+                                        <footer class="apo-entry-footer">
+                                            <time datetime="{{ blog.publish_date }}" class="apo-entry-publish-date">{{ blog.publish_date }}</time>
+                                        </footer>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                    <!-- End Article-->
+                </div>
+                {% endfor %}
+                {% for event in eventresults %}
+                <div class="apo-item">
+                    <!-- Article-->
+                    <article class="apo-entry">
+                        <div class="apo-entry-inner">
+                            <div class="apo-entry-media"><a href="{{ event.get_absolute_url }}"><img src="{{ event.cover_image }}" alt=""></a></div>
+                            <div class="apo-entry-content-wrap">
+                                <div class="apo-aligner-outer">
+                                    <div class="apo-aligner-inner">
+                                        <header class="apo-entry-header">
+                                            <ul class="apo-entry-categories">
+                                                    <li><a></a></li>
+                                            </ul>
+                                            <h2 class="apo-entry-title"><a href="{{ event.get_absolute_url }}">{{ event.title }}</a></h2>
+                                        </header>
+                                        <footer class="apo-entry-footer">
+                                            <time datetime="{{ event.date }}" class="apo-entry-publish-date">{{ event.date }}</time>
+                                        </footer>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                    <!-- End Article-->
+                </div>
+                {% endfor %}
+            </div>
+            <!-- End Isotope-->
+        </div>
+        {% comment %} <div class="apo-page-controls">
+            <!-- Pagination-->
+            <nav>
+                <ul class="apo-pagination">
+                    <li class="nv-current"><span class="page-numbers current">1</span></li>
+                    <li><a href="#" class="page-numbers">2</a></li>
+                    <li><span class="page-numbers dots">...</span></li>
+                    <li><a href="#" class="page-numbers">5</a></li>
+                </ul>
+            </nav>
+            <!-- End Pagination-->
+        </div> {% endcomment %}
+    </div>
+</div>
+<!-- End Page Content-->
+{% endblock %}

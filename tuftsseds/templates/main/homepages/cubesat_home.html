@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} CubeSat | Tufts SEDS {% endblock %}
+{% block pagecontent %}
+<!-- Page Content-->
+<div class="apo-page">
+    <div class="container">
+        <!-- Page Header-->
+        <div class="apo-page-header apo-style-2">
+            <div class="apo-page-header-column">
+                <h1 class="apo-page-title">Tufts SEDS CubeSat Team</h1>
+            </div>
+            <div class="apo-page-header-column">
+                <nav class="apo-filter-wrap">
+                    <ul id="isotope-filter" class="apo-filter">
+                        <li><a href="#" data-filter="*" class="apo-active">All</a></li>
+                        <li><a href="#" data-filter=".apo-adcs">ADCS</a></li>
+                        <li><a href="#" data-filter=".apo-therm-sys">Thermal Systems</a></li>
+                        <li><a href="#" data-filter=".apo-structures">Structures</a></li>
+                        <li><a href="#" data-filter=".apo-cdh">CDH</a></li>
+                        <li><a href="#" data-filter=".apo-power">Power</a></li>
+                        <li><a href="#" data-filter=".apo-comp-vis">Computer Vision</a></li>
+                        <li><a href="#" data-filter=".apo-payload">Payload</a></li>
+                        <li><a href="#" data-filter=".apo-IT">Integration and Testing</a></li>
+                        <li><a href="#" data-filter=".apo-DO">Detumbling and Orbit</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div>
+            Tufts SEDS CubeSat team is on a mission to contribute to space exploration by building a CubeSat designed to
+            detect and identify space debris. Our team, composed of students from diverse academic backgrounds, shares a
+            common passion for unraveling the mysteries of the cosmos. Stay tuned as we work towards our goal of
+            launching this satellite into the final frontier.
+        </div>
+        <br>
+        <div>
+            For more information, see our website <a style="font-weight: bold;" href="https://tufts-cubesat.vercel.app">here</a>.
+        </div>
+        <hr>
+        <!-- End Page Header-->
+        <div class="apo-section">
+            <!-- Isotope-->
+            <div data-isotope-layout="grid" data-isotope-filter="#isotope-filter"
+                class="apo-isotope apo-cols-3 apo-entries-container apo-style-3">
+                <div class="grid-sizer"></div>
+                <!-- Add apo-item plus whatever other class the article relates to-->
+                {% comment %} Goes through the list in backwards order bc of how it ws sorted in the view {% endcomment %}
+                {% for result in results reversed %}
+                <div class="apo-item apo-{% if result.filter == 2 %}launches{% elif result.filter == 1 %}projects{% else %}other{% endif %}">
+                    <!-- Article-->
+                    <article class="apo-entry">
+                        <div class="apo-entry-inner">
+                            <div class="apo-entry-media"><a href="{{ result.get_absolute_url }}"><img src="{{ result.cover_image }}" alt="{{ result.title }}"></a></div>
+                            <div class="apo-entry-content-wrap">
+                                <div class="apo-aligner-outer">
+                                    <div class="apo-aligner-inner">
+                                        <header class="apo-entry-header">
+                                            <h2 class="apo-entry-title"><a href="{{ result.get_absolute_url }}">{{ result.title }}</a></h2>
+                                        </header>
+                                        <footer class="apo-entry-footer">
+                                            {% if result.date %}
+                                            <time datetime="{{ result.date }}" class="apo-entry-publish-date">
+                                                {{ result.date }}
+                                            </time>
+                                            {% else %}
+                                            <time datetime="{{ result.publish_date }}" class="apo-entry-publish-date">
+                                                {{ result.publish_date }}
+                                            </time>
+                                            {% endif %}
+                                        </footer>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                    <!-- End Article-->
+                </div>
+                {% endfor %}
+                <!-- End Isotope-->
+            </div>
+            {% comment %} <div class="apo-page-controls">
+                <!-- Pagination-->
+                <nav>
+                    <ul class="apo-pagination">
+                        <li class="nv-current"><span class="page-numbers current">1</span></li>
+                        <li><a href="#" class="page-numbers">2</a></li>
+                        <li><span class="page-numbers dots">...</span></li>
+                        <li><a href="#" class="page-numbers">5</a></li>
+                    </ul>
+                </nav>
+                <!-- End Pagination-->
+            </div> {% endcomment %}
+        </div>
+    </div>
+    <!-- End Page Content-->
+</div>
+{% endblock %}

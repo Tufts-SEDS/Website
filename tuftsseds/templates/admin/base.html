@@ -1,0 +1,6 @@
+{% extends 'admin/base.html' %}
+
+{% block userlinks %}
+  {{ block.super }}
+  <li><a href="{% url 'account:dashboard' %}">Switch to Modern Admin View</a></li>
+{% endblock %}

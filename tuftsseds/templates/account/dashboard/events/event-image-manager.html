@@ -1,0 +1,41 @@
+{% extends '../dashboard-base.html' %}
+{% load static %}
+{% block title %} Event Image Manager | Tufts SEDS Dashboard {% endblock %}
+{% block pagecontent %}
+<div class="row row-projects">
+    {% for event in page_obj %}
+    <div class="col-sm-6 col-lg-3">
+        <div class="card">
+            <a href="{% url 'account:edit_event' event.slug %}">
+                <div class="p-2">
+                    <a href="{% url 'account:edit_event' event.slug %}">
+                        <img class="card-img-top rounded" src="{{ event.cover_image }}">
+                </div>
+                <div class="card-body pt-2">
+                    <h4 class="mb-1 fw-bold">{{ event.title }}</h4>
+                    <p class="text-muted small mb-2">Event date: {{ event.date }}</p>
+                </div>
+            </a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+        <a href="?page=1">&laquo; first</a>
+        <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">next</a>
+        <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+{% endblock %}

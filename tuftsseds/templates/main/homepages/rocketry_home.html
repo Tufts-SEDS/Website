@@ -1,0 +1,217 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Rocketry | Tufts SEDS {% endblock %}
+
+{% block before_mainstyle %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
+<link href="
+https://cdn.jsdelivr.net/npm/@splidejs/splide-extension-video@0.8.0/dist/css/splide-extension-video.min.css
+" rel="stylesheet">
+<!-- Optional: Custom Styles -->
+<style>
+    .carousel-container {
+        max-width: 1200px;
+        width: 80%;
+        justify-content: center;
+    }
+
+
+    /* Ensure videos cover the slide area */
+    .splide__slide video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    /* Optional: Style captions or overlays */
+    .caption {
+        position: absolute;
+        bottom: 10px;
+        left: 20px;
+        color: white;
+        background: rgba(0, 0, 0, 0.5);
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 14px;
+    }
+
+    /* Position captions relative to slides */
+    .splide__slide {
+        position: relative;
+    }
+</style>
+{% endblock %}
+
+{% block pagecontent %}
+<div class="apo-page">
+    <div class="container">
+        <!-- Rocketry Page Header-->
+        <div class="apo-page-header apo-style-2">
+            <div class="apo-page-header-column">
+                <h1 class="apo-page-title">Tufts Rocketry Team</h1>
+            </div>
+            <div class="apo-page-header-column">
+                <nav class="apo-filter-wrap">
+                    <ul class="apo-navigation">
+                        <ul id="isotope-filter" class="apo-filter">
+                            <li><a href="{% url 'main:rocket_hp' %}">Rocketry Home</a></li>
+                            <li><a href="{% url 'main:rocket_launch' %}">Launches</a></li>
+                            <li><a href="{% url 'main:rocket_projects' %}">Projects</a></li>
+                            <li><a href="{% url 'main:rocket_leadership' %}">Leadership</a></li>
+                            <li class="apo-has-children"><a href="#">Sponsors</a>
+                                <ul class="apo-sub-menu" style="width: auto;">
+                                    <li style="width: auto;"><a href="{% url 'main:rocket_our_sponsers' %}">Our
+                                            Sponsors</a></li>
+                                    <li style="width: auto;"><a href="{% url 'main:rocket_become_sponser' %}">Become a
+                                            Sponsor</a></li>
+                                    <li style="width: auto;"><a href="{% url 'main:rocket_donate' %}">Donate to Tufts
+                                            SEDS</a></li>
+                                </ul>
+                            </li>
+                            {% comment %} <li><a href="{% url 'main:rocket_gallery' %}">Gallery</a></li>
+                            {% endcomment %}
+                        </ul>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <!-- End Rocketry Page Header-->
+    <!-- Rocketry Content Section-->
+    {% block rocket_content %}
+    <!-- Splide Carousel Container -->
+    <div class="container">
+        <div class="splide">
+            <div class="splide__track">
+                <ul class="splide__list">
+
+                    <!-- Slide 1: Video (YouTube) -->
+                    <li class="splide__slide" data-splide-youtube="https://www.youtube.com/watch?v=zW2_JGOw7Ao">
+                    </li>
+
+
+                    <!-- Slide 2: Image -->
+                    <li class="splide__slide">
+                        <img src="{% static 'images/rocketry/temp_rockethp1.webp' %}" alt="Image 2">
+                        <div class="caption">Tufts Rocketry @ Spaceport 2024</div>
+                    </li>
+
+                    <!-- Slide 3: Image -->
+                    <li class="splide__slide">
+                        <img src="{% static 'images/rocketry/temp_rockethp3.webp' %}" alt="Image 3">
+                        <div class="caption">Tufts Rocketry @ Spaceport 2024</div>
+                    </li>
+
+                    <!-- Slide 4: Image -->
+                    <li class="splide__slide">
+                        <img src="{% static 'images/events/launch_frostyflights/launch_frostyflights_17.webp' %}"
+                            alt="Image 4">
+                        <a href="https://sedstufts.org/events/launch-frosty-flights-with-sparkling-re-launches-in-st-albans"><div class="caption">Frosty Flights with Sparkling Re-Launches in St. Albans</div></a>
+                    </li>
+
+                    <!-- Slide 2: Video (Self-Hosted) -->
+                    <!-- <li class="splide__slide">
+                        <video data-splide-video="true" controls>
+                            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="caption">Caption for Video 1</div>
+                    </li> -->
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- End of Splide Carousel Container -->
+    <div class="container">
+        <section class="apo-section" style="text-align: center;">
+            <h4>About Us</h4>
+
+            <p>Tufts SEDS Rocketry is a student-led organization dedicated to designing, building, and launching
+                high-power rockets! Our diverse, experienced, and highly-motivated team comprises students studying
+                everything from mechanical and electrical engineering to physics, computer science, chemistry, and even
+                English. We are all passionate about space, excited to tackle the challenges of rocketry, and committed
+                to developing a supportive aerospace community at Tufts.
+            </p>
+
+            <p>With our flagship team rocket program, we seek to apply our rocketry expertise at the highest possible
+                level. This year, we are
+                designing our team rocket for the prestigious Spaceport America Cup competition. We have developed a
+                strong, cohesive team, supported by mentors in industry and academia, with the ultimate goal of
+                long-term project sustainability and continuous technical improvement.</p>
+
+            <p>In our individual rocket program, members work towards personal NAR Level 1 and 2 certifications, or work
+                on personal project rockets. This provides an excellent starting point for students interested in
+                rocketry, and helps members learn many of the skills applicable to the larger and more complex team
+                rocket.</p>
+        </section>
+
+        <div class="apo-section">
+            <h2 class="apo-section-title">Team Statistics</h2>
+            <!-- Counters-->
+            <div class="apo-grid apo-cols-4">
+                <!-- Counter-->
+                <div class="apo-grid-col">
+                    <div data-value="64" class="apo-counter">Member Count</div>
+                </div>
+                <!-- End Counter-->
+                <!-- Counter-->
+                <div class="apo-grid-col">
+                    <div data-value="61" class="apo-counter">Rockets Launched</div>
+                </div>
+                <!-- End Counter-->
+                <!-- Counter-->
+                <div class="apo-grid-col">
+                    <div data-value="86" class="apo-counter">Success Rate (%)</div>
+                </div>
+                <!-- End Counter-->
+                <!-- Counter-->
+                <div class="apo-grid-col">
+                    <div data-value="9462" class="apo-counter">Altitude Record (ft)</div>
+                </div>
+                <!-- End Counter -->
+                {% comment %}
+                <!-- Change to 3601 for cisco -->
+                {% endcomment %}
+            </div>
+            <!-- End Counters-->
+        </div>
+    </div>
+    <!-- We put the scripts for the carousel to avoid errors when using this template -->
+    {% endblock %}
+    <!-- End Rocketry Content Section-->
+</div>
+{% endblock %}
+
+{% block extrascripts %}
+{% block rocketry_scripts %}
+<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+<script src="
+https://cdn.jsdelivr.net/npm/@splidejs/splide-extension-video@0.8.0/dist/js/splide-extension-video.min.js
+"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var splide = new Splide('.splide', {
+            type: 'loop', // Carousel type: loop, slide, etc.
+            perPage: 1, // Number of slides per page
+            perMove: 1, // Number of slides to move on navigation
+            heightRatio: 0.5625, // 16:9 aspect ratio
+            cover: true, // Cover images/videos to fit slide
+            autoplay: true, // Enable autoplay
+            interval: 3000, // Autoplay interval in ms
+            pauseOnHover: true, // Pause autoplay on hover
+            pauseOnFocus: true, // Pause autoplay on focus
+            arrows: true, // Show next/prev arrows
+            pagination: true, // Show pagination dots
+            video: {
+                loop: true,
+                autoplay: true, // Autoplay videos
+                controls: true, // Show video controls
+            },
+        });
+
+        splide.mount(window.splide.Extensions);
+    });
+</script>
+{% endblock %}
+{% endblock %}

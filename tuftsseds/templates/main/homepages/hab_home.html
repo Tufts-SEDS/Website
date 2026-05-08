@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} High Altitude Weather Balloon | Tufts SEDS {% endblock %}
+{% block pagecontent %}
+<!-- Page Content-->
+<div class="apo-page">
+    <div class="apo-medium">
+        <article class="apo-entry apo-single">
+            <!-- Article Media-->
+            <div class="apo-entry-media"><img
+                    style="width: 100%; height: 300px; object-fit: fill; object-position: left bottom; "
+                    src="{% static 'images/weather-balloon/kupol-meteozond-aerostat.jpg' %}" alt="">
+                <div
+                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 1)); pointer-events: none;">
+                    <div
+                        style="transform: translate(0%, 300%); color: white; font-size: 48px; font-weight: bold; text-align: center;">
+                        Tufts HAB Team
+                    </div>
+                </div>
+            </div>
+            <!-- End Article Media-->
+        </article>
+    </div>
+    <style>
+        .hab-nav {
+            background: #000;
+            height: 60px;
+            text-align: center;
+        }
+
+        .hab-nav li {
+            display: inline-block;
+            list-style: none;
+            height: 60px;
+            /* should be the same as line-height */
+            line-height: 60px;
+            /* should be the same as height */
+            padding: 0 40px;
+            /* "0" sets top and bottom padding to none */
+        }
+
+        .hab-nav li:hover {
+            background: whitesmoke;
+            transition: background .3s;
+        }
+
+        /* This rule is applied to the link <a> tag. It lets you turn off the link underline and set the link text color. */
+        .nav-link {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .hab-nav li:hover .nav-link {
+            color: black;
+        }
+    </style>
+    <div class="nav hab-nav">
+        <ul>
+            <li><a href="#" class="nav-link">Launches</a></li>
+            <li><a href="#" class="nav-link">Reports</a></li>
+            <li><a href="#" class="nav-link">Updates</a></li>
+        </ul>
+    </div>
+    <div class="container">
+        <!-- Page Header-->
+        <br>
+        <br>
+        <div>
+            The Tufts High Altitude Balloon (HAB) team empowers students to explore science and engineering through
+            hands-on stratospheric experiments. By launching custom-built payloads on weather balloons, we test ideas in
+            near-space conditions to turn theory into tangible discoveries. Each mission starts with a question—and ends
+            with data, lessons, and a renewed drive to explore what's next.
+        </div>
+        <hr>
+        <!-- End Page Header-->
+        <div class="apo-section">
+            <!-- Isotope-->
+            <div data-isotope-layout="grid" data-isotope-filter="#isotope-filter"
+                class="apo-isotope apo-cols-3 apo-entries-container apo-style-3">
+                <div class="grid-sizer"></div>
+                <!-- Add apo-item plus whatever other class the article relates to-->
+                <div class="apo-item apo-travel apo-motivation">
+                    <!-- Article-->
+                    {% comment %} <article class="apo-entry">
+                        <div class="apo-entry-inner">
+                            <div class="apo-entry-media"><a href="#"><img
+                                        src="https://github.com/therealchrif/welcome/blob/master/images/img-27.jpg?raw=true"
+                                        alt=""></a></div>
+                            <div class="apo-entry-content-wrap">
+                                <div class="apo-aligner-outer">
+                                    <div class="apo-aligner-inner">
+                                        <header class="apo-entry-header">
+                                            <ul class="apo-entry-categories">
+                                                <li><a href="#">Travel</a></li>
+                                            </ul>
+                                            <h2 class="apo-entry-title"><a href="#">Tremblant In Canada</a></h2>
+                                        </header>
+                                        <footer class="apo-entry-footer">
+                                            <time datetime="2016-12-24" class="apo-entry-publish-date">24 December,
+                                                2016</time>
+                                        </footer>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article> {% endcomment %}
+                    <!-- End Article-->
+                </div>
+                <!-- End Isotope-->
+            </div>
+            {% comment %} <div class="apo-page-controls">
+                <!-- Pagination-->
+                <nav>
+                    <ul class="apo-pagination">
+                        <li class="nv-current"><span class="page-numbers current">1</span></li>
+                        <li><a href="#" class="page-numbers">2</a></li>
+                        <li><span class="page-numbers dots">...</span></li>
+                        <li><a href="#" class="page-numbers">5</a></li>
+                    </ul>
+                </nav>
+                <!-- End Pagination-->
+            </div> {% endcomment %}
+        </div>
+    </div>
+    <!-- End Page Content-->
+</div>
+{% endblock %}

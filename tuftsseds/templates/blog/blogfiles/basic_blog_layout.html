@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} {{ blog.title }} | Tufts SEDS {% endblock %}
+{% block pagecontent %}
+<!-- Page Content-->
+<div class="apo-page">
+    <div class="container">
+        <main class="apo-section apo-section-thin">
+            <div class="apo-section apo-medium">
+                <!-- Article-->
+                <article class="apo-entry apo-single">
+                    <!-- Article Media-->
+                    <div class="apo-entry-media"><img src="images/img-159.jpg" alt=""></div>
+                    <!-- End of Article Media-->
+                    <!-- Article Content-->
+                    <div class="apo-entry-content-wrap">
+                        <header class="apo-entry-header">
+                            <h2 class="apo-entry-title">{{ blog.title }}</h2>
+                            <ul class="apo-entry-meta">
+                                <li>Author: <a href="#">{{ blog.author.author_name }}</a></li>
+                                <li>Published in: <a href="#">{{ blog.publish_date }}</a></li>
+                                <li>Categories:
+                                    {% for category in blog.category.all %}
+                                    <a href="#">{{ category }}</a>,
+                                    {% endfor %}
+                                </li>
+                            </ul>
+                        </header>
+                        <div class="apo-entry-content">
+
+
+                            <!-- Actual content goes in here -->
+
+                        </div>
+                        <footer class="apo-entry-footer">
+                            <div class="row apo-table-row-md">
+                                <div class="col-md-6">
+                                    <div class="apo-inline-block">
+                                        <div class="apo-named-element"><span class="apo-named-element-caption">Tags:
+                                            </span>
+                                            <div class="apo-named-element-container">
+                                                <ul class="apo-entry-tags">
+                                                    {% for tag in blog.tags.names %}
+                                                    <li><a href="#">{{ tag }}</a></li>,
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="apo-inline-block">
+                                        {% comment %} <div class="apo-named-element"><span
+                                                class="apo-named-element-caption">Share On:</span>
+                                            <div class="apo-named-element-container">
+                                                <!-- Social Networks-->
+                                                <ul class="apo-social-networks">
+                                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                                    <li><a href="#"><i class="fa fa-google"></i></a></li>
+                                                    <li><a href="#"><i class="fa fa-pinterest-p"></i></a></li>
+                                                </ul>
+                                                <!-- End Social Networks-->
+                                            </div>
+                                        </div> {% endcomment %}
+                                    </div>
+                                </div>
+                            </div>
+                        </footer>
+                    </div>
+                    <!-- End of Article Content-->
+                </article>
+                <!-- End Article-->
+            </div>
+            <hr>
+        </main>
+    </div>
+</div>
+<!-- End Page Content-->
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} {{ event.title }} | Tufts SEDS {% endblock %}
+{% block pagecontent %}
+<div class="apo-page">
+    <div class="apo-fixed-content-fixed-col">
+      <h2>{{ event.title }}</h2>
+      {% if event.is_description_html %}
+        {{ event.description|safe }}
+      {% else %}
+        <p>{{ event.description }}</p>
+      {% endif %}
+      <hr class="apo-divider-small apo-divider-thin"/>
+      <dl class="apo-project-details">
+        <dt>Author:</dt>
+        <dd>{{ event.author.author_name }}</dd>
+        <dt>Date:</dt>
+        <dd>{{ event.date }}</dd>
+        <dt>Photo Credit:</dt>
+        <dd>{{ event.photo_credits }}</dd>
+      </dl>
+      <!-- Social Networks-->
+      <ul class="apo-social-networks">
+        <li><a href="https://www.youtube.com/@TuftsSEDS"><i class="fa fa-youtube-play"></i></a></li>
+        <li><a href="https://www.linkedin.com/company/tufts-seds"><i class="fa fa-linkedin"></i></a></li>
+        <li><a href="https://www.instagram.com/tufts.seds/"><i class="fa fa-instagram"></i></a></li>
+      </ul>
+      <!-- End Social Networks-->
+    </div>
+    <div class="apo-fixed-content-scroll-col">
+      <div class="apo-project-images">
+        {% for image in event_images %}
+        <img src="{{ image }}" loading="lazy" alt="{{ event.title }}"/>
+        {% endfor %}
+      </div>
+    </div>
+</div>
+{% endblock %}

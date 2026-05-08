@@ -1,0 +1,150 @@
+<!-- Site Header-->
+    <header id="header" class="apo-header apo-header-dark">
+      <div class="apo-header-section apo-sticky">
+        <div class="apo-header-component-first">
+          <div class="apo-header-items">
+            <div class="apo-header-item">
+              <!-- Logo-->
+                    <a href="{% url 'main:home' %}" 
+                    title="Home" class="apo-logo">
+                    <img src="{% static 'images/logo.png' %}" alt="Logo"></a>
+              <!-- End Logo-->
+            </div>
+          </div>
+        </div>
+        <div class="apo-header-component-middle">
+          <div class="apo-header-items">
+            <div class="apo-header-item">
+              <!-- Navigation-->
+              <nav class="apo-navigation-container">
+                <ul class="apo-navigation">
+                  <li class="apo-has-children apo-current"><a href="{% url 'main:home' %}">Home</a>
+                    <!-- Sub Menu (level 2)-->
+                    <ul class="apo-sub-menu">
+                      <li><a href="{% url 'main:rocket_hp' %}">Rocketry</a></li>
+                      <li><a href="{% url 'main:weatherball_hp' %}">Weather Balloon</a></li>
+                      <li><a href="{% url 'main:cubesat_hp' %}">CubeSat</a></li>
+                      <li><a href="{% url 'main:cubesat_hp' %}">Radio Telescope</a></li>
+                      <li><a href="{% url 'main:astrophotography_hp' %}">Astrophotography</a></li>
+                  </ul>
+                    <!-- End of SubMenu-->
+                  </li>
+                  <li class=""><a class="dynamic-color" href="{% url 'main:leadership' %}">Leadership</a></li>
+                  <li class=""><a class="dynamic-color" href="{% url 'blog:blogs' %}">Blog</a></li>
+                  <li class=""><a class="dynamic-color" href="{% url 'events:events' %}">Events</a></li>
+                  <li class=""><a class="dynamic-color" href="{% url 'main:about_us' %}">About Us</a></li>
+                  <li class=""><a class="dynamic-color" href="{% url 'events:events' %}">Contact Us</a></li>
+                  </li>
+                  {% comment %} <li class="apo-has-children"><a class="dynamic-color">Database</a> {% endcomment %}
+                    <!-- Sub Menu (level 2)-->
+                    {% comment %} <ul class="apo-sub-menu">
+                      <li><a href="portfolio_masonry_fit_width_4_columns.html">Rocketry</a></li>
+                      <li><a href="portfolio_masonry_fit_width_3_columns.html">CubeSat</a></li>
+                      <li><a href="portfolio_classic_sortable_4_columns.html">Weather Balloon</a></li>
+                      <li><a href="portfolio_single_post.html">Astrophotography</a></li> 
+                    </ul> {% endcomment %}
+                    <!-- End of SubMenu-->
+                  </li>
+                </ul>
+              </nav>
+              <!-- End Navigation-->
+            </div>
+          </div>
+        </div>
+        <div class="apo-header-component-last">
+          <div class="apo-header-items">
+            <div class="apo-header-item">
+              <form class="apo-oneline-form apo-rounded-form">
+                <input type="search" name="s" placeholder="Search..." tabindex="1"/>
+                <button type="submit"><i class="icon icon-magnifier"></i></button>
+              </form>
+            </div>
+            <div class="apo-header-item">
+              <!-- Navigation Button-->
+              <button type="button" data-arctic-modal="#modal-nav" class="hamburger hamburger--emphatic apo-hamburger-clickable"><span class="hamburger-box"><span class="hamburger-inner"></span></span></button>
+              <!-- End Navigation Button-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- End Site Header-->
+
+
+
+
+
+
+
+    <!-- Site Header-->
+    <header id="header" class="apo-header apo-header-transparent">
+      <div class="apo-header-section">
+        <div class="apo-header-component-first">
+          <div class="apo-header-items">
+            <div class="apo-header-item">
+              <!-- Navigation Button-->
+              {% comment %} <div type="button" data-arctic-modal="#modal-nav" class="apo-header-button hamburger hamburger--emphatic apo-hamburger-clickable"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div> {% endcomment %}
+              <!-- End Navigation Button-->
+            </div>
+            <div class="apo-header-item">
+              {% comment %} <!-- Logo-->
+                    <a href="{% url 'main:home' %}" 
+                    title="Home" class="apo-logo">
+                    <img src="{% static 'images/logo.png' %}" alt="Logo"></a>
+              <!-- End Logo--> {% endcomment %}
+            </div>
+          </div>
+        </div>
+        <div class="apo-header-component-middle">
+          <div class="apo-header-items">
+            <div class="apo-header-item">
+              <!-- Navigation-->
+              <nav class="apo-navigation-container">
+                <ul class="apo-navigation">
+                  <li class="apo-has-children apo-current"><a class="dynamic-color" href="{% url 'main:home' %}">Home</a>
+                    <!-- Sub Menu (level 2)-->
+                    <ul class="apo-sub-menu">
+                        <li><a href="{% url 'main:rocket_hp' %}">Rocketry</a></li>
+                        <li><a href="{% url 'main:weatherball_hp' %}">Weather Balloon</a></li>
+                        <li><a href="{% url 'main:cubesat_hp' %}">CubeSat</a></li>
+                        <li><a href="{% url 'main:cubesat_hp' %}">Radio Telescope</a></li>
+                        <li><a href="{% url 'main:astrophotography_hp' %}">Astrophotography</a></li>
+                    </ul>
+                    <!-- End of SubMenu-->
+                  </li>
+                  <li class=""><a class="dynamic-color" href="{% url 'main:leadership' %}">Leadership</a></li>
+                  <li class=""><a class="dynamic-color" href="{% url 'blog:blogs' %}">Blog</a></li>
+                  <li class=""><a class="dynamic-color" href="{% url 'events:events' %}">Events</a></li>
+                  <li class=""><a class="dynamic-color" href="{% url 'main:about_us' %}">About Us</a></li>
+                  <li class=""><a class="dynamic-color" href="{% url 'events:events' %}">Contact Us</a></li>
+                  {% comment %} <li class="apo-has-children"><a class="dynamic-color">Database</a> {% endcomment %}
+                    <!-- Sub Menu (level 2)-->
+                    {% comment %} <ul class="apo-sub-menu">
+                      <li><a href="portfolio_masonry_fit_width_4_columns.html">Rocketry</a></li>
+                      <li><a href="portfolio_masonry_fit_width_3_columns.html">CubeSat</a></li>
+                      <li><a href="portfolio_classic_sortable_4_columns.html">Weather Balloon</a></li>
+                      <li><a href="portfolio_single_post.html">Astrophotography</a></li> 
+                    </ul> {% endcomment %}
+                    <!-- End of SubMenu-->
+                  </li>
+                </ul>
+              </nav>
+              <!-- End Navigation-->
+            </div>
+          </div>
+        </div>
+        <div class="apo-header-component-last">
+          <div class="apo-header-items">
+            <div class="apo-header-item">
+              <!-- Social Networks-->
+              <ul class="apo-social-networks">
+                <li><a class="dynamic-color" href="https://twitter.com/sedstufts"><i class="fa fa-twitter"></i></a></li>
+                <li><a class="dynamic-color" href="https://www.instagram.com/tufts.seds/"><i class="fa fa-instagram"></i></a></li>
+              </ul>
+              <!-- End Social Networks-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- End Site Header-->

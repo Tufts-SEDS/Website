@@ -1,0 +1,95 @@
+{% extends 'base_astrophotography.html' %}
+{% load static %}
+{% block title %} Astrophotography | Tufts SEDS {% endblock %}
+{% block pagecontent %}
+<div class="apo-page">
+  <!-- <audio src="audio/audio.mp3" autoplay="true" class="apo-slider-audio"></audio> -->
+  <div class="rev_slider_wrapper fullscreen-container">
+    <div id="rev-slider-1" class="rev_slider fullscreenbanner apo-revslider-theme">
+      <ul>
+        {% for photo in images %}
+        <li data-transition="fade" data-speed="500"><img src="{{ photo.photo }}" alt=""></li>
+        {% endfor %}
+      </ul>
+      <!-- Slider Actions -->
+      <div class="apo-revslider-controls apo-right">
+        <div class="apo-revslider-controls-item">
+          <div class="apo-revslider-theme-nav-prev">
+            <div class="apo-revslider-control-title">Prev</div>
+            <i class="apo-icon-prev"></i>
+          </div>
+        </div>
+        <div class="apo-revslider-controls-item apo-playing">
+          <div class="apo-revslider-control-pause">
+            <div class="apo-revslider-control-title">Pause</div>
+            <i class="apo-icon-pause"></i>
+          </div>
+          <div class="apo-revslider-control-play">
+            <div class="apo-revslider-control-title">Play</div>
+            <i class="apo-icon-play"></i>
+          </div>
+        </div>
+        <div class="apo-revslider-controls-item">
+          <div class="apo-revslider-theme-nav-next">
+            <div class="apo-revslider-control-title">Next</div>
+            <i class="apo-icon-next"></i>
+          </div>
+        </div>
+      </div>
+      <!-- End Slider Actions -->
+    </div>
+    <div class="apo-slider-fullscreen-controls">
+      <div class="container">
+        <div class="apo-hr-controls">
+          <div class="apo-hr-controls-component-first">
+            <div class="apo-hr-controls-items">
+              <div class="apo-hr-controls-item">
+              </div>
+            </div>
+            <div class="apo-hr-controls-component-middle">
+              <div class="apo-hr-controls-items">
+                <div class="apo-hr-controls-item">
+                  <button type="button" class="apo-fullscreen-control-close"><i
+                      class="icon icon-cross"></i>Close</button>
+                </div>
+              </div>
+            </div>
+            <div class="apo-hr-controls-component-last">
+              <div class="apo-hr-controls-items">
+                <div class="apo-hr-controls-item">
+                  <!-- Slider Actions -->
+                  <div class="apo-revslider-controls apo-right">
+                    <div class="apo-revslider-controls-item">
+                      <div class="apo-revslider-theme-nav-prev">
+                        <div class="apo-revslider-control-title">Prev</div>
+                        <i class="apo-icon-prev"></i>
+                      </div>
+                    </div>
+                    <div class="apo-revslider-controls-item apo-playing">
+                      <div class="apo-revslider-control-pause">
+                        <div class="apo-revslider-control-title">Pause</div>
+                        <i class="apo-icon-pause"></i>
+                      </div>
+                      <div class="apo-revslider-control-play">
+                        <div class="apo-revslider-control-title">Play</div>
+                        <i class="apo-icon-play"></i>
+                      </div>
+                    </div>
+                    <div class="apo-revslider-controls-item">
+                      <div class="apo-revslider-theme-nav-next">
+                        <div class="apo-revslider-control-title">Next</div>
+                        <i class="apo-icon-next"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- End Slider Actions -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

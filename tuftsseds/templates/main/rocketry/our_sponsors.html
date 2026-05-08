@@ -1,0 +1,146 @@
+{% extends '../homepages/rocketry_home.html' %}
+{% block title %} Rocketry - Our Sponsors | Tufts SEDS {% endblock %}
+{% load static %}
+
+{% block rocket_content %}
+<div class="apo-page">
+    <div class="apo-page-header">
+        <div class="apo-page-header-column">
+            <h1 class="apo-page-title">Current Tufts SEDS Rocket Team Sponsors</h1>
+        </div>
+    </div>
+
+    <hr style="visibility: hidden;">
+
+
+    <!-- Start Platinum Sponsors -->
+    {% comment %} <div class="shine" style="text-align: center;">
+        <h2>Platinum Sponsors</h2>
+    </div>
+    <div class="container">
+        <section class="apo-section">
+            <div style="text-align: center;">
+
+                <!-- <h4>Sponsor #1</h4>
+                <img class="sponsor-img fadein"
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTx3MvejjkpDcokdaw4XYbToG22CCsufoGnA4BUoKBb&s"> -->
+
+            </div>
+            <hr style="visibility: hidden;">
+        </section>
+    </div>{% endcomment %}
+    <!-- End Platinum Sponsors -->
+
+
+    <!-- Start Gold Sponsors -->
+    <div class="gold" style="text-align: center;">
+        <h2>Gold Sponsors</h2>
+    </div>
+    <div class="container">
+        <section class="apo-section">
+            <div style="text-align: center;">
+
+                
+                <img class="sponsor-img fadein"
+                    src="{% static 'images/rocketry/tufts-logo2.png' %}">
+                    <h4>Tufts University Mechanical Engineering</h4>
+                <br>
+
+                
+                <img class="sponsor-img fadein"
+                    src="{% static 'images/rocketry/altium.png' %}">
+                    <h4>Altium</h4>
+                <br>
+
+                
+                <img class="sponsor-img fadein"
+                    src="{% static 'images/rocketry/mec.png' %}">
+                    <h4>Microwave Engineering Corporation</h4>
+            </div>
+            <hr style="visibility: hidden;">
+        </section>
+    </div>
+    <!-- End Gold Sponsors -->
+
+
+    <!-- Start Silver Sponsors -->
+    <div style="text-align: center; color: #6e6e6e;">
+        <h2>Silver Sponsors</h2>
+    </div>
+    <div class="container">
+        <section class="apo-section">
+            <div style="text-align: center;">
+                <div class="sponsor-gallery" style="justify-content: center;">
+
+                    <div class="sponsor-item" style="visibility: visible;">
+                        <img class="sponsor-img fadein" src="{% static 'images/rocketry/altair.png' %}" />
+                        <span class="sponsor-caption">Altair</span> 
+                    </div>
+
+                    <div class="sponsor-item" style="visibility: visible;">
+                        <img class="sponsor-img fadein" src="{% static 'images/rocketry/ansys.png' %}" />
+                        <span class="sponsor-caption">Ansys</span>
+                    </div>
+                </div>
+                <hr style="visibility: hidden;">
+        </section>
+    </div>
+    <!-- End Silver Sponsors -->
+
+
+    <!-- Start Bronze Sponsors -->
+    <div style="text-align: center; color: #cd7f32;">
+        <h2>Bronze Sponsors</h2>
+    </div>
+    <div class="container">
+        <section class="apo-section">
+            <div style="text-align: center;">
+                <div class="sponsor-gallery">
+                    <!-- <div class="sponsor-item">
+                        <img src="https://picsum.photos/190/190?11" />
+                        <span class="sponsor-caption">This is the sponsor name</span>
+                    </div>
+                    <div class="sponsor-item" style="visibility: hidden;">
+                        <img src="https://picsum.photos/190/190?11" />
+                        <span class="sponsor-caption">This is the sponsor name</span>
+                    </div>
+                    <div class="sponsor-item" style="visibility: hidden;">
+                        <img src="https://picsum.photos/190/190?11" />
+                        <span class="sponsor-caption">This is the sponsor name</span>
+                    </div>
+                    <div class="sponsor-item">
+                        <img src="https://picsum.photos/190/190?11" style="visibility: hidden;" />
+                        <span class="sponsor-caption">This is the sponsor name</span>
+                    </div>
+                    <div class="sponsor-item">
+                        <img src="https://picsum.photos/190/190?11" style="visibility: hidden;" />
+                        <span class="sponsor-caption">This is the sponsor name</span>
+                    </div> -->
+                </div>
+            </div>
+            <hr style="visibility: hidden;">
+        </section>
+    </div>
+    <!-- End Bronze Sponsors -->
+</div>
+{% endblock %}
+
+{% block rocketry_scripts %}
+<script>
+    $(document).on("scroll", function () {
+        var pageTop = $(document).scrollTop()
+        var pageBottom = pageTop + $(window).height()
+        var tags = $(".fadein")
+
+        for (var i = 0; i < tags.length; i++) {
+            var tag = tags[i]
+
+            if ($(tag).offset().top < pageBottom) {
+                $(tag).addClass("visible")
+            } else {
+                $(tag).removeClass("visible")
+            }
+        }
+    })
+</script>
+{% endblock %}

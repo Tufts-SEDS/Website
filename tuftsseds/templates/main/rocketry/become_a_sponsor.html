@@ -1,0 +1,129 @@
+{% extends '../homepages/rocketry_home.html' %}
+{% block title %} Rocketry - Become a Sponsor | Tufts SEDS {% endblock %}
+{% load static %}
+
+{% block extrastylesheet %}
+<link rel="stylesheet" media="all" href="{% static 'css/sponsor-table.min.css' %}" type="text/css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.2.12/pdfobject.min.js"
+    integrity="sha512-lDL6DD6x4foKuSTkRUKIMQJAoisDeojVPXknggl4fZWMr2/M/hMiKLs6sqUvxP/T2zXdrDMbLJ0/ru8QSZrnoQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+{% endblock %}
+
+{% block rocket_content %}
+<div class="apo-page">
+    <div class="apo-page-header">
+        <div class="apo-page-header-column">
+            <h1 class="apo-page-title">Become a Sponsor</h1>
+        </div>
+    </div>
+    <div class="container">
+        <section class="apo-section">
+            <p>At Tufts Rocketry, our passion for innovation and dedication to learning continuously pushes us to
+                maximize our potential. Since being essentially re-started in 2021, Tufts Rocketry has grown rapidly
+                into a strong, dedicated, and capable team of over 60 members. This year, we have expanded our scope
+                even further with our flagship Team Rocket Project--a powerful and capable rocket designed for the
+                Spaceport America Cup.</p>
+        
+        
+            <p>To make our goals a reality, we need your support! Materials, resources, equipment, and mentorship
+                will be invaluable to us as we power Tufts Rocketry into uncharted territory, and we will all be
+                incredibly grateful.
+            </p>
+
+            <p>The formation this year of our new sponsorship program shows just how far the Team has come. We are
+                looking to build active and mutually beneficial relationships with our sponsors, and we offer access to
+                some of the most innovative and resourceful minds at Tufts. If you believe our interests align, please
+                see the sponsorship package below for more details, and don't hesitate to contact us!
+            </p>
+        </section>
+        {% comment %}
+        <section class="apo-section">
+            <h2>Sponsorship Tiers</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th style="color: #cd7f32; font-size: 24px;">Bronze</th>
+                        <th style="color: #6e6e6e; font-size: 24px;">Silver</th>
+                        <th class="gold" style="font-size: 24px; text-align: center;">Gold</th>
+                        <th class="shine" style="font-size: 24px;  text-align: center;">Platinum</th>
+                    </tr>
+                </thead>
+                <tr>
+                    <td style="text-align: left; padding-left: 10px;">Invitation to team events</td>
+                    <td>⚫</td>
+                    <td>⚫</td>
+                    <td>⚫</td>
+                    <td>⚫</td>
+                </tr>
+                <tr>
+                    <td style="text-align: left; padding-left: 10px;">Recognition in team presentations</td>
+                    <td>⚫</td>
+                    <td>⚫</td>
+                    <td>⚫</td>
+                    <td>⚫</td>
+                </tr>
+                <tr>
+                    <td style="text-align: left; padding-left: 10px;">Access to team resume book</td>
+                    <td></td>
+                    <td>⚫</td>
+                    <td>⚫</td>
+                    <td>⚫</td>
+                </tr>
+                <tr>
+                    <td style="text-align: left; padding-left: 10px;">Logo on our team webpage</td>
+                    <td></td>
+                    <td>⚫</td>
+                    <td>⚫</td>
+                    <td>⚫</td>
+                </tr>
+                <tr>
+                    <td style="text-align: left; padding-left: 10px;">Social media coverage</td>
+                    <td></td>
+                    <td></td>
+                    <td>⚫</td>
+                    <td>⚫</td>
+                </tr>
+                <tr>
+                    <td style="text-align: left; padding-left: 10px;">Small logo on rocket</td>
+                    <td></td>
+                    <td></td>
+                    <td>⚫</td>
+                    <td>⚫</td>
+                </tr>
+                <tr>
+                    <td style="text-align: left; padding-left: 10px;">Opportunities for team engagement and product
+                        demos</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>⚫</td>
+                </tr>
+                <tr>
+                    <td style="text-align: left; padding-left: 10px;">Large logo on rocket, website, and select team
+                        apparel</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>⚫</td>
+                </tr>
+            </table>
+        </section>
+        {% endcomment %}
+        <section class="apo-section">
+            <div id="sponsor-packet"></div>
+        </section>
+    </div>
+    {% endblock %}
+
+    {% block rocketry_scripts %}
+    <script>
+        var options = {
+            height: "800px",
+            pdfOpenParams: {
+                page: '1'
+            }
+        };
+        PDFObject.embed("{% static 'other/rocketry/Tufts-Rocketry-Team-2024-Sponsorship-Packet-v1.5.pdf' %}", "#sponsor-packet", options);
+    </script>
+    {% endblock %}

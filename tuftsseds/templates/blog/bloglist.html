@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Blogs | Tufts SEDS {% endblock %}
+{% block pagecontent %}
+  <!-- Page Content-->
+  <div class="apo-page">
+    <!-- Page Header-->
+    <div class="apo-page-header apo-style-2">
+      <div class="apo-page-header-column">
+        <h1 class="apo-page-title">SEDS Blog</h1>
+        <ul class="apo-breadcrumbs">
+          <li><a href="{% url 'main:home' %}">Home</a></li>
+          <li><a>Blogs</a></li>
+        </ul>
+      </div>
+    </div>
+    <!-- End Page Header-->
+    <div class="apo-section">
+      <!-- Isotope-->
+      <div data-isotope-layout="masonry" class="apo-isotope apo-cols-4 apo-entries-container apo-style-2">
+        <div class="grid-sizer"></div>
+        {% for blog in object_list %}
+        <div class="apo-item {% for category in blog.category.all %} apo-{{ category }}{% endfor %}">
+          <!-- Article-->
+          <article class="apo-entry">
+            <div class="apo-entry-inner">
+              <div class="apo-entry-media"><a href="#"><img src="{{ blog.cover_image }}" alt=""></a></div>
+              <div class="apo-entry-content-wrap">
+                <div class="apo-aligner-outer">
+                  <div class="apo-aligner-inner">
+                    <header class="apo-entry-header">
+                      <ul class="apo-entry-categories">
+                      {% for category in blog.category.all %}
+                        <li><em><a class="apo-testimonial-author-position">{{category}}</a></em></li>
+                      {% endfor %}
+                      </ul>
+                      <h2 class="apo-entry-title"><a href="{{ blog.get_absolute_url }}">{{ blog.title }}</a></h2>
+                    </header>
+                    <div class="apo-entry-content">
+                      <p>{{ blog.short_description }}...</p>
+                    </div>
+                    <footer class="apo-entry-footer"><a href="#" class="apo-entry-read-more-link apo-btn apo-btn-mini">
+                        Read More</a></footer>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+          <!-- End Article-->
+        </div>
+        {% endfor %}
+      </div>
+      <!-- End Isotope-->
+    </div>
+    <div class="apo-page-controls apo-small">
+      <!-- Pagination-->
+      {% if page_obj.has_next %}
+      <nav>
+        <ul class="apo-pagination">
+            <li class="nv-current"><span class="page-numbers current">{{ page_obj.number }}</span></li>
+            <li><a href="?page={{ page_obj.next_page_number }}" class="page-numbers">{{ page_obj.next_page_number }}</a></li>
+            <li><span class="page-numbers dots">...</span></li>
+            <li><a href="?page={{ page_obj.paginator.num_pages }}" class="page-numbers">{{ page_obj.paginator.num_pages }}</a></li>
+        </ul>
+      </nav>
+      {% endif %}
+      <!-- End Pagination-->
+    </div>
+  </div>
+  <!-- End Page Content-->
+{% endblock %}

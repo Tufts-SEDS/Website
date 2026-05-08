@@ -1,0 +1,209 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Leadership | Tufts SEDS {% endblock %}
+{% block pagecontent %}
+<!-- Content Section-->
+<div class="container">
+    <!-- Page Header-->
+    <div class="apo-page-header">
+        <div class="apo-page-header-column">
+            <h1 class="apo-page-title">Leadership</h1>
+        </div>
+    </div>
+    <!-- End Page Header-->
+    <div class="apo-entry-content">
+        <p>At Tufts University, our Students for the Exploration and Development of Space (SEDS) club offers an
+            inclusive community of enthusiastic aerospace-loving students. As part of our global network of SEDS
+            members, we provide a range of exciting opportunities. These include the chance to develop technical skills,
+            collaborate on team projects, participate in outreach initiatives, connect with industry professionals,
+            attend conferences, and immerse yourself in space-themed events.</p>
+        <p>Our diverse membership represents various academic backgrounds and experiences, with majors spanning
+            mechanical engineering, astrophysics, electrical engineering, international relations, mathematics, human
+            factors, computer science, biology, civil engineering, chemistry, physics, chemical engineering, economics,
+            and computer engineering. We welcome anyone with a passion for space!</p>
+        <p>Our weekly meetings take place in Joyce Cummings Center 260 every Sunday at 1:00pm. To join our community, simply attend
+            our general meetings or reach out to us via email at <a
+                href="mailto:support@sedstufts.org">support@sedstufts.org</a>. Ad astra!</p>
+    </div>
+    <div class="apo-section">
+        <h2 class="apo-section-title">Executive Board</h2>
+        <!-- Current Executive Members-->
+        <div class="apo-grid apo-cols-4">
+            {% for member in active_members %}
+            <!-- Team Member-->
+            {% if member.eboard_role %}
+            <div class="apo-grid-col">
+                <figure class="apo-team-member">
+                    {% if member.picture %}
+                    <!-- Member's Photo--><img src="{{ member.picture }}"
+                        alt="Picture of {{ member.first_name }} {{ member.last_name }}" class="apo-team-member-photo">
+                    {% else %}
+                    <!-- Member's Photo--><img
+                        src="https://images.pexels.com/photos/47367/full-moon-moon-bright-sky-47367.jpeg?auto=compress&cs=tinysrgb&w=1600"
+                        alt="{{ member.first_name }} {{ member.last_name }}" class="apo-team-member-photo">
+                    {% endif %}
+                    <!-- End Member's Photo-->
+                    <!-- Member's Info-->
+                    <figcaption
+                        class="apo-team-member-info {% if not member.picture %} apo-reveal-imageless {% endif %}">
+                        <div class="apo-vcentered-outer">
+                            <div class="apo-vcentered-inner">
+                                <h6 class="apo-team-member-name"><a>{{ member.first_name }}
+                                        {{ member.last_name }}</a></h6><small
+                                    class="apo-team-member-position">{{ member.eboard_role }}</small>
+                                <ul class="apo-social-networks">
+                                    {% if member.linkedin %}
+                                    <li><a href="{{ member.linkedin }}"><i class="fa fa-linkedin"></i></a></li>
+                                    {% endif %}
+                                    {% if member.personal_site %}
+                                    <li><a href="{{ member.personal_site }}"><i class="fa fa-user-circle"></i></a></li>
+                                    {% endif %}
+                                    {% if member.youtube %}
+                                    <li><a href="{{ member.youtube }}"><i class="fa fa-youtube-play"></i></a></li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        </div>
+                    </figcaption>
+                    <!-- End Member's Info-->
+                </figure>
+            </div>
+            {% endif %}
+            {% endfor %}
+            <!-- End Team Member-->
+        </div>
+        <!-- End Current Executive Members-->
+
+        <hr class="apo-divider-dashed" style="border:none;">
+
+        <h2 class="apo-section-title">Project Team Leads</h2>
+        <!-- Current Team Leads -->
+        <div class="apo-grid apo-cols-4">
+            {% for member in active_members %}
+            <!-- Team Member-->
+            {% if member.chapter_role %}
+            <div class="apo-grid-col">
+                <figure class="apo-team-member">
+                    {% if member.picture %}
+                    <!-- Member's Photo--><img src="{{ member.picture }}"
+                        alt="Picture of {{ member.first_name }} {{ member.last_name }}" class="apo-team-member-photo">
+                    {% else %}
+                    <!-- Member's Photo--><img
+                        src="https://images.pexels.com/photos/47367/full-moon-moon-bright-sky-47367.jpeg?auto=compress&cs=tinysrgb&w=1600"
+                        alt="{{ member.first_name }} {{ member.last_name }}" class="apo-team-member-photo">
+                    {% endif %}
+                    <!-- End Member's Photo-->
+                    <!-- Member's Info-->
+                    <figcaption
+                        class="apo-team-member-info {% if not member.picture %} apo-reveal-imageless {% endif %}">
+                        <div class="apo-vcentered-outer">
+                            <div class="apo-vcentered-inner">
+                                <h6 class="apo-team-member-name"><a>{{ member.first_name }}
+                                        {{ member.last_name }}</a></h6><small
+                                    class="apo-team-member-position">{{ member.chapter_role }}</small>
+                                <ul class="apo-social-networks">
+                                    {% if member.linkedin %}
+                                    <li><a href="{{ member.linkedin }}"><i class="fa fa-linkedin"></i></a></li>
+                                    {% endif %}
+                                    {% if member.personal_site %}
+                                    <li><a href="{{ member.personal_site }}"><i class="fa fa-user-circle"></i></a></li>
+                                    {% endif %}
+                                    {% if member.youtube %}
+                                    <li><a href="{{ member.youtube }}"><i class="fa fa-youtube-play"></i></a></li>
+                                    {% endif %}
+                                    {% if member.twitter %}
+                                    <li><a href="{{ member.twitter }} "><i class="fa fa-twitter"></i></a></li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        </div>
+                    </figcaption>
+                    <!-- End Member's Info-->
+                </figure>
+            </div>
+            {% endif %}
+            {% endfor %}
+            <!-- End Team Member-->
+        </div>
+        <!-- End Current Team Leads -->
+
+
+        <!-- Past Team Members Section-->
+        <section class="apo-section">
+            <h2 class="apo-section-title">Past Executive Board and Project Team Leads</h2>
+            <!-- Tabs-->
+            <div class="apo-tabs apo-vertical-tabs">
+                <!-- Tabs Navigation-->
+                <ul class="apo-tabs-nav">
+                    {% for year in years %}
+                    <li><a id="tab-link-{{ year }}" class="tabber" href="#tab-{{ year }}" aria-haspopup="true"
+                            aria-expanded="true" aria-controls="tab-{{ year }}">{{ year }}</a></li>
+                    {% endfor %}
+                </ul>
+                <!-- End Tabs Navigation-->
+                <div class="apo-tabs-container">
+                    {% for year, members in past_members.items %}
+                    <div id="tab-{{ year }}" aria-labelledby="tab-link-{{ year }}" class="apo-tab">
+                        <div class="apo-grid apo-cols-4">
+                            {% for member in members %}
+                            <!-- Team Member-->
+                            <div class="apo-grid-col">
+                                <figure class="apo-team-member">
+                                    {% if member.picture %}
+                                    <!-- Member's Photo--><img src="{{ member.picture }}"
+                                        alt="Picture of {{ member.first_name }} {{ member.last_name }}"
+                                        class="apo-team-member-photo">
+                                    {% else %}
+                                    <!-- Member's Photo--><img
+                                        src="https://images.pexels.com/photos/47367/full-moon-moon-bright-sky-47367.jpeg?auto=compress&cs=tinysrgb&w=1600"
+                                        alt="{{ member.first_name }} {{ member.last_name }}"
+                                        class="apo-team-member-photo">
+                                    {% endif %}
+                                    <!-- End Member's Photo-->
+                                    <!-- Member's Info-->
+                                    <figcaption
+                                        class="apo-team-member-info {% if not member.picture %} apo-reveal-imageless {% endif %}">
+                                        <div class="apo-vcentered-outer">
+                                            <div class="apo-vcentered-inner">
+                                                <h6 class="apo-team-member-name"><a>{{ member.first_name }}
+                                                        {{ member.last_name }}</a></h6><small
+                                                    class="apo-team-member-position">{{ member.role }}</small>
+                                                <ul class="apo-social-networks">
+                                                    {% if member.linkedin %}
+                                                    <li><a href="{{ member.linkedin }}"><i
+                                                                class="fa fa-linkedin"></i></a></li>
+                                                    {% endif %}
+                                                    {% if member.personal_site %}
+                                                    <li><a href="{{ member.personal_site }}"><i
+                                                                class="fa fa-user-circle"></i></a></li>
+                                                    {% endif %}
+                                                    {% if member.youtube %}
+                                                    <li><a href="{{ member.youtube }}"><i
+                                                                class="fa fa-youtube-play"></i></a></li>
+                                                    {% endif %}
+                                                    {% if member.twitter %}
+                                                    <li><a href="{{ member.twitter }} "><i
+                                                                class="fa fa-twitter"></i></a></li>
+                                                    {% endif %}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </figcaption>
+                                    <!-- End Member's Info-->
+                                </figure>
+                                <!-- End Team Member-->
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <!-- End Tabs-->
+        </section>
+        <!-- End Past Team Members Section-->
+
+    </div>
+    <!-- End Content Section-->
+</div>
+{% endblock %}

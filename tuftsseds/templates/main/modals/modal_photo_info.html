@@ -1,0 +1,85 @@
+<!-- Modal Window-->
+<div class="apo-modal apo-modal-photo-info">
+    <header class="apo-modal-photo-info-header">
+      <h2 class="apo-modal-photo-info-title"> {{ photo.name }} </h2>
+      <em class="apo-photo-stream-category"> {{ photo.caption }} </em>
+    </header>
+    <div class="apo-modal-photo-info-body">
+      <div class="apo-extended-info-list apo-grid apo-cols-4"> {{ photo.name }} 
+        <div class="apo-grid-col">
+          <div class="apo-extended-info-list-item">
+            <div class="apo-extended-info-list-name">Target:</div>
+            <div class="apo-extended-info-list-value">{{ photo.target }}</div>
+          </div>
+        </div>
+        <div class="apo-grid-col">
+          <div class="apo-extended-info-list-item">
+            <div class="apo-extended-info-list-name">Capture date:</div>
+            <div class="apo-extended-info-list-value">{{ photo.date_taken }}</div>
+          </div>
+        </div>
+        <div class="apo-grid-col">
+          <div class="apo-extended-info-list-item">
+            <div class="apo-extended-info-list-name">Capture location:</div>
+            <div class="apo-extended-info-list-value">{{ photo.location }}</div>
+          </div>
+        </div>
+        <div class="apo-grid-col">
+          <div class="apo-extended-info-list-item">
+            <div class="apo-extended-info-list-name">Camera Model:</div>
+            <div class="apo-extended-info-list-value">{{ photo.camera_model.name }}</div>
+          </div>
+        </div>
+        <div class="apo-grid-col">
+          <div class="apo-extended-info-list-item">
+            <div class="apo-extended-info-list-name">Lens:</div>
+            <div class="apo-extended-info-list-value">{{ photo.camera_model.lens }}</div>
+          </div>
+        </div>
+        <div class="apo-grid-col">
+          <div class="apo-extended-info-list-item">
+            <div class="apo-extended-info-list-name">ISO:</div>
+            <div class="apo-extended-info-list-value">{{ photo.iso }}</div>
+          </div>
+        </div>
+        <div class="apo-grid-col">
+          <div class="apo-extended-info-list-item">
+            <div class="apo-extended-info-list-name">Focal Length:</div>
+            <div class="apo-extended-info-list-value">{{ photo.focal_length }}</div>
+          </div>
+        </div>
+        <div class="apo-grid-col">
+          <div class="apo-extended-info-list-item">
+            <div class="apo-extended-info-list-name">Aperture:</div>
+            <div class="apo-extended-info-list-value">{{ photo.aperture }}</div>
+          </div>
+        </div>
+        <div class="apo-grid-col">
+          <div class="apo-extended-info-list-item">
+            <div class="apo-extended-info-list-name">Exposure time:</div>
+            <div class="apo-extended-info-list-value">{{ photo.exposure_time }}</div>
+          </div>
+        </div>
+        <div class="apo-grid-col">
+          <div class="apo-extended-info-list-item">
+            <div class="apo-extended-info-list-name">Tracker:</div>
+            <div class="apo-extended-info-list-value">{{ photo.tracker }}</div>
+          </div>
+        </div>
+        <div class="apo-grid-col">
+          <div class="apo-extended-info-list-item">
+            <div class="apo-extended-info-list-name">Guiding:</div>
+            <div class="apo-extended-info-list-value">{{ photo.guiding }}</div>
+          </div>
+        </div>
+        <div class="apo-grid-col">
+          <div class="apo-extended-info-list-item">
+            <div class="apo-extended-info-list-name">Photo credit:</div>
+            <div class="apo-extended-info-list-value">{{ photo.photo_credit }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="arctic-modal-close-container"><button type="button" class="apo-close-btn arcticmodal-close"><i class="icon icon-cross"></i> Close</button></div>
+  </div>
+  <!-- End Modal Window-->

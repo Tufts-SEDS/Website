@@ -1,0 +1,302 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>SEDS Dashboard</title>
+    <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport'>
+    <!-- Favicon-->
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicon_io/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon_io/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon_io/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'favicon_io/site.webmanifest' %}">
+
+    <!-- Fonts and icons -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/webfont/1.6.28/webfontloader.js"
+        integrity="sha512-v/wOVTkoU7mXEJC3hXnw9AA6v32qzpknvuUF6J2Lbkasxaxn2nYcl+HGB7fr/kChGfCqubVr1n2sq1UFu3Gh1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        WebFont.load({
+            google: {
+                "families": ["Lato:300,400,700,900"]
+            },
+            custom: {
+                "families": ["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular",
+                    "Font Awesome 5 Brands", "simple-line-icons"
+                ],
+                urls: ['../assets/css/fonts.min.css']
+            },
+            active: function () {
+                sessionStorage.fonts = true;
+            }
+        });
+    </script>
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" media="all" href="{% static 'css/account/atlantis.min.css' %}" type="text/css">
+
+</head>
+
+<body data-background-color="dark">
+    <div class="wrapper">
+        <div class="main-header">
+            <!-- Logo Header -->
+            <div class="logo-header" data-background-color="dark2">
+
+                <!--<a href="index.html" class="logo">
+                    <img src="../assets/img/logo.svg" alt="navbar brand" class="navbar-brand">
+                </a>-->
+                <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse"
+                    data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon">
+                        <i class="icon-menu"></i>
+                    </span>
+                </button>
+                <button class="topbar-toggler more"><i class="icon-options-vertical"></i></button>
+                <div class="nav-toggle">
+                    <button class="btn btn-toggle toggle-sidebar">
+                        <i class="icon-menu"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- End Logo Header -->
+
+            <!-- Navbar Header -->
+            <nav class="navbar navbar-header navbar-expand-lg" data-background-color="dark">
+
+                <div class="container-fluid">
+                    <div class="collapse" id="search-nav">
+                        <form class="navbar-left navbar-form nav-search mr-md-3">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <a href="{% url 'admin:index' %}">
+                                        
+                                            <i class="fa fa-search search-icon">Switch to Base Admin View</i>
+                                        
+                                    </a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
+                        <li class="nav-item dropdown hidden-caret">
+                            <ul class="dropdown-menu dropdown-user animated fadeIn">
+                                <div class="dropdown-user-scroll scrollbar-outer">
+                                    <li>
+                                        <div class="user-box">
+                                            <div class="avatar-lg"><img src="../assets/img/profile.jpg"
+                                                    alt="image profile" class="avatar-img rounded"></div>
+                                            <div class="u-text">
+                                                <h4>{{ request.user.name }}</h4>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </div>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <!-- End Navbar -->
+        </div>
+
+        <!-- Sidebar -->
+        <div class="sidebar sidebar-style-2" data-background-color="dark2">
+            <div class="sidebar-wrapper scrollbar scrollbar-inner">
+                <div class="sidebar-content">
+                    <ul class="nav nav-primary">
+                        <li class="nav-item">
+                            <a href="{% url 'account:event_image_manager' %}" class="collapsed" aria-expanded="false">
+                                <i class="bi bi-rocket"></i>
+                                <p>Events Manager</p>
+                                <span class="caret"></span>
+                            </a>
+                        </li>
+                        {% comment %} {% if rocketry in request.user.chapter_affiliation.all %} {% endcomment %}
+                        <li class="nav-item">
+                            <a data-toggle="collapse" href="#rocketry-items" class="collapsed" aria-expanded="false">
+                                <i class="bi bi-rocket"></i>
+                                <p>Rocketry</p>
+                                <span class="caret"></span>
+                            </a>
+                            <div class="collapse" id="rocketry-items">
+                                <ul class="nav nav-collapse">
+                                    <li>
+                                        <a href="">
+                                            <span class="sub-item">My Rockets</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        {% comment %} <a href="{% url 'account:upload_rocket' %}"> {% endcomment %}
+                                            <span class="sub-item">Upload Rocket Model</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        {% comment %} {% endif %} {% endcomment %}
+                        {% comment %} {% if astrophotography in request.user.chapter_affiliation.all %} {% endcomment %}
+                        <li class="nav-item">
+                            <a data-toggle="collapse" href="#astrophotography-items" class="collapsed"
+                                aria-expanded="false">
+                                <i class="bi bi-rocket"></i>
+                                <p>Astrophotography</p>
+                                <span class="caret"></span>
+                            </a>
+                            <div class="collapse" id="astrophotography-items">
+                                <ul class="nav nav-collapse">
+                                    <li>
+                                        <a href="">
+                                            <span class="sub-item">Upload Image</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="">
+                                            <span class="sub-item">Edit Current Gallery</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        {% comment %} {% endif %} {% endcomment %}
+
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- End Sidebar -->
+
+        <div class="main-panel">
+            <div class="container">
+                <div class="page-inner">
+                    <div class="mt-2 mb-4">
+                        <h2 class="text-white pb-2">Hi {{ request.user.name }}!</h2>
+                    </div>
+                    {% block pagecontent %}
+
+                    {% endblock %}
+                </div>
+                <footer class="footer">
+                    <div class="container-fluid">
+                        <nav class="pull-left">
+                            <ul class="nav">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="http://www.themekita.com">
+                                        ThemeKita
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">
+                                        Help
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">
+                                        Licenses
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                        <div class="copyright ml-auto">
+                            2018, made with <i class="fa fa-heart heart text-danger"></i> by <a
+                                href="http://www.themekita.com">ThemeKita</a>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <!--   Core JS Files   -->
+        <!-- jQuery -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+        <!-- Popper.js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+
+        <!-- Bootstrap -->
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+        <!-- jQuery UI -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+        <!-- jQuery UI Touch Punch -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js">
+        </script>
+
+        <!-- jQuery Scrollbar -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.scrollbar/0.2.11/jquery.scrollbar.min.js"></script>
+
+        <!-- Moment.js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+
+        <!-- Chart.js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+
+        <!-- jQuery Sparkline -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-sparklines/2.1.2/jquery.sparkline.min.js"></script>
+
+        <!-- Circles -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/circles/0.9.3/circles.min.js"></script>
+
+        <!-- Datatables -->
+        <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+
+        <!-- Bootstrap Notify -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-notify/0.2.0/js/bootstrap-notify.min.js"></script>
+
+        <!-- Bootstrap Toggle -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
+        <!-- jQuery Vector Maps -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqvmap/1.5.1/jquery.vmap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqvmap/1.5.1/maps/jquery.vmap.world.js"></script>
+
+        <!-- Gmaps -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gmaps.js/0.4.25/gmaps.min.js"></script>
+
+        <!-- Fullcalendar -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+
+        <!-- DateTimePicker -->
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js">
+        </script>
+
+        <!-- Bootstrap Tagsinput -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.min.js">
+        </script>
+
+        <!-- Bootstrap Wizard -->
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap-wizard/1.2/jquery.bootstrap.wizard.min.js">
+        </script>
+
+        <!-- jQuery Validation -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+
+        <!-- Summernote -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.min.js"></script>
+
+        <!-- Select2 -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.full.min.js"></script>
+
+        <!-- Sweet Alert -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+
+        <!-- Owl Carousel -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+        <!-- Magnific Popup -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js">
+        </script>
+
+        <!-- Atlantis JS -->
+        <script src="{% static 'js/account/atlantis.min.js' %}"></script>
+        {% block scripts %}
+
+        {% endblock %}
+</body>
+
+</html>

@@ -1,0 +1,118 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>SEDS Member Login</title>
+	<!-- Mobile Specific Metas -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<!-- Font-->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli">
+	<!-- Main Style Css -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous">
+	</script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+		integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
+	</script>
+	<link rel="stylesheet" href="{% static 'css/account/login-register.min.css' %}" />
+	<div class="container" id="container">
+		<div class="form-container sign-up-container">
+			<form action="{% url 'account:login_register' %}" method="post" id="logup">
+				{% csrf_token %}
+				{% if register_form.errors %}
+				{% for field in register_form %}
+				{% for error in field.errors %}
+				<div class="form-row extra-space">
+					<div class="error-notice">
+						<div class="oaerror danger">
+							<strong>Error</strong> - {{ error|escape }}
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+				{% endfor %}
+				{% endif %}
+				<h1>Sign up</h1>
+				<br>
+				{{ register_form.name }}
+				{{ register_form.email }}
+				{{ register_form.chapter }}
+				{{ register_form.password }}
+				{{ register_form.password2 }}
+				<button type="submit" value="Submit">Sign Up</button>
+			</form>
+		</div>
+		<div class="form-container sign-in-container">
+			<form action="{% url 'account:login_register' %}" method="post" id="login">
+				{% csrf_token %}
+				{% if login_form.errors %}
+				{% for field in login_form %}
+				{% for error in field.errors %}
+				<div class="form-row extra-space">
+					<div class="error-notice">
+						<div class="oaerror danger">
+							<strong>Error</strong> - {{ error|escape }}
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+				{% endfor %}
+				{% endif %}
+				<h1>Sign in</h1>
+				<br>
+				{{ login_form.email }}
+				{{ login_form.password }}
+				<a href="{% url 'account:reset_password' %}">Forgot your password?</a>
+				<button type="submit" value="Submit">Sign In</button>
+			</form>
+		</div>
+		<div class="overlay-container">
+			<div class="overlay">
+				<div class="overlay-panel overlay-left">
+					<h1>Welcome Back,</h1>
+					<h1 id="login-element"></h1>
+					<p>To keep connected with us please login with your personal info</p>
+					<button class="ghost" id="signin">Sign In</button>
+				</div>
+				<div class="overlay-panel overlay-right">
+					<h1>Hello,</h1>
+					<h1 id="signup-element"></h1>
+					<p>Enter your personal details and start journey with us</p>
+					<button class="ghost" id="signup">Sign Up</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+	<script>
+		var typed = new Typed('#signup-element', {
+			strings: ['CubeSat Launch Technician', 'Rocket Scientist', 'Weather Balloon Mission Facilitator',
+			'Radio Astronomer', 'Astrophotographer', 'Space Engineer'],
+			typeSpeed: 50,
+		});
+	</script>
+	<script>
+		var typed = new Typed('#login-element', {
+			strings: ['CubeSat Launch Technician', 'Rocket Scientist', 'Weather Balloon Mission Facilitator',
+				'Radio Astronomer', 'Astrophotographer', 'Space Engineer'],
+			typeSpeed: 50,
+		});
+	</script>
+	<script>
+		const signUpButton = document.getElementById('signup');
+		const signInButton = document.getElementById('signin');
+		const container = document.getElementById('container');
+
+		signUpButton.addEventListener('click', () => {
+			container.classList.add("right-panel-active");
+		});
+
+		signInButton.addEventListener('click', () => {
+			container.classList.remove("right-panel-active");
+		});
+	</script>
+	</body>
+
+</html>

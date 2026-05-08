@@ -1,0 +1,169 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Radio Telescope | Tufts SEDS {% endblock %}
+
+{% block before_mainstyle %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
+<link href="
+https://cdn.jsdelivr.net/npm/@splidejs/splide-extension-video@0.8.0/dist/css/splide-extension-video.min.css
+" rel="stylesheet">
+<!-- Optional: Custom Styles -->
+<style>
+    .carousel-container {
+        max-width: 1200px;
+        width: 80%;
+        justify-content: center;
+    }
+
+
+    /* Ensure videos cover the slide area */
+    .splide__slide video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    /* Optional: Style captions or overlays */
+    .caption {
+        position: absolute;
+        bottom: 10px;
+        left: 20px;
+        color: white;
+        background: rgba(0, 0, 0, 0.5);
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 14px;
+    }
+
+    /* Position captions relative to slides */
+    .splide__slide {
+        position: relative;
+    }
+</style>
+{% endblock %}
+
+{% block pagecontent %}
+<div class="apo-page">
+    <div class="container">
+        <!-- Radio Telescope Page Header-->
+        <div class="apo-page-header apo-style-2">
+            <div class="apo-page-header-column">
+                <h1 class="apo-page-title">Radio Telescope</h1>
+            </div>
+            <div class="apo-page-header-column">
+                <nav class="apo-filter-wrap">
+                    <ul class="apo-navigation">
+                        <ul id="isotope-filter" class="apo-filter">
+                            <li><a href="{% url 'main:radio_telescope_news' %}">News</a></li>
+                            {% comment %} <li><a href="{% url 'main:rocket_gallery' %}">Gallery</a></li>
+                            {% endcomment %}
+                        </ul>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <!-- End Radio Telescope Page Header-->
+    <!-- Radio Telescope Content Section-->
+    {% block rocket_content %}
+    <!-- Splide Carousel Container -->
+    <div class="container">
+        <div class="splide">
+            <div class="splide__track">
+                <ul class="splide__list">
+
+                    <!-- Slide 1: Image -->
+                    <li class="splide__slide">
+                        <img src="{% static 'images/radio-telescope/rt_1.jpg' %}" alt="Image 1">
+                        <div class="caption"></div>
+                    </li>
+
+                    <!-- Slide 1: Image -->
+                    <li class="splide__slide">
+                        <img src="{% static 'images/radio-telescope/rt_2.jpg' %}" alt="Image 2">
+                        <div class="caption"></div>
+                    </li>
+
+                    <!-- Slide 3: Image -->
+                    <li class="splide__slide">
+                        <img src="{% static 'images/radio-telescope/rt_3.jpg' %}"
+                            alt="Image 3">
+                        <div class="caption"></div>
+                    </li>
+
+                    <!-- Slide 4: Image -->
+                    <li class="splide__slide">
+                        <img src="{% static 'images/radio-telescope/rt_4.jpg' %}"
+                            alt="Image 4">
+                        <div class="caption"></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- End of Splide Carousel Container -->
+    <!-- About Radio Telescope Container -->
+    <div class="container">
+        <section class="apo-section" style="text-align: center;">
+            <h4>About Us</h4>
+
+            <p>The Tufts Small Radio Telescope (SRT) is a joint SEDS and Tufts Physics and Astronomy department project 
+                to build a 3-meter radio telescope to observe the hydrogen 21 cm line. Currently under construction, it 
+                will be a public radio telescope accessible to the Tufts community for education, research, outreach, and 
+                just for fun. Users will be able to log in remotely, view live data streams, schedule an observation, view 
+                and collect their observation data, and share or export it. Instructors in astronomy, data science, and 
+                digital signal processing courses will be able to utilize the telescope and its data stream for labs, 
+                projects, or demonstrations. A long-term goal is to perform Very Long Baseline Interferometry (VLBI), 
+                a method of producing higher resolution data by correlating observations in different locations, with 
+                other universities across the country. We also hope to eventually observe pulsars which have been recently 
+                used to observe a stochastic gravitational wave background in the NSF NANOGrav collaboration. We aim to 
+                promote astronomy and astrophysics, currently a very small part of Tufts, to a larger community.
+            </p>
+
+            <p>As of spring 2025, we are busy assembling the hardware and software to control the system and collect 
+                and analyze data. We are a small team of physics, astrophysics, and engineering students excited about 
+                astronomy, building, and promoting and developing science within the community. Feel free to 
+                <a href="mailto:support@sedstufts.org"><u>contact us</u></a> to learn more!</p>
+
+        </section>
+    </div>
+    <!-- End of About Radio Telescope Container -->
+    <!-- We put the scripts for the carousel to avoid errors when using this template -->
+    {% endblock %}
+    <!-- End Radio Telescope Content Section-->
+</div>
+{% endblock %}
+
+{% block extrascripts %}
+{% block rocketry_scripts %}
+<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+<script src="
+https://cdn.jsdelivr.net/npm/@splidejs/splide-extension-video@0.8.0/dist/js/splide-extension-video.min.js
+"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var splide = new Splide('.splide', {
+            type: 'loop', // Carousel type: loop, slide, etc.
+            perPage: 1, // Number of slides per page
+            perMove: 1, // Number of slides to move on navigation
+            heightRatio: 0.5625, // 16:9 aspect ratio
+            cover: true, // Cover images/videos to fit slide
+            autoplay: true, // Enable autoplay
+            interval: 3000, // Autoplay interval in ms
+            pauseOnHover: true, // Pause autoplay on hover
+            pauseOnFocus: true, // Pause autoplay on focus
+            arrows: true, // Show next/prev arrows
+            pagination: true, // Show pagination dots
+            video: {
+                loop: true,
+                autoplay: true, // Autoplay videos
+                controls: true, // Show video controls
+            },
+        });
+
+        splide.mount(window.splide.Extensions);
+    });
+</script>
+{% endblock %}
+{% endblock %}

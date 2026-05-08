@@ -1,0 +1,131 @@
+{% extends '../dashboard-base.html' %}
+{% load static %}
+{% block title %} Event Images | Tufts SEDS Dashboard {% endblock %}
+{% block pagecontent %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">{{event.title}} Images</h4>
+                <p class="card-category">Click and drag images to reorganize their order</p>
+                <p class="card-category"><u>Include Selected: ON</u> Selected images will be added to the site, others will be discarded</p>
+                <p class="card-category"><u>Include Selected: OFF</u> Selected images will be discard, others will be added to the site</p>
+                <button id="toggle-include" onclick="toggleIncludeSelected()">Include Selected: ON</button>
+            </div>
+            <div class="card-body">
+                <div id="sortable-grid" class="row image-gallery grid">
+                    {% for image in event.event_images.all %}
+                    <a class="col-6 col-md-3 mb-4">
+                        <img src="{{ image.image }}" class="img-fluid">
+                    </a>
+                    {% endfor %}
+                </div>
+                <button id="submit-button">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.1/Sortable.min.js"></script>
+<script>
+ $(document).ready(function () {
+    // Attach click event to each image
+    $('#sortable-grid img').on('click', function () {
+        // Check if the image already has the 'selected' class
+        var isSelected = $(this).hasClass('selected');
+
+        // If not selected, add the 'selected' class and apply the red outline
+        if (!isSelected) {
+            $(this).addClass('selected');
+            $(this).css('outline', '3px solid red');  // Adjusted outline thickness
+        } else {
+            // If selected, remove the 'selected' class and the red outline
+            $(this).removeClass('selected');
+            $(this).css('outline', 'none');
+        }
+    });
+});
+</script>
+<script>
+    var includeSelected = true; // Default is to include selected images
+
+    var sortable = new Sortable(document.getElementById('sortable-grid'), {
+        group: 'grid',
+        animation: 150,
+        onEnd: function (evt) {
+            // Get the updated list of image links without leading newline
+            var updatedList = Array.from(evt.from.children)
+                .map(item => item.querySelector('img').getAttribute('src').replace(/^\n+/, ''));
+
+            console.log(updatedList);
+        }
+    });
+
+    function toggleIncludeSelected() {
+        includeSelected = !includeSelected;
+        var toggleButton = document.getElementById('toggle-include');
+        toggleButton.innerText = 'Include Selected: ' + (includeSelected ? 'ON' : 'OFF');
+        console.log('Include selected:', includeSelected);
+    }
+
+    // Add event listener to the submit button
+    document.getElementById('submit-button').addEventListener('click', function () {
+        // Disable user interactions
+        document.body.style.pointerEvents = 'none';
+
+        // Get the list of image links including or excluding selected images based on the toggle
+        var imageLinks = Array.from(document.getElementById('sortable-grid').children)
+            .map(item => {
+                var imgElement = item.querySelector('img');
+                if (imgElement) {
+                    return {
+                        src: imgElement.getAttribute('src').replace(/^\n+/, ''),
+                        selected: imgElement.classList.contains('selected'),
+                    };
+                } else {
+                    console.error('Error: Unable to find img element in item', item);
+                    return null;
+                }
+            });
+
+        // Filter based on the toggle and extract only the image sources
+        if (includeSelected) {
+            // Include only selected images
+            imageLinks = imageLinks.filter(item => item.selected).map(item => item.src);
+        } else {
+            // Exclude selected images
+            imageLinks = imageLinks.filter(item => !item.selected).map(item => item.src);
+        }
+
+        // Send data to Django server
+        fetch('{% url "account:save_changes" %}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{csrf_token}}',
+                },
+                body: JSON.stringify({
+                    "links": imageLinks,
+                    "slug": '{{event.slug}}'
+                }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                // Enable user interactions
+                document.body.style.pointerEvents = 'auto';
+                // Reload the page
+                location.reload();
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                // Enable user interactions
+                document.body.style.pointerEvents = 'auto';
+            });
+    });
+</script>
+
+
+{% endblock %}

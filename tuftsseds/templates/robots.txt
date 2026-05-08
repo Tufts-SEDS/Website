@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: 
+Disallow: /static/
+Disallow: /account/
+Disallow: /admin/
+Allow: /static/favicon_io/favicon.ico
+Sitemap: https://sedstufts.org/sitemap.xml

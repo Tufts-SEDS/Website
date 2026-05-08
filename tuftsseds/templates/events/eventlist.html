@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Events | Tufts SEDS {% endblock %}
+{% block pagecontent %}
+<!-- Page Content-->
+<div class="apo-page">
+  <!-- Parallax Grid -->
+  {% if not page_obj.has_next %}
+    {% if page_obj.paginator.count|divisibleby:4 %}
+      <div class="apo-parallax-grid apo-portfolio-container apo-style-2 apo-portfolio-appear" data-columns-sm="2" data-columns-md="3" data-columns-lg="4">
+    {% elif page_obj.paginator.count|divisibleby:3 %}
+      <div class="apo-parallax-grid apo-portfolio-container apo-style-2 apo-portfolio-appear" data-columns-sm="2" data-columns-md="3" data-columns-lg="3">
+    {% else %}
+      <div class="apo-parallax-grid apo-portfolio-container apo-style-2 apo-portfolio-appear" data-columns-sm="2" data-columns-md="2" data-columns-lg="2">
+    {% endif %}
+  {% endif %}
+    {% for event in object_list %}
+    <div class="apo-parallax-grid-item">
+      <!-- Article-->
+      <article class="apo-project">
+        <div class="apo-project-media"><a href="#"><img src="{% static 'images/events/' %}{{ event.folder_name }}/{{ event.cover_image }}.webp" alt=""></a></div>
+        <div class="apo-project-content-wrap">
+          <div class="apo-aligner-outer">
+            <div class="apo-aligner-inner">
+              <header class="apo-project-header">
+                <h2 class="apo-project-title"><a href="{{ event.get_absolute_url }}">{{ event.title }}</a></h2>
+                <ul class="apo-project-categories">
+                  <li><a>{{ event.date }}</a></li>
+                </ul>
+              </header>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+    {% endfor %}
+  </div>
+  <!-- End Parallax Grid -->
+</div>
+<!-- Pagination-->
+<div class="apo-page-controls">
+{% if page_obj.has_next %}
+<nav>
+  <ul class="apo-pagination">
+      <li class="nv-current"><span class="page-numbers current">{{ page_obj.number }}</span></li>
+      <li><a href="?page={{ page_obj.next_page_number }}" class="page-numbers">{{ page_obj.next_page_number }}</a></li>
+      <li><span class="page-numbers dots">...</span></li>
+      <li><a href="?page={{ page_obj.paginator.num_pages }}" class="page-numbers">{{ page_obj.paginator.num_pages }}</a></li>
+  </ul>
+</nav>
+{% endif %}
+</div>
+<!-- End Pagination-->
+
+
+
+
+<!-- End Page Content-->
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/modules/apolo.parallax-grid.min.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,278 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Home | Tufts SEDS {% endblock %}
+{% block pagecontent %}
+<div class="apo-page">
+  <!-- Slider-->
+  <div class="rev_slider_wrapper fullscreen-container">
+    <div id="rev-slider-2" class="rev_slider fullscreenbanner apo-revslider-theme">
+      <ul>
+        <!-- Slide 1-->
+        <li data-transition="fade" data-speed="700" data-prevslidecaption="Prev" data-nextslidecaption="Next"><img
+            src="{% static 'WEBP_IMAGES/homepage/temp_rockethp3.webp' %}" loading="lazy" alt="" class="rev-slidebg">
+          <!-- Layer 1-->
+          <div data-x="left" data-y="center" data-width="['auto']" data-height="['auto']"
+            data-hoffset="['0','130','130','30']" data-voffset="-55" data-fontsize="['14','14','14','14']"
+            data-lineheight="['20','20','20','20']" data-fontweight="['400','400','400','400']"
+            data-color="['#ffffff','#ffffff','#ffffff','#ffffff']"
+            data-transform_in="x:-40px;opacity:0;s:700;e:Power2.easeInOut;" data-transform_out="x:0px;opacity:0;s:700;"
+            data-start="800" class="tp-caption tp-resizeme apo-layer-style-1">Taking our journey to the skies</div>
+          <!-- End of Layer 1-->
+          <!-- Layer 2-->
+          <a href="#">
+            <div data-x="left" data-y="center" data-width="['auto']" data-height="['auto']"
+              data-hoffset="['0','130','130','30']" data-voffset="0" data-fontsize="['60','60','60','40']"
+              data-lineheight="['60','60','60','60']" data-fontweight="['400','400','400','400']"
+              data-color="['#ffffff','#ffffff','#ffffff','#ffffff']"
+              data-transform_in="x:-40px;opacity:0;s:700;e:Power2.easeInOut;"
+              data-transform_out="x:0px;opacity:0;s:700;" data-start="900"
+              class="tp-caption tp-resizeme apo-layer-style-2">Tufts SEDS Spaceport 2024</div>
+          </a>
+          <!-- End of Layer 2-->
+          <!-- Layer 3-->
+          <div data-x="left" data-y="center" data-width="['auto']" data-height="['auto']"
+            data-hoffset="['0','130','130','30']" data-voffset="80" data-fontsize="['12','12','12','12']"
+            data-lineheight="['18','18','18','18']" data-fontweight="['400','400','400','400']"
+            data-color="['#ffffff','#ffffff','#ffffff','#ffffff']"
+            data-transform_in="x:-40px;opacity:0;s:700;e:Power2.easeInOut;" data-transform_out="x:0px;opacity:0;s:700;"
+            data-start="1000" class="tp-caption tp-resizeme apo-layer-style-3">Photo credit: Rachel Bonanno</div>
+          <!-- End of Layer 3-->
+        </li>
+        <!-- End of Slide 1-->
+        <!-- Slide 2-->
+        <li data-transition="fade" data-speed="700" data-prevslidecaption="Prev" data-nextslidecaption="Next"><img
+            src="{% static 'WEBP_IMAGES/homepage/spacevision_2024.webp' %}" loading="lazy" alt="">
+          <!-- Layer 1-->
+          <div data-x="right" data-y="center" data-width="['auto']" data-height="['auto']"
+            data-hoffset="['0','30','30','30']" data-voffset="-55" data-fontsize="['14','14','14','14']"
+            data-lineheight="['20','20','20','20']" data-fontweight="['400','400','400','400']"
+            data-color="['#ffffff','#ffffff','#ffffff','#ffffff']"
+            data-transform_in="x:40px;opacity:0;s:700;e:Power2.easeInOut;" data-transform_out="x:0px;opacity:0;s:700;"
+            data-start="800" class="tp-caption tp-resizeme apo-layer-style-1">Another great leap for mankind</div>
+          <!-- End of Layer 1-->
+          <!-- Layer 2-->
+          <a href="#">
+            <div id="test" data-x="right" data-y="center" data-width="['auto']" data-height="['auto']"
+              data-hoffset="['0','30','30','30']" data-voffset="0" data-fontsize="['60','60','60','40']"
+              data-lineheight="['60','60','60','60']" data-fontweight="['400','400','400','400']"
+              data-color="['#ffffff','#ffffff','#ffffff','#ffffff']"
+              data-transform_in="x:40px;opacity:0;s:700;e:Power2.easeInOut;" data-transform_out="x:0px;opacity:0;s:700;"
+              data-opacity="0.4" data-start="900" class="tp-caption tp-resizeme apo-layer-style-2">TuftsSEDS x
+              Spacevision 2024</div>
+          </a>
+          <!-- End of Layer 2-->
+          <!-- Layer 3-->
+          <div data-x="right" data-y="center" data-width="['auto']" data-height="['auto']"
+            data-hoffset="['0','30','30','30']" data-voffset="80" data-fontsize="['12','12','12','12']"
+            data-lineheight="['18','18','18','18']" data-fontweight="['400','400','400','400']"
+            data-color="['#ffffff','#ffffff','#ffffff','#ffffff']"
+            data-transform_in="x:40px;opacity:0;s:700;e:Power2.easeInOut;" data-transform_out="x:0px;opacity:0;s:700;"
+            data-start="1000" class="tp-caption tp-resizeme apo-layer-style-3">Photo credit: SEDS-USA</div>
+          <!-- End of Layer 3-->
+        </li>
+        <!-- End of Slide 2-->
+        <!-- Slide 3-->
+        {% comment %} <li data-transition="fade" data-delay="50000" data-prevslidecaption="Prev"
+          data-nextslidecaption="Next">
+
+          <img src="{% static 'images/main/slider_rocket.jpg' %}" alt="" data-bg-position="center center"
+            data-bgfit="cover" data-bgrepeat="no-repeat">
+
+          <!-- Background Video Layer -->
+          <!--<div class="rs-background-video-layer" data-autoplay="true" data-ytid="uO3k8bG4G_w" data-volume="100" data-forcerewind="off" data-nextslideatend="true" data-videoloop="loopandnoslidestop" data-videoattributes="version=3&enablejsapi=1&html5=1&hd=1&controls=0&modestbranding=1&wmode=opaque&showinfo=0&rel=0&start=1&disablekb=1"></div> -->
+          <!-- End of Background Video Layer -->
+
+          <!-- Layer 1-->
+          <div data-x="left" data-y="center" data-width="['auto']" data-height="['auto']"
+            data-hoffset="['0','130','130','30']" data-voffset="-55" data-fontsize="['14','14','14','14']"
+            data-lineheight="['20','20','20','20']" data-fontweight="['400','400','400','400']"
+            data-color="['#ffffff','#ffffff','#ffffff','#ffffff']"
+            data-transform_in="x:-40px;opacity:0;s:700;e:Power2.easeInOut;" data-transform_out="x:0px;opacity:0;s:700;"
+            data-start="800" class="tp-caption tp-resizeme apo-layer-style-1">Image subtitle</div>
+          <!-- End of Layer 1-->
+          <!-- Layer 2-->
+          <div data-x="left" data-y="center" data-width="['auto']" data-height="['auto']"
+            data-hoffset="['0','130','130','30']" data-voffset="0" data-fontsize="['60','60','60','40']"
+            data-lineheight="['60','60','60','60']" data-fontweight="['400','400','400','400']"
+            data-color="['#ffffff','#ffffff','#ffffff','#ffffff']"
+            data-transform_in="x:-40px;opacity:0;s:700;e:Power2.easeInOut;" data-transform_out="x:0px;opacity:0;s:700;"
+            data-start="900" class="tp-caption tp-resizeme apo-layer-style-2">Image Title</div>
+          <!-- End of Layer 2-->
+          <!-- Layer 3-->
+          <div data-x="left" data-y="center" data-width="['auto']" data-height="['auto']"
+            data-hoffset="['0','130','130','30']" data-voffset="80" data-fontsize="['12','12','12','12']"
+            data-lineheight="['18','18','18','18']" data-fontweight="['400','400','400','400']"
+            data-color="['#ffffff','#ffffff','#ffffff','#ffffff']"
+            data-transform_in="x:-40px;opacity:0;s:700;e:Power2.easeInOut;" data-transform_out="x:0px;opacity:0;s:700;"
+            data-start="1000" class="tp-caption tp-resizeme apo-layer-style-3">Image caption with credits</div>
+          <!-- End of Layer 3-->
+        </li> {% endcomment %}
+        <!-- End of Slide 3-->
+      </ul>
+      <!-- Slider Actions -->
+      <div class="apo-revslider-controls">
+        <div class="apo-revslider-controls-item">
+          <div class="apo-revslider-theme-nav-prev">
+            <div class="apo-revslider-control-title">Prev</div>
+            <i class="apo-icon-prev"></i>
+          </div>
+        </div>
+        <div class="apo-revslider-controls-item">
+          <div class="apo-revslider-theme-nav-next">
+            <div class="apo-revslider-control-title">Next</div>
+            <i class="apo-icon-next"></i>
+          </div>
+        </div>
+      </div>
+      <!-- End Slider Actions -->
+    </div>
+  </div>
+  <!-- End of Slider-->
+
+  <!-- Content Section for Rocketry and Weather Balloon -->
+  <div class="apo-section apo-section-no-spacing">
+    <!-- Isotope-->
+    <div data-isotope-layout="masonry" class="apo-isotope apo-cols-2 apo-portfolio-container apo-style-5">
+      <div class="grid-sizer"></div>
+      <div class="apo-item">
+        <!-- Article-->
+        <article class="apo-project">
+          <div class="apo-project-media"><a href="#"><img src="{% static 'WEBP_IMAGES/homepage/index_rocketry.webp' %}"
+                alt="cool rocket jpeg"></a></div>
+          <div class="apo-project-content-wrap">
+            <div class="apo-aligner-outer">
+              <div class="apo-aligner-inner">
+                <header class="apo-project-header">
+                  <h2 class="apo-project-title"><a href="{% url 'main:rocket_hp' %}">Rocketry</a></h2>
+                </header>
+              </div>
+            </div>
+          </div><span class="apo-project-triangle"></span>
+        </article>
+      </div>
+      <div class="apo-item">
+        <!-- Article-->
+        <article class="apo-project">
+          {% comment %} IMAGE IS A PLACEHOLDER, CHANGE IT FOR SOMETHING FROM OUR LAUNCH {% endcomment %}
+          <div class="apo-project-media"><a href="#"><img src="{% static 'WEBP_IMAGES/homepage/index_hab.webp' %}"
+                loading="lazy" alt=""></a></div>
+          <div class="apo-project-content-wrap">
+            <div class="apo-aligner-outer">
+              <div class="apo-aligner-inner">
+                <header class="apo-project-header">
+                  <h2 class="apo-project-title"><a href="{% url 'main:weatherball_hp' %}">Weather Balloon</a></h2>
+                </header>
+              </div>
+            </div>
+          </div><span class="apo-project-triangle"></span>
+        </article>
+      </div>
+    </div>
+  </div>
+  <div class="apo-section apo-section-no-spacing">
+    <!-- Isotope-->
+    <div data-isotope-layout="masonry" class="apo-isotope apo-cols-3 apo-portfolio-container apo-style-5">
+      <div class="grid-sizer"></div>
+      <div class="apo-item">
+        <!-- Article-->
+        <article class="apo-project">
+          {% comment %} IMAGE IS A PLACEHOLDER, CHANGE IT FOR SOMETHING FROM OUR CHAPTER {% endcomment %}
+          <div class="apo-project-media"><a href="#"><img
+                src="{% static 'WEBP_IMAGES/homepage/index_astrophotography.webp' %}" loading="lazy" alt=""></a></div>
+          <div class="apo-project-content-wrap">
+            <div class="apo-aligner-outer">
+              <div class="apo-aligner-inner">
+                <header class="apo-project-header">
+                  <h2 class=""><a href="{% url 'main:astrophotography_hp' %}">Astrophotography</a></h2>
+                </header>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+      <div class="apo-item">
+        <!-- Article-->
+        <article class="apo-project">
+          <div class="apo-project-media"><a href="#"><img
+                src="{% static 'WEBP_IMAGES/homepage/index_rad_telescope.webp' %}" alt=""></a></div>
+          <div class="apo-project-content-wrap">
+            <div class="apo-aligner-outer">
+              <div class="apo-aligner-inner">
+                <header class="apo-project-header">
+                  <h2 class="apo-project-title"><a href="#">Radio Telescope</a></h2>
+                </header>
+              </div>
+            </div>
+          </div><span class="apo-project-triangle"></span>
+        </article>
+      </div>
+      <div class="apo-item">
+        <!-- Article-->
+        <article class="apo-project">
+          {% comment %} IMAGE IS A PLACEHOLDER, CHANGE IT FOR SOMETHING FROM OUR CHAPTER {% endcomment %}
+          <div class="apo-project-media"><a href="#"><img
+                src="https://upload.wikimedia.org/wikipedia/commons/8/8f/1KUNS-PF_1-U_Cubesat.jpg" loading="lazy"
+                alt=""></a></div>
+          <div class="apo-project-content-wrap">
+            <div class="apo-aligner-outer">
+              <div class="apo-aligner-inner">
+                <header class="apo-project-header">
+                  <h2 class="apo-project-title"><a href="{% url 'main:cubesat_hp' %}">CubeSat</a></h2>
+                </header>
+              </div>
+            </div>
+          </div><span class="apo-project-triangle"></span>
+        </article>
+      </div>
+    </div>
+  </div>
+  <!-- End Isotope-->
+  <!-- Content Section-->
+  <div data-parallax="scroll" data-image-src="{% static 'images/main/jLhWw64Jko4L5TyPdVCSCh.webp' %}"
+    class="apo-section apo-fullheight-section apo-section-parallax">
+    <div class="container"><img src="{% static 'images/transparent-logo.png' %}" alt="" class="apo-content-logo">
+      <h6 class="apo-section-title apo-style-3">SEDS: Students for the Exploration and Development of Space</h6>
+      <blockquote class="apo-style-3">
+        <p>Committed to advancing the journey of space exploration<br> and the endless possibilities it holds</p>
+      </blockquote>
+    </div>
+  </div>
+  <!-- End Content Section-->
+  <!-- Content Section-->
+  <div class="apo-section apo-section-no-spacing">
+    <!-- Isotope-->
+    <div data-isotope-layout="grid"
+      class="apo-isotope apo-cols-3 apo-entries-container apo-style-5 apo-same-height-container">
+      <div class="grid-sizer"></div>
+      {% for event in events %}
+      <div class="apo-item">
+        <!-- Article-->
+        <article class="apo-entry">
+          <div data-bg-img-src="{% static 'images/events/' %}{{ event.folder_name }}/{{ event.cover_image }}.webp"
+            loading="lazy" class="apo-entry-media"></div>
+          <div class="apo-entry-content-wrap">
+            <div class="apo-aligner-outer">
+              <div class="apo-aligner-inner apo-same-height">
+                <header class="apo-entry-header">
+                  <h2 class="apo-entry-title"><a href="{{ event.get_absolute_url }}">{{ event.title }}</a></h2>
+                  <div class="apo-entry-meta">
+                    <time datetime="2016-12-24" class="apo-entry-publish-date">{{ event.date }}</time>
+                  </div>
+                </header>
+                <footer class="apo-entry-footer"><a href="{{ event.get_absolute_url }}"
+                    class="apo-entry-read-more-link apo-btn apo-btn-small">
+                    Read More</a></footer>
+              </div>
+            </div>
+          </div>
+        </article>
+        <!-- End Article-->
+      </div>
+      {% endfor %}
+      <!-- End Isotope-->
+    </div>
+  </div>
+  {% endblock %}
+
+
+
