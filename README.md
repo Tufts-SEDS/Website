@@ -3,6 +3,8 @@
 
 This repository contains the source code for the official Tufts SEDS website. Below are instructions to help you set up your local environment.
 
+(Link to the original repository)[https://github.com/bimmui/tufts-SEDS] (should we ever need it, it is private but Claire adn Will have access)
+
 ### Python Environment Setup
 Before doing anything, install the following:
 - [Git](https://git-scm.com/downloads)
