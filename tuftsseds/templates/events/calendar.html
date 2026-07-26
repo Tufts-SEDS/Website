@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Calendar | Tufts SEDS {% endblock %}
+
+{% block extrastylesheet %}
+<style>
+  .events-calendar-embed {
+    width: 100%;
+    min-height: 700px;
+    border: 0;
+  }
+
+  @media (max-width: 767px) {
+    .events-calendar-embed {
+      min-height: 500px;
+    }
+  }
+</style>
+{% endblock %}
+
+{% block pagecontent %}
+<div class="apo-page">
+  <div class="apo-page-header apo-style-2">
+    <div class="apo-page-header-column">
+      <h1 class="apo-page-title">Calendar</h1>
+      <ul class="apo-breadcrumbs">
+        <li><a href="{% url 'main:home' %}">Home</a></li>
+        <li><a href="{% url 'events:events' %}">Events</a></li>
+        <li><a>Calendar</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="apo-section">
+    <div class="container">
+      <p>Upcoming Tufts SEDS events</p>
+      <iframe
+        class="events-calendar-embed"
+        src="https://calendar.google.com/calendar/embed?src=onolb8cjqerk0kj009vmhoavr8%40group.calendar.google.com&amp;ctz=America%2FNew_York"
+        title="Tufts SEDS Google Calendar"
+        loading="lazy"
+        frameborder="0"
+        scrolling="no">
+      </iframe>
+    </div>
+  </div>
+</div>
+{% endblock %}

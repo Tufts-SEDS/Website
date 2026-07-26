@@ -101,7 +101,12 @@
                 </li>
                 <li class="leadership"><a class="dynamic-color" href="{% url 'main:leadership' %}">Leadership</a></li>
                 <li class="blog"><a class="dynamic-color" href="{% url 'blog:blogs' %}">Blog</a></li>
-                <li class="events"><a class="dynamic-color" href="{% url 'events:events' %}">Events</a></li>
+                <li class="events apo-has-children"><a href="" onclick="return false;" class="dynamic-color">Events</a>
+                  <ul class="apo-sub-menu">
+                    <li><a href="{% url 'events:events' %}">Past Events</a></li>
+                    <li><a href="{% url 'events:calendar' %}">Calendar</a></li>
+                  </ul>
+                </li>
                 {% comment %}<li class="media"><a class="dynamic-color" href="{% url 'main:media' %}">Media</a></li>{% endcomment %}
                 <li class="wiki"><a class="dynamic-color"
                     href="https://sedstufts.notion.site/sedstufts/3bce0b81e5c64006974c05a38ad85014?v=dadb10bf25164fb6b814ad583a3c459f" target="_blank">Wiki</a>

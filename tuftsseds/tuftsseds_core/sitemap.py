@@ -37,6 +37,7 @@ class StaticViewSitemap(Sitemap):
             "main:leadership",
             "main:about_us",
             "events:events",
+            "events:calendar",
             "blog:blogs",
         ]
 

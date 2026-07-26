@@ -26,6 +26,18 @@ class EventsListView(ListView):
     }
 
 
+def events_calendar(request):
+    metacontent = {
+        "description": (
+            "View upcoming Tufts SEDS events on our public Google Calendar — "
+            "talks, workshops, launches, and outreach."
+        ),
+        "author": "",
+        "keywords": "calendar, events, SEDS, tufts, space, aerospace, astronomy",
+    }
+    return render(request, "events/calendar.html", {"metacontent": metacontent})
+
+
 def get_event(request, slug):
     event = get_object_or_404(Events.objects.filter(slug=slug))
 
