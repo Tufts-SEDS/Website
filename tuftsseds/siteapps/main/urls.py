@@ -1,5 +1,5 @@
 from django.urls import path
-from django.views.generic.base import TemplateView
+from django.views.generic.base import RedirectView, TemplateView
 
 from . import views
 
@@ -28,7 +28,9 @@ urlpatterns = [
     path("rocketry/leadership", views.rocket_leadership, name="rocket_leadership"),
     path("rocketry/projects", views.rocket_projects, name="rocket_projects"),
     # path("rocketry-gallery", views.rocket_gallery, name="rocket_gallery"),
-    path("weather-balloon", views.weatherball_hp, name="weatherball_hp"),
+    path("weather-balloon", 
+         RedirectView.as_view(url="/", permanent=False), 
+         name="weatherball_hp"),
     path("astrophotography", views.astrophotography_hp, name="astrophotography_hp"),
     path(
         "astrophotography_help",

@@ -147,3 +147,6 @@ GitHub.sublime-settings
 
 # custom files
 full_code_history.txt
+
+# .DS_Store files
+.DS_Store

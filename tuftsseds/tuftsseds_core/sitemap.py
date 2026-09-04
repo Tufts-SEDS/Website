@@ -31,7 +31,7 @@ class StaticViewSitemap(Sitemap):
         return [
             "main:home",
             "main:rocket_hp",
-            "main:weatherball_hp",
+            # "main:weatherball_hp",
             "main:cubesat_hp",
             "main:astrophotography_hp",
             "main:leadership",
