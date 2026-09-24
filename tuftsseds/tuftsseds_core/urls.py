@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.contrib.sitemaps.views import sitemap
-from .sitemap import EventsSitemap, BlogsSitemap, StaticViewSitemap
+from .sitemap import EventsSitemap, StaticViewSitemap
 from django.urls import include, path
 
 urlpatterns = [
@@ -28,11 +28,9 @@ urlpatterns = [
             "sitemaps": {
                 "static": StaticViewSitemap,
                 "events": EventsSitemap,
-                "blogs": BlogsSitemap,
             }
         },
     ),
-    path("blog/", include("tuftsseds.siteapps.blog.urls")),
     path("events/", include("tuftsseds.siteapps.events.urls")),
     path("database/", include("tuftsseds.siteapps.database.urls")),
     path("account/", include("tuftsseds.siteapps.account.urls")),

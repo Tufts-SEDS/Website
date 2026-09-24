@@ -7,8 +7,7 @@ from django.http.response import HttpResponseRedirect
 from django.utils.text import slugify
 from django.shortcuts import render
 
-from .models import Events
-from tuftsseds.siteapps.blog.models import Author
+from .models import Author, Events
 
 
 class CsvImportForm(forms.Form):
@@ -90,6 +89,43 @@ class EventsAdmin(admin.ModelAdmin):
 
                     for tag in tag_list:
                         the_event.tags.add(tag)
+
+        form = CsvImportForm()
+        data = {"form": form}
+        return render(request, "admin/csv_upload.html", data)
+
+
+@admin.register(Author)
+class AuthorAdmin(admin.ModelAdmin):
+    search_fields = ["author_name"]
+
+    def get_urls(self):
+        urls = super().get_urls()
+        new_urls = [
+            path("upload-csv/", self.upload_csv),
+        ]
+        return new_urls + urls
+
+    def upload_csv(self, request):
+        if request.method == "POST":
+            import pandas as pd
+            csv_files = request.FILES.getlist("csv_upload")
+
+            for csv_file in csv_files:
+                if not csv_file.name.endswith(".csv"):
+                    messages.warning(request, "The wrong file type was uploaded")
+                    return HttpResponseRedirect(request.path_info)
+
+                csv_data = pd.read_csv(csv_file)
+
+                for index, row in csv_data.iterrows():
+                    Author.objects.update_or_create(
+                        author_name=row["name"],
+                        defaults={
+                            "email": row["email"],
+                            "personal_website": row["site"],
+                        },
+                    )
 
         form = CsvImportForm()
         data = {"form": form}

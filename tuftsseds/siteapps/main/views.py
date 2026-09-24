@@ -1,5 +1,4 @@
 from datetime import date
-from itertools import chain
 from django.shortcuts import get_object_or_404, render
 from django.template.defaulttags import register
 from django.http import JsonResponse
@@ -7,15 +6,7 @@ from django.db.models import Q
 from django.conf import settings
 
 from tuftsseds.siteapps.events.models import Events
-from tuftsseds.siteapps.blog.models import Blog, Author, Category
 from .models import ExecMembers, YearAndRole, MailingList, AstrophotographyPhotos
-
-
-def get_date_attr(value):
-    try:
-        return value.publish_date
-    except AttributeError:
-        return value.date
 
 
 @register.filter
@@ -43,18 +34,10 @@ def index(request):
 
 # The following functions denoted with "_hp" are views that
 # send the user to the homepage of each respective project teams
-# The homepages simply query events and blogs that are related to
+# The homepages simply query events that are related to
 # specific teams and display them on the project team homepages
 def rocket_hp(request):
     # rocket_events = Events.objects.filter(related_proj_team="rocketry")
-    # rocket_blogs = Blog.objects.filter(related_proj_team="rocketry")
-
-    # Gets blog and events related to rocketry
-    # Aggregates the data from both models into one big queryset sorted by date bc that their common field
-    # List goes from oldest -> newest, will be switched in the template
-    # result_list = sorted(
-    #     chain(rocket_blogs, rocket_events), key=lambda instance: get_date_attr(instance)
-    # )
 
     # Using some indicators to figure what data-filter to apply to
     # each result when rendered in the rocket homepage
@@ -139,15 +122,8 @@ def rocket_leadership(request):
 
 
 def rocket_launch(request):
-    rocket_events = Events.objects.filter(related_proj_team="rocketry")
-    rocket_blogs = Blog.objects.filter(related_proj_team="rocketry")
-
-    # Gets blog and events related to rocketry
-    # Aggregates the data from both models into one big queryset sorted by date bc that their common field
     # List goes from oldest -> newest, will be switched in the template
-    result_list = sorted(
-        chain(rocket_blogs, rocket_events), key=lambda instance: get_date_attr(instance)
-    )
+    result_list = Events.objects.filter(related_proj_team="rocketry").order_by("date")
 
     metacontent = {
         "description": """Tufts SEDS Rocketry is a student-led organization dedicated to the design, 
@@ -183,12 +159,7 @@ def burner(request):
 
 
 def weatherball_hp(request):
-    hab_events = Events.objects.filter(related_proj_team="hab")
-    hab_blogs = Blog.objects.filter(related_proj_team="hab")
-
-    result_list = sorted(
-        chain(hab_blogs, hab_events), key=lambda instance: get_date_attr(instance)
-    )
+    result_list = Events.objects.filter(related_proj_team="hab").order_by("date")
     metacontent = {
         "description": """The Tufts SEDS High Altitude Balloon team is committed to advancing our understanding of weather patterns, 
                             climate change, and the effects of high altitude conditions on biological organisms.""",
@@ -240,13 +211,7 @@ def image_info(request):
 
 
 def cubesat_hp(request):
-    cubesat_events = Events.objects.filter(related_proj_team="cubesat")
-    cubesat_blogs = Blog.objects.filter(related_proj_team="cubesat")
-
-    result_list = sorted(
-        chain(cubesat_blogs, cubesat_events),
-        key=lambda instance: get_date_attr(instance),
-    )
+    result_list = Events.objects.filter(related_proj_team="cubesat").order_by("date")
 
     metacontent = {
         "description": """Discover the Tufts SEDS CubeSat team's mission to contribute to space exploration by building innovative CubeSats for various scientific purposes. 
@@ -437,16 +402,6 @@ def search(request):
     if request.method == "POST":
         searched = request.POST.get("s")
 
-        blogresults = (
-            Blog.objects.filter(
-                (Q(title__icontains=searched))
-                | (Q(short_description__icontains=searched))
-                | (Q(tags__name__in=[searched]))
-                | (Q(author__author_name__icontains=searched))
-            )
-            .distinct()
-            .order_by("-publish_date")
-        )
         eventresults = (
             Events.objects.filter(
                 (Q(title__icontains=searched))
@@ -462,28 +417,7 @@ def search(request):
         "main/search/results.html",
         {
             "searched": searched,
-            "blogresults": blogresults,
             "eventresults": eventresults,
         },
     )
 
-
-def search_category(request, category_slug):
-    category = get_object_or_404(Category, slug=category_slug)
-
-    blogresults = Blog.objects.filter(category=category)
-    eventresults = Events.objects.filter(
-        (Q(title__icontains=category.name))
-        | (Q(description__icontains=category.name))
-        | (Q(tags__name__in=[category.name]))
-    ).distinct()
-
-    return render(
-        request,
-        "main/search/results.html",
-        {
-            "searched": category.name,
-            "blogresults": blogresults,
-            "eventresults": eventresults,
-        },
-    )

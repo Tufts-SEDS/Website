@@ -34,15 +34,9 @@
                                                     href="{{ result.get_absolute_url }}">{{ result.title }}</a></h2>
                                         </header>
                                         <footer class="apo-entry-footer">
-                                            {% if result.date %}
                                             <time datetime="{{ result.date }}" class="apo-entry-publish-date">
                                                 {{ result.date }}
                                             </time>
-                                            {% else %}
-                                            <time datetime="{{ result.publish_date }}" class="apo-entry-publish-date">
-                                                {{ result.publish_date }}
-                                            </time>
-                                            {% endif %}
                                         </footer>
                                     </div>
                                 </div>

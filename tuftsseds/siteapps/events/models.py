@@ -1,8 +1,16 @@
 from django.db import models
 from django.urls import reverse
+from django.utils.translation import gettext_lazy as _
 from taggit.managers import TaggableManager
 
-from tuftsseds.siteapps.blog.models import Author
+
+class Author(models.Model):
+    author_name = models.CharField(max_length=255)
+    email = models.EmailField(_("email address"), null=True, blank=True)
+    personal_website = models.URLField(null=True, blank=True)
+
+    def __str__(self):
+        return self.author_name
 
 
 class Events(models.Model):

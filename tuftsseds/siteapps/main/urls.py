@@ -47,11 +47,6 @@ urlpatterns = [
     # Search bar function
     #############################
     path("search-results", views.search, name="search"),
-    path(
-        "search-results/category=<slug:category_slug>",
-        views.search_category,
-        name="search_category",
-    ),
     # Other/Misc.
     #############################
     path(

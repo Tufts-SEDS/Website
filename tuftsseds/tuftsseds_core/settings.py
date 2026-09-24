@@ -64,7 +64,6 @@ INSTALLED_APPS = [
     "django.contrib.sites",
     "django.contrib.sitemaps",
     "tuftsseds.siteapps.main.apps.MainConfig",
-    "tuftsseds.siteapps.blog.apps.BlogConfig",
     "tuftsseds.siteapps.events.apps.EventsConfig",
     "tuftsseds.siteapps.database.apps.DatabaseConfig",
     "tuftsseds.siteapps.account.apps.AccountConfig",
@@ -200,8 +199,6 @@ CRONJOBS = [
         "tuftsseds.siteapps.main.deactivate_execs.check_and_deactivate_active_members",
     )
 ]
-
-# Directory for files for blogs
 
 # Django-taggit settings
 TAGGIT_CASE_INSENSITIVE = True

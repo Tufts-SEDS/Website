@@ -30,7 +30,6 @@
                     <!-- End of SubMenu-->
                   </li>
                   <li class=""><a class="dynamic-color" href="{% url 'main:leadership' %}">Leadership</a></li>
-                  <li class=""><a class="dynamic-color" href="{% url 'blog:blogs' %}">Blog</a></li>
                   <li class=""><a class="dynamic-color" href="{% url 'events:events' %}">Events</a></li>
                   <li class=""><a class="dynamic-color" href="{% url 'main:about_us' %}">About Us</a></li>
                   <li class=""><a class="dynamic-color" href="{% url 'events:events' %}">Contact Us</a></li>
@@ -113,7 +112,6 @@
                     <!-- End of SubMenu-->
                   </li>
                   <li class=""><a class="dynamic-color" href="{% url 'main:leadership' %}">Leadership</a></li>
-                  <li class=""><a class="dynamic-color" href="{% url 'blog:blogs' %}">Blog</a></li>
                   <li class=""><a class="dynamic-color" href="{% url 'events:events' %}">Events</a></li>
                   <li class=""><a class="dynamic-color" href="{% url 'main:about_us' %}">About Us</a></li>
                   <li class=""><a class="dynamic-color" href="{% url 'events:events' %}">Contact Us</a></li>

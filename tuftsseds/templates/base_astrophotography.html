@@ -155,7 +155,6 @@
               <ul class="apo-fullscreen-nav-pages">
                 <li class="wiki"><a class="dynamic-color"
                   href="https://sedstufts.notion.site/sedstufts/3bce0b81e5c64006974c05a38ad85014?v=dadb10bf25164fb6b814ad583a3c459f" target="_blank">Wiki</a>
-                <li class="blog"><a class="dynamic-color" href="{% url 'blog:blogs' %}">Blog</a></li>
                 <li class="events"><a class="dynamic-color" href="{% url 'events:events' %}">Events</a></li>
               </ul>
             </section>
@@ -210,8 +209,6 @@
     var curr_page = "{{ request.get_full_path }}";
     if (curr_page.includes("leadership")) {
       $(".leadership").addClass("apo-current");
-    } else if (curr_page.includes("blog")) {
-      $(".blog").addClass("apo-current");
     } else if (curr_page.includes("events")) {
       $(".events").addClass("apo-current");
     } else if (curr_page.includes("about")) {
