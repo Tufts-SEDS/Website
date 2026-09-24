@@ -99,7 +99,6 @@
                   <!-- End of SubMenu-->
                 </li>
                 <li class="leadership"><a class="dynamic-color" href="{% url 'main:leadership' %}">Leadership</a></li>
-                <li class="blog"><a class="dynamic-color" href="{% url 'blog:blogs' %}">Blog</a></li>
                 <li class="events apo-has-children"><a href="" onclick="return false;" class="dynamic-color">Events</a>
                   <ul class="apo-sub-menu">
                     <li><a href="{% url 'events:events' %}">Past Events</a></li>
@@ -175,7 +174,6 @@
           <h2 class="apo-widget-title">Navigation</h2>
           <ul>
             <li> <a href="{% url 'main:home' %}">Home</a></li>
-            <li> <a href="{% url 'blog:blogs' %}">Blog</a></li>
           </ul>
         </section>
         <!-- End Widget-->
@@ -245,8 +243,6 @@
     var curr_page = "{{ request.get_full_path }}";
     if (curr_page.includes("leadership")) {
       $(".leadership").addClass("apo-current");
-    } else if (curr_page.includes("blog")) {
-      $(".blog").addClass("apo-current");
     } else if (curr_page.includes("events")) {
       $(".events").addClass("apo-current");
     } else if (curr_page.includes("about")) {

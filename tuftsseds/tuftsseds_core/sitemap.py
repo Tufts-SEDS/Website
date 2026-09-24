@@ -4,7 +4,6 @@ from django.contrib.sitemaps import Sitemap
 from django.urls import reverse
 
 from tuftsseds.siteapps.events.models import Events
-from tuftsseds.siteapps.blog.models import Blog
 
 
 class EventsSitemap(Sitemap):
@@ -13,14 +12,6 @@ class EventsSitemap(Sitemap):
 
     def lastmod(self, obj):
         return datetime.now()
-
-
-class BlogsSitemap(Sitemap):
-    def items(self):
-        return Blog.objects.all().order_by("-publish_date")
-
-    def lastmod(self, obj):
-        return obj.edit_date
 
 
 class StaticViewSitemap(Sitemap):
@@ -37,7 +28,6 @@ class StaticViewSitemap(Sitemap):
             "main:about_us",
             "events:events",
             "events:calendar",
-            "blog:blogs",
         ]
 
     def location(self, item):
