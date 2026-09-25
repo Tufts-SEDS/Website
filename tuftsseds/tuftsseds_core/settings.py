@@ -204,7 +204,7 @@ CRONJOBS = [
 TAGGIT_CASE_INSENSITIVE = True
 
 # Other
-ACTIVE_YEAR = "2025-2026"
+ACTIVE_YEAR = "2026-2027"
 
 # Used for creating visual DB schemas
 GRAPH_MODELS = {

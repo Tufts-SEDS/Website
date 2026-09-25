@@ -1,5 +1,5 @@
 import os
-from PIL import Image
+from PIL import Image, ImageOps
 import pillow_heif
 
 
@@ -29,7 +29,9 @@ else:
             if file_extension in supported_extensions:
                 file_path = os.path.join(root, filename)
                 img = Image.open(file_path)
-                img = img.convert("RGB")
+                # Phones store rotation as EXIF metadata; bake it into the pixels
+                # so the image is upright once the metadata is dropped
+                img = ImageOps.exif_transpose(img).convert("RGB")
 
                 # Ensure the output directory structure is preserved
                 relative_path = os.path.relpath(file_path, input_directory)
