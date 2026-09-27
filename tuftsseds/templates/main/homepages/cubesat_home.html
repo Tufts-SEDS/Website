@@ -1,53 +1,157 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %} CubeSat | Tufts SEDS {% endblock %}
+{% block extrastylesheet %}
+<style>
+    .cubesat-page-header {
+        padding-bottom: 20px;
+    }
+
+    .cubesat-website {
+        text-align: center;
+        padding: 20px;
+        margin: 0 0 30px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .cubesat-website h4 a,
+    .cubesat-website h4 a:focus {
+        color: #2970f3;
+        position: relative;
+        text-decoration: none;
+        display: inline-block; /* Helps anchor the underline correctly within the link block */
+    }
+
+    /* Uses ::before because the theme's .apo-btn::after is the arrow icon, centered with top: 50% */
+    .cubesat-website h4 a::before {
+        content: '';
+        position: absolute;
+        width: calc(100% - 25px); /* Leaves out the arrow's padding-right from .apo-btn-large */
+        height: 2px;          /* Thickness of the underline */
+        bottom: 0;            /* Sits just below the text */
+        left: 0;
+        background-color: #2970f3; /* Matches your link text color */
+        transform: scaleX(0); /* Hide line initially */
+        transform-origin: bottom right; /* Forces it to slide off to the right when cursor leaves */
+        transition: transform 0.3s ease-out;
+    }
+
+    .cubesat-website h4 a:hover::before {
+        transform: scaleX(1); /* Expand line to full width */
+        transform-origin: bottom left; /* Forces it to slide in from the left */
+    }
+
+    .cubesat-website h4 a:hover {
+        text-decoration: none;
+    }
+
+    .cubesat-team {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 30px;
+        margin-top: 20px;
+    }
+
+    .cubesat-team ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .cubesat-team li {
+        margin-bottom: 8px;
+    }
+
+    .cubesat-team .cubesat-role {
+        display: block;
+        font-size: 0.85em;
+        opacity: 0.7;
+    }
+</style>
+{% endblock %}
+
 {% block pagecontent %}
 <!-- Page Content-->
 <div class="apo-page">
     <div class="container">
         <!-- Page Header-->
-        <div class="apo-page-header apo-style-2">
+        <div class="apo-page-header apo-style-2 cubesat-page-header">
             <div class="apo-page-header-column">
                 <h1 class="apo-page-title">Tufts SEDS CubeSat Team</h1>
             </div>
-            <div class="apo-page-header-column">
-                <nav class="apo-filter-wrap">
-                    <ul id="isotope-filter" class="apo-filter">
-                        <li><a href="#" data-filter="*" class="apo-active">All</a></li>
-                        <li><a href="#" data-filter=".apo-adcs">ADCS</a></li>
-                        <li><a href="#" data-filter=".apo-therm-sys">Thermal Systems</a></li>
-                        <li><a href="#" data-filter=".apo-structures">Structures</a></li>
-                        <li><a href="#" data-filter=".apo-cdh">CDH</a></li>
-                        <li><a href="#" data-filter=".apo-power">Power</a></li>
-                        <li><a href="#" data-filter=".apo-comp-vis">Computer Vision</a></li>
-                        <li><a href="#" data-filter=".apo-payload">Payload</a></li>
-                        <li><a href="#" data-filter=".apo-IT">Integration and Testing</a></li>
-                        <li><a href="#" data-filter=".apo-DO">Detumbling and Orbit</a></li>
-                    </ul>
-                </nav>
-            </div>
         </div>
+        <!-- CubeSat Website Link-->
+        <section class="cubesat-website">
+            <h4><a href="https://tufts-cubesat.vercel.app" target="_blank" rel="noopener"
+                class="apo-btn apo-btn-large">Visit the CubeSat Website</a></h4>
+        </section>
         <div>
             Tufts SEDS CubeSat team is on a mission to contribute to space exploration by building a CubeSat designed to
             detect and identify space debris. Our team, composed of students from diverse academic backgrounds, shares a
             common passion for unraveling the mysteries of the cosmos. Stay tuned as we work towards our goal of
             launching this satellite into the final frontier.
         </div>
-        <br>
-        <div>
-            For more information, see our website <a style="font-weight: bold;" href="https://tufts-cubesat.vercel.app">here</a>.
-        </div>
+
+        <!-- Team Members-->
+        <section class="apo-section">
+            <h4>Team Members</h4>
+            <div class="cubesat-team">
+                <div>
+                    <h6>Project Leads</h6>
+                    <ul>
+                        <li>Will Goldman<span class="cubesat-role">Project Lead, Software Lead</span></li>
+                        <li>Natalie Germanov<span class="cubesat-role">Project Lead, Structures Lead</span></li>
+                    </ul>
+                </div>
+                <div>
+                    <h6>Structures</h6>
+                    <ul>
+                        <li>Allie Staiger</li>
+                        <li>Isaac Meredith</li>
+                    </ul>
+                </div>
+                <div>
+                    <h6>Software</h6>
+                    <ul>
+                        <li>Shepard Rogers</li>
+                        <li>Kai Kaplinsky</li>
+                    </ul>
+                </div>
+                <div>
+                    <h6>Power</h6>
+                    <ul>
+                        <li>Jacky Zhao<span class="cubesat-role">Power Lead</span></li>
+                        <li>Steven Bagade</li>
+                        <li>Daniel Carreno</li>
+                        <li>Jules Crowson</li>
+                    </ul>
+                </div>
+                <div>
+                    <h6>Comms</h6>
+                    <ul>
+                        <li>Ryan Cooley<span class="cubesat-role">Comms Lead</span></li>
+                        <li>Brandon Douglas</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact-->
+        <section class="apo-section">
+            <h4>Contact</h4>
+            <p>Interested in joining or have questions about the project? Reach out to Will Goldman, Project Lead, at
+                <a href="mailto:william.goldman@tufts.edu"><u>william.goldman@tufts.edu</u></a>.</p>
+        </section>
+
+        {% if results %}
         <hr>
-        <!-- End Page Header-->
+        <!-- CubeSat Events-->
         <div class="apo-section">
-            <!-- Isotope-->
-            <div data-isotope-layout="grid" data-isotope-filter="#isotope-filter"
-                class="apo-isotope apo-cols-3 apo-entries-container apo-style-3">
+            <div data-isotope-layout="grid" class="apo-isotope apo-cols-3 apo-entries-container apo-style-3">
                 <div class="grid-sizer"></div>
-                <!-- Add apo-item plus whatever other class the article relates to-->
                 {% comment %} Goes through the list in backwards order bc of how it ws sorted in the view {% endcomment %}
                 {% for result in results reversed %}
-                <div class="apo-item apo-{% if result.filter == 2 %}launches{% elif result.filter == 1 %}projects{% else %}other{% endif %}">
+                <div class="apo-item">
                     <!-- Article-->
                     <article class="apo-entry">
                         <div class="apo-entry-inner">
@@ -71,21 +175,9 @@
                     <!-- End Article-->
                 </div>
                 {% endfor %}
-                <!-- End Isotope-->
             </div>
-            {% comment %} <div class="apo-page-controls">
-                <!-- Pagination-->
-                <nav>
-                    <ul class="apo-pagination">
-                        <li class="nv-current"><span class="page-numbers current">1</span></li>
-                        <li><a href="#" class="page-numbers">2</a></li>
-                        <li><span class="page-numbers dots">...</span></li>
-                        <li><a href="#" class="page-numbers">5</a></li>
-                    </ul>
-                </nav>
-                <!-- End Pagination-->
-            </div> {% endcomment %}
         </div>
+        {% endif %}
     </div>
     <!-- End Page Content-->
 </div>
