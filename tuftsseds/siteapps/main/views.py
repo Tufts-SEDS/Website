@@ -4,6 +4,7 @@ from django.template.defaulttags import register
 from django.http import JsonResponse
 from django.db.models import Q
 from django.conf import settings
+from django.urls import reverse
 
 from tuftsseds.siteapps.events.models import Events
 from .models import ExecMembers, YearAndRole, MailingList, AstrophotographyPhotos
@@ -398,26 +399,78 @@ def support_us(request):
     )
 
 
-def search(request):
-    if request.method == "POST":
-        searched = request.POST.get("s")
+# Pages the search bar can find. The keywords are what the search matches against,
+# so add a line here (and relevant keywords) whenever a new public page is added.
+SEARCHABLE_PAGES = [
+    ("Home", "main:home", "tufts seds students exploration development space"),
+    ("About Us", "main:about_us", "about mission chapter join members contact"),
+    ("Leadership", "main:leadership", "leadership executive board eboard officers president project leads members"),
+    ("Support Us", "main:support_us", "support donate sponsor sponsorship"),
+    ("Media", "main:media", "media news press photos videos"),
+    ("Events", "events:events", "events launches meetings outreach"),
+    ("Event Calendar", "events:calendar", "calendar schedule events dates meetings"),
+    ("Rocketry", "main:rocket_hp", "rocketry rockets rocket launch high power"),
+    ("Rocketry Projects", "main:rocket_projects", "rocketry projects rockets carm"),
+    ("Rocketry Launches", "main:rocket_launch", "rocketry launches launch rockets"),
+    ("Rocketry Leadership", "main:rocket_leadership", "rocketry leadership leads team"),
+    ("Rocketry Sponsors", "main:rocket_our_sponsers", "rocketry sponsors sponsorship"),
+    ("Become a Rocketry Sponsor", "main:rocket_become_sponser", "rocketry sponsor sponsorship become"),
+    ("Donate to Rocketry", "main:rocket_donate", "rocketry donate donation support"),
+    ("CubeSat", "main:cubesat_hp", "cubesat satellite space debris team members"),
+    ("Radio Telescope", "main:radio_telescope_hp", "radio telescope srt astronomy hydrogen"),
+    ("Radio Telescope News", "main:radio_telescope_news", "radio telescope news updates srt"),
+    ("Astrophotography", "main:astrophotography_hp", "astrophotography photos photography night sky"),
+]
 
-        eventresults = (
-            Events.objects.filter(
-                (Q(title__icontains=searched))
-                | (Q(description__icontains=searched))
-                | (Q(tags__name__in=[searched]))
-                | (Q(author__author_name__icontains=searched))
+
+def search(request):
+    # GET so result pages can be bookmarked or shared; POST kept for any old forms
+    searched = (request.GET.get("s") or request.POST.get("s") or "").strip()
+    words = searched.split()
+
+    eventresults = Events.objects.none()
+    pageresults = []
+    memberresults = ExecMembers.objects.none()
+
+    if words:
+        # Every word has to appear somewhere, but not necessarily as one phrase
+        event_query = Q()
+        member_query = Q()
+        for word in words:
+            event_query &= (
+                Q(title__icontains=word)
+                | Q(description__icontains=word)
+                | Q(tags__name__icontains=word)
+                | Q(author__author_name__icontains=word)
+                | Q(related_proj_team__icontains=word)
             )
+            member_query &= (
+                Q(first_name__icontains=word)
+                | Q(last_name__icontains=word)
+                | Q(yearandrole__role__icontains=word)
+            )
+
+        eventresults = Events.objects.filter(event_query).distinct().order_by("-date")
+        memberresults = (
+            ExecMembers.objects.filter(member_query)
             .distinct()
-            .order_by("-date")
+            .order_by("-active", "ordering", "last_name")
         )
+
+        lowered = [word.lower() for word in words]
+        for title, url_name, keywords in SEARCHABLE_PAGES:
+            haystack = f"{title} {keywords}".lower()
+            if all(word in haystack for word in lowered):
+                pageresults.append({"title": title, "url": reverse(url_name)})
+
     return render(
         request,
         "main/search/results.html",
         {
             "searched": searched,
             "eventresults": eventresults,
+            "pageresults": pageresults,
+            "memberresults": memberresults,
         },
     )
 

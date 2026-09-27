@@ -131,9 +131,8 @@
       <div class="apo-header-component-last">
         <div class="apo-header-items">
           <div class="apo-header-item">
-            <form class="apo-oneline-form apo-rounded-form" method="POST" action="{% url 'main:search' %}">
-              {% csrf_token %}
-              <input type="search" name="s" placeholder="Search..." tabindex="1" />
+            <form class="apo-oneline-form apo-rounded-form" method="GET" action="{% url 'main:search' %}">
+              <input type="search" name="s" value="{{ request.GET.s }}" placeholder="Search..." tabindex="1" />
               <button type="submit"><i class="icon icon-magnifier"></i></button>
             </form>
           </div>

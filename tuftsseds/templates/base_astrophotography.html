@@ -160,9 +160,8 @@
             </section>
           </div>
 
-          <form class="apo-oneline-form" method="POST" action="{% url 'main:search' %}">
-            {% csrf_token %}
-            <input type="search" name="s" placeholder="Search this website">
+          <form class="apo-oneline-form" method="GET" action="{% url 'main:search' %}">
+            <input type="search" name="s" value="{{ request.GET.s }}" placeholder="Search this website">
             <button type="submit"><i class="icon icon-magnifier"></i></button>
           </form>
         </div>

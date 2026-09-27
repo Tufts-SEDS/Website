@@ -2,6 +2,30 @@
 {% load static %}
 {% block title %} {{ searched }} Search Results | Tufts SEDS {% endblock %}
 
+{% block extrastylesheet %}
+<style>
+    .search-results-group {
+        margin-bottom: 40px;
+    }
+
+    .search-results-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .search-results-list li {
+        margin-bottom: 10px;
+    }
+
+    .search-results-list .search-result-detail {
+        display: block;
+        font-size: 0.85em;
+        opacity: 0.7;
+    }
+</style>
+{% endblock %}
+
 {% block pagecontent %}
 <!-- Page Content-->
 <div class="apo-page">
@@ -9,56 +33,82 @@
         <!-- Page Header-->
         <div class="apo-page-header apo-style-2">
             <div class="apo-page-header-column">
-                <h1 class="apo-page-title">Search Results for...{{ searched }}</h1>
+                {% if searched %}
+                <h1 class="apo-page-title">Search Results for "{{ searched }}"</h1>
+                {% else %}
+                <h1 class="apo-page-title">Search</h1>
+                {% endif %}
             </div>
         </div>
         <!-- End Page Header-->
         <div class="apo-section">
-            <!-- Isotope-->
-            <div data-isotope-layout="grid" data-isotope-filter="#isotope-filter"
-                class="apo-isotope apo-cols-3 apo-entries-container apo-style-3">
-                <div class="grid-sizer"></div>
-                {% for event in eventresults %}
-                <div class="apo-item">
-                    <!-- Article-->
-                    <article class="apo-entry">
-                        <div class="apo-entry-inner">
-                            <div class="apo-entry-media"><a href="{{ event.get_absolute_url }}"><img src="{{ event.cover_image }}" alt=""></a></div>
-                            <div class="apo-entry-content-wrap">
-                                <div class="apo-aligner-outer">
-                                    <div class="apo-aligner-inner">
-                                        <header class="apo-entry-header">
-                                            <ul class="apo-entry-categories">
-                                                    <li><a></a></li>
-                                            </ul>
-                                            <h2 class="apo-entry-title"><a href="{{ event.get_absolute_url }}">{{ event.title }}</a></h2>
-                                        </header>
-                                        <footer class="apo-entry-footer">
-                                            <time datetime="{{ event.date }}" class="apo-entry-publish-date">{{ event.date }}</time>
-                                        </footer>
+            {% if not searched %}
+            <p>Type something into the search bar to find pages, events, and people on the site.</p>
+            {% elif not pageresults and not memberresults and not eventresults %}
+            <p>No results found for "{{ searched }}". Try fewer or different words, or
+                <a href="{% url 'events:events' %}"><u>browse all events</u></a>.</p>
+            {% endif %}
+
+            {% if pageresults %}
+            <div class="search-results-group">
+                <h4>Pages</h4>
+                <ul class="search-results-list">
+                    {% for page in pageresults %}
+                    <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
+            {% if memberresults %}
+            <div class="search-results-group">
+                <h4>People</h4>
+                <ul class="search-results-list">
+                    {% for member in memberresults %}
+                    <li>
+                        <a href="{% url 'main:leadership' %}">{{ member.first_name }} {{ member.last_name }}</a>
+                        <span class="search-result-detail">{% if member.active %}Current leadership{% else %}Past leadership{% endif %}</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
+            {% if eventresults %}
+            <div class="search-results-group">
+                <h4>Events</h4>
+                <!-- Isotope-->
+                <div data-isotope-layout="grid"
+                    class="apo-isotope apo-cols-3 apo-entries-container apo-style-3">
+                    <div class="grid-sizer"></div>
+                    {% for event in eventresults %}
+                    <div class="apo-item">
+                        <!-- Article-->
+                        <article class="apo-entry">
+                            <div class="apo-entry-inner">
+                                <div class="apo-entry-media"><a href="{{ event.get_absolute_url }}"><img src="{{ event.cover_image }}" alt="{{ event.title }}"></a></div>
+                                <div class="apo-entry-content-wrap">
+                                    <div class="apo-aligner-outer">
+                                        <div class="apo-aligner-inner">
+                                            <header class="apo-entry-header">
+                                                <h2 class="apo-entry-title"><a href="{{ event.get_absolute_url }}">{{ event.title }}</a></h2>
+                                            </header>
+                                            <footer class="apo-entry-footer">
+                                                <time datetime="{{ event.date|date:'Y-m-d' }}" class="apo-entry-publish-date">{{ event.date }}</time>
+                                            </footer>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </article>
-                    <!-- End Article-->
+                        </article>
+                        <!-- End Article-->
+                    </div>
+                    {% endfor %}
                 </div>
-                {% endfor %}
+                <!-- End Isotope-->
             </div>
-            <!-- End Isotope-->
+            {% endif %}
         </div>
-        {% comment %} <div class="apo-page-controls">
-            <!-- Pagination-->
-            <nav>
-                <ul class="apo-pagination">
-                    <li class="nv-current"><span class="page-numbers current">1</span></li>
-                    <li><a href="#" class="page-numbers">2</a></li>
-                    <li><span class="page-numbers dots">...</span></li>
-                    <li><a href="#" class="page-numbers">5</a></li>
-                </ul>
-            </nav>
-            <!-- End Pagination-->
-        </div> {% endcomment %}
     </div>
 </div>
 <!-- End Page Content-->
