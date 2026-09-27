@@ -1,6 +1,17 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %} Home | Tufts SEDS {% endblock %}
+
+{% block extrastylesheet %}
+<style>
+  /* Crop the project tiles to the same shape so the row lines up */
+  .apo-homepage-projects .apo-project-media img {
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+  }
+</style>
+{% endblock %}
 {% block pagecontent %}
 <div class="apo-page">
   <!-- Slider-->
@@ -129,10 +140,10 @@
   </div>
   <!-- End of Slider-->
 
-  <!-- Content Section for Rocketry and Weather Balloon -->
+  <!-- Content Section for Rocketry, CubeSat, and Radio Telescope -->
   <div class="apo-section apo-section-no-spacing">
     <!-- Isotope-->
-    <div data-isotope-layout="masonry" class="apo-isotope apo-cols-2 apo-portfolio-container apo-style-5">
+    <div data-isotope-layout="masonry" class="apo-isotope apo-cols-3 apo-portfolio-container apo-style-5 apo-homepage-projects">
       <div class="grid-sizer"></div>
       <div class="apo-item">
         <!-- Article-->
@@ -144,45 +155,6 @@
               <div class="apo-aligner-inner">
                 <header class="apo-project-header">
                   <h2 class="apo-project-title"><a href="{% url 'main:rocket_hp' %}">Rocketry</a></h2>
-                </header>
-              </div>
-            </div>
-          </div><span class="apo-project-triangle"></span>
-        </article>
-      </div>
-    </div>
-  </div>
-  <div class="apo-section apo-section-no-spacing">
-    <!-- Isotope-->
-    <div data-isotope-layout="masonry" class="apo-isotope apo-cols-3 apo-portfolio-container apo-style-5">
-      <div class="grid-sizer"></div>
-      <div class="apo-item">
-        <!-- Article-->
-        <article class="apo-project">
-          {% comment %} IMAGE IS A PLACEHOLDER, CHANGE IT FOR SOMETHING FROM OUR CHAPTER {% endcomment %}
-          <div class="apo-project-media"><a href="#"><img
-                src="{% static 'WEBP_IMAGES/homepage/index_astrophotography.webp' %}" loading="lazy" alt=""></a></div>
-          <div class="apo-project-content-wrap">
-            <div class="apo-aligner-outer">
-              <div class="apo-aligner-inner">
-                <header class="apo-project-header">
-                  <h2 class=""><a href="{% url 'main:astrophotography_hp' %}">Astrophotography</a></h2>
-                </header>
-              </div>
-            </div>
-          </div>
-        </article>
-      </div>
-      <div class="apo-item">
-        <!-- Article-->
-        <article class="apo-project">
-          <div class="apo-project-media"><a href="#"><img
-                src="{% static 'WEBP_IMAGES/homepage/index_rad_telescope.webp' %}" alt=""></a></div>
-          <div class="apo-project-content-wrap">
-            <div class="apo-aligner-outer">
-              <div class="apo-aligner-inner">
-                <header class="apo-project-header">
-                  <h2 class="apo-project-title"><a href="#">Radio Telescope</a></h2>
                 </header>
               </div>
             </div>
@@ -201,6 +173,22 @@
               <div class="apo-aligner-inner">
                 <header class="apo-project-header">
                   <h2 class="apo-project-title"><a href="{% url 'main:cubesat_hp' %}">CubeSat</a></h2>
+                </header>
+              </div>
+            </div>
+          </div><span class="apo-project-triangle"></span>
+        </article>
+      </div>
+      <div class="apo-item">
+        <!-- Article-->
+        <article class="apo-project">
+          <div class="apo-project-media"><a href="#"><img
+                src="{% static 'WEBP_IMAGES/homepage/index_rad_telescope.webp' %}" alt=""></a></div>
+          <div class="apo-project-content-wrap">
+            <div class="apo-aligner-outer">
+              <div class="apo-aligner-inner">
+                <header class="apo-project-header">
+                  <h2 class="apo-project-title"><a href="#">Radio Telescope</a></h2>
                 </header>
               </div>
             </div>
