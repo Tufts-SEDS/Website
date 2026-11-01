@@ -34,6 +34,8 @@
  	 function Counter(element, config) {
  	 	this.element = element;
  	 	this.value =  isFinite(this.element.data('value')) ? this.element.data('value') : 0;
+ 	 	// Keep as many decimal places as data-value has (e.g. 88.8)
+ 	 	this.decimals = (String(this.element.attr('data-value')).split('.')[1] || '').length;
  	 	this.config = config && $.isPlainObject(config) ? $.extend(true, {}, _baseConfig, config ) : _baseConfig;
  	 	this.waiting = this.config.countWhenScrolled == 'on';
 
@@ -108,7 +110,7 @@
 
  			if( diff > self.config.duration ) diff = self.config.duration;
 
- 			currentValue = Math.ceil(diff / self.config.duration * value);
+ 			currentValue = self.round(diff / self.config.duration * value);
 
  			self.element
  				.data('value', currentValue )
@@ -142,7 +144,7 @@
 
  			if(diff > self.config.duration) diff = self.config.duration;
 
- 			currentValue = Math.ceil( diff / self.config.duration * value );
+ 			currentValue = self.round( diff / self.config.duration * value );
 
  			self.element
  				.data('value', currentValue)
@@ -152,6 +154,18 @@
 
  		}, fps);
 
+ 	}
+
+ 	/**
+ 	 * Rounds up to the counter's number of decimal places.
+ 	 *
+ 	 * @param Number value
+ 	 *
+ 	 * @return Number
+ 	 */
+ 	Counter.prototype.round = function(value) {
+ 		var factor = Math.pow(10, this.decimals);
+ 		return Math.ceil( +(value * factor).toFixed(6) ) / factor;
  	}
 
  	/**

@@ -19,8 +19,303 @@
             padding-inline-start: 10%;
             padding-inline-end: 10%;
         }
+
+        .subteam-details {
+            margin: 20px 3% 0;
+        }
+
+        .subteam-details summary {
+            cursor: pointer;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .subteam-details h5 {
+            margin-top: 30px;
+            margin-bottom: 12px;
+        }
+
+        .subteam-details h6 {
+            margin-top: 20px;
+            margin-bottom: 8px;
+        }
     </style>
+    <!-- .container absorbs the .row negative margins so content stays on screen -->
+    <div class="container">
     <div class="apo-section">
+        <!-- Start Project Entry -->
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="apo-testimonials proj-img" style="margin-left: 3%;">
+                    <img src="{% static 'images/rocketry/rocketry_team_with_kindlevan.webp' %}"
+                        alt="The Tufts Rocketry Team with KINDLEVAN">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="apo-testimonials apo-style-4" style="text-align: center;">
+                    <h3>KINDLEVAN</h3>
+                    <p>The Tufts Rocketry Team's third entry into the International Rocket Engineering Competition
+                        10k COTS category, The Kinetic and Dynamic Legendary Vertically Ascending Novelty, or
+                        KINDLEVAN, is a 6" diameter fiberglass rocket. Standing at 9.54', it flew to 9,915 feet in
+                        June 2026. KINDLEVAN was the team's first attempt at designing, building, and using an airbrake
+                        system, which deployed during the coast phase of flight after motor burnout. KINDLEVAN carried
+                        a CubeSat payload designed to measure changes in the efficiency of four solar panels during
+                        descent from apogee. KINDLEVAN's flight at the IREC resulted in the team's best placement to
+                        date, including a top-ten overall.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <details class="subteam-details">
+                    <summary>KINDLEVAN Subteam Details</summary>
+
+                    <h5>Avionics and Electrical</h5>
+                    <p>The goals for KINDLEVAN were to implement a robust sensor suite and control capabilities. These
+                        included: altitude and motion tracking for control of deployment energetics, high data rate
+                        logging and live transmission, trajectory modeling for optimization of control surface
+                        actuation, and photovoltaic efficiency monitoring. Additionally, a major focus of the project
+                        was the capture of high-quality on-board footage, as well as live video transmission, requiring
+                        control over camera activation and power supply. As such, the primary objective of the
+                        electrical and avionics subteams were the design and implementation of a series of custom
+                        flight computers that can accomplish these goals. These computers have received the
+                        designations of Panini, The Sun, and Greek Yogurt. In addition to these, a ground station
+                        capable of receiving the telemetry transmissions, with a custom computer designated as
+                        Focaccia, has been created, alongside a portable interface for that computer built off a
+                        Raspberry Pi. These computers are split between three sections of the rocket: the avionics
+                        bay, air brakes compartment, and payload. Each of these is accompanied by an isolated power
+                        system.</p>
+
+                    <h6>Flight Computer</h6>
+                    <p>Panini is the primary flight computer for KINDLEVAN, serving a multi-purpose role within the
+                        rocket. It is a continuation of the design of the flight computer created for the team's
+                        previous rocket for the IREC in 2025. It is built around an ESP32 microcontroller, capable of
+                        performing the complex calculations needed for trajectory prediction and optimization as well
+                        as state determination. These calculations are reliant on the on-board sensor suite consisting
+                        of: two redundant barometers, a 6DOF inertial measurement unit, a 200 G range accelerometer, a
+                        magnetometer, a GNSS receiver patch antenna, as well as an SHT40 and a TMP1075 temperature
+                        sensor. The board also features an SD card module and a LoRa-capable transceiver module for
+                        telemetry data retention and transmission. Fast debugging and programming capabilities are
+                        provided by an on-board USB-C connector, which interfaces with the processor through a USB to
+                        UART bridge.</p>
+
+                    <h6>Air Brakes</h6>
+                    <p>The flight computer, Panini, is also responsible for controlling air brake extension, which is
+                        done in order to control the rocket's achieved apogee during flight. Panini determines the
+                        optimal air brake extension by solving a nonlinear optimization problem, which determines an
+                        optimal trajectory. Panini then extends the airbraking mechanism according to this trajectory,
+                        collects new data, and repeats the process.</p>
+
+                    <h6>Ground Station</h6>
+                    <p>The purpose of the ground station is to display live flight data recorded by the SRAD boards on
+                        the rocket. In order to achieve this visualization goal, the ground station runs a Python
+                        program through Thonny, which relies on a combination of Tkinter and Matplotlib toolkits. Once
+                        the program is run on the ground station, there are no further inputs. The user can navigate
+                        the visualization screen to focus on different data outputs, but there are no additional
+                        features; the ground station is exclusively for visualizing flight data. In order to display
+                        live rocket data, the ground station first receives this data over UART Serial (wire) from
+                        Focaccia. The data received through RF by Focaccia is then sent over serial to the Raspberry Pi
+                        before it is stored locally by the reception PCB to its own micro SD card. After receiving this
+                        data, the Raspberry Pi then displays it on the ground station monitor by continuously updating
+                        its displays and graphs on the monitor based on this data stream.</p>
+
+                    <h5>Payload</h5>
+                    <p>The purpose of our payload is to determine how the efficiency of solar panels changes based on
+                        the altitude of the rocket during descent. We hypothesize that as the payload descends, there
+                        will be a decrease in current generated by the solar panels since the atmosphere will get
+                        thicker and absorb more sunlight.</p>
+                    <p>The payload is a 4.4 lbs, aluminum 2U CubeSat form factor with four inset solar panels on each
+                        of the sides, with an internal SRAD computer collecting current output data. The payload
+                        deploys with the nosecone upon ejection of the drogue parachute at apogee. The solar panels are
+                        then exposed to sunlight throughout the entire descent. To measure the current output of the
+                        solar panels, we developed a PCB named "The Sun," which includes four current sensors, one for
+                        each solar panel, as well as a barometer and IMU to measure the altitude and motion of the
+                        payload as it descends. Data is stored on a removable microSD card, and The Sun is powered by
+                        four 7.4 V Samsung 18650 batteries.</p>
+                    <p>We planned to use this data to quantify the efficiency of the solar panels as a function of
+                        altitude, but due to a combination of an unexpected delay before launch and a software bug, we
+                        were unable to collect any data in the time frame of the launch at IREC. We plan to perform a
+                        test launch in Fall 2026 to finally get data from our payload.</p>
+                    <p>Each of the six sides on the payload exterior structure is constructed from aluminum 6061 and
+                        was manufactured to size in-house using a Bridgeport mill. The waterjet was used to cut out
+                        slots to run wiring from the solar panels to the SRAD board. All of the holes that hold the
+                        sides together were drilled using a drill press. The sides are fastened using #6-32 x 3/4 inch
+                        bolts. We chose aluminum 6061 due to its ease of access, machinability, and strength under
+                        shock loads during recovery. The payload takes the force of nosecone ejection and drogue
+                        deployment and must be designed to withstand that amount of force plus a factor of safety.
+                        Additionally, aluminum 6061 is relatively cheap and common for manufacturing, and we use it for
+                        many parts of the rocket beyond the payload.</p>
+
+                    <h5>Propulsion</h5>
+                    <p>To be updated...</p>
+
+                    <h5>Mechanical</h5>
+                    <h6>Airframe</h6>
+                    <p>The six-inch fiberglass exterior of KINDLEVAN is the smallest commercially available airframe
+                        size which is able to accommodate the 2U CubeSat form factor. It was cut to length and squared
+                        to form the basic structure of the rocket. Cutouts were made in the switchband to provide easy
+                        access to batteries and other AV bay electronics. Other switchband cutouts accommodated the
+                        switches and the onboard camera mounts. Slots were cut in the aft airframe which the air brake
+                        leaves extend from when they are deployed during the coast phase of flight.</p>
+
+                    <h6>Payload Structure</h6>
+                    <p>The payload structure was constructed out of aluminum 6061-T6 and fastened using 18-8 stainless
+                        steel socket head screws to ensure the head profile does not interfere with the 2U CubeSat size
+                        requirements. The walls of the CubeSat have pockets to hold the solar panels used in the
+                        experiment. A structural dynamic simulation in SolidWorks FEA was run to ensure the aluminum
+                        structure could withstand the shock loads of parachute deployment. The sled that holds the
+                        electronics within the payload structure was constructed out of 3 mm birch plywood.</p>
+
+                    <h6>Nosecone</h6>
+                    <p>The nosecone was purchased from a vendor and modified to accommodate a custom nosecone tip that
+                        was designed and manufactured in-house. This modification allowed the nosecone to serve as the
+                        structural housing for the rocket's GPS system while maintaining easy access to the
+                        electronics. The custom nosecone tip is secured to the assembly using a fiberglass rod that
+                        threads into a bulkhead which is epoxied to the interior of the fiberglass nosecone. A custom
+                        3D-printed GPS mount is bolted to the metal nosecone tip and houses the TeleGPS V4, antenna, and
+                        battery. A 3D-printed guide installed on the nosecone bulkhead helps align the fiberglass rod
+                        during tip installation. This design allows the GPS to be removed after integration and
+                        minimizes the risk of the battery dying before launch. Below that, the 2U CubeSAT payload is
+                        mounted to the bottom of the nosecone with an adapter machined from aluminum 6061. It is
+                        equipped with a quick link that attaches to the drogue parachute, which is housed in the
+                        compartment just below the payload inside the forward airframe.</p>
+                    <p>Similar to last year's rocket, the payload is integrated into the overall nosecone assembly and
+                        bears all of the load from drogue deployment at apogee. Since the payload measures the output
+                        of solar panels after parachute deployment, it needs to be exposed to sunlight as the rocket
+                        returns to the ground. To accomplish this, the team chose to mount the payload onto the aft end
+                        of the nosecone coupler tube. The payload is fastened to the payload bulkhead, which is located
+                        at the aft end of the coupler. The payload bulkhead is secured with two all-threads held in
+                        tension with another bulkhead at the forward end of the coupler within the nosecone. The
+                        coupler and the bulkhead were both attached inside the nosecone with Fibre Glast system 1101
+                        epoxy, and cured at 85&deg;F for 12 hours.</p>
+
+                    <h6>Fins</h6>
+                    <p>The booster was constructed out of COTS G12 fiberglass, which was cut and sanded to length. The
+                        removable fins were mounted through-the-wall using aluminum 7075 fin mounts epoxied to the G12
+                        fiberglass motor mount tube. The removable fin mounts were attached to the motor mount tube
+                        with alignment rings and small 1101 epoxy fillets. Larger epoxy fillets were added to the
+                        outside of the aft airframe tube to complete the through-the-wall mounting of the fin brackets.
+                        We chose through-the-wall mounts because they have worked well for our team's rockets in
+                        previous years and reinforce the fins, providing sufficient strength.</p>
+                    <p>The removable fins are some of the most heavily optimized components on KINDLEVAN, and they are
+                        also the most notable example of the testing-based optimization method. Extra care was given
+                        this year to characterize fin flutter through a detailed analysis involving calculations of
+                        flutter velocity across various thicknesses of composite materials.</p>
+                    <p>These removable fins also allow for easy repairs should the booster sustain damage upon landing.
+                        Unlike fins with layups, removable fins can be swapped quickly. Removable fins also allow for
+                        pre-flight apogee tuning without the use of air brakes or other in-flight controls. By simply
+                        swapping for a lower or higher drag set of fins, the apogee can be modified as desired.</p>
+
+                    <h6>Air Brakes</h6>
+                    <p>The air brake system uses a rack-and-pinion mechanism to convert the rotational motion of a DC
+                        motor into linear motion that deploys and retracts the braking surfaces. The mechanical
+                        assembly is integrated into the airframe and designed to transfer parachute deployment loads
+                        into the surrounding rocket structure. The internal structure supports and aligns the motor,
+                        pinion, and racks to maintain smooth and controlled deployment throughout operation. The
+                        assembly was designed with an emphasis on minimizing mass and packaging volume while providing
+                        sufficient stiffness and strength to withstand expected flight loads.</p>
+
+                    <h6>Thrust Plate</h6>
+                    <p>The thrust plate was designed to withstand motor thrust loads and was evaluated using both
+                        static and dynamic structural analyses in SolidWorks FEA. These analyses were used to optimize
+                        the part for weight while verifying that it could safely withstand the expected motor loading
+                        conditions. The thrust plate was programmed in Fusion360 CAM and machined by students using a
+                        HAAS VF2 mill. Grooves for increasing surface area for epoxy adhesion were post-machined into
+                        the walls of the thrust plate using a manual lathe.</p>
+                    <p>The team also ran material testing on the adhesion strength of 1101 epoxy connections, for both
+                        fiberglass-fiberglass and fiberglass-aluminum interfaces. This informed the overlap distance for
+                        stop rings and the thrust plate to ensure sufficient strength. The testing built on our lap
+                        shear tests from last year, and our results corroborated the strength properties provided by
+                        the epoxy data sheets.</p>
+
+                    <h5>Recovery</h5>
+                    <p>KINDLEVAN's dual-deployment recovery system was recovered as one body and performed perfectly
+                        at IREC. A 36 inch ripstop nylon drogue parachute deployed at apogee and an 84 inch Iris Ultra
+                        main parachute deployed at 1,200 feet. The target descent velocity under drogue was 98 ft/s and
+                        target descent velocity under main was 22 ft/s. The drogue deployment separated between the
+                        nosecone and the forward airframe. The recovery system utilized COTS &frac12; inch tubular
+                        Kevlar shock cords of varying lengths chosen to be around 5 times the length of the section of
+                        the rocket they are attached to, with some modifications to achieve the optimal recovery stack
+                        under the main to minimize in-air collision. These shock cords were tested to withstand about
+                        6000 lbf.</p>
+                    <p>The main deployment separated the aft side of the avionics bay and the aft airframe. We chose to
+                        house the drogue in the compartment between the nosecone and forward airframe to give the
+                        payload more time to collect data. Being exposed to sunlight throughout the entire descent gave
+                        our experiment the largest range of altitudes possible. When the nosecone separated at apogee,
+                        the payload pulled out of the forward airframe along with it. The booster did not fall
+                        ballistically; it tumbled with the rest of the stack. This was simulated and then validated
+                        during the first flight test and IREC launch.</p>
+                    <p>We calculated the number of shear pins to prevent early separation of the main when the drogue
+                        deploys, also validated by our first flight test. The recovery scheme was controlled by one
+                        COTS RRC3+ and one SRAD flight computer that controlled the primary and backup CO2 energetics.
+                        For IREC, the COTS RRC3+ flight computers were used. CO2 was chosen as the energetic, since
+                        black powder would risk coating the payload solar panels in soot, rendering them useless.
+                        Additionally, testing CO2 in competition setting was critical to ensure a successful recovery
+                        with CO2 was possible and repeatable in the future when Tufts Rocketry competes in the 30K COTS
+                        category.</p>
+                </details>
+            </div>
+        </div>
+        <!-- End Project Entry -->
+        <br>
+        <!-- Start Project Entry -->
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="apo-testimonials proj-img" style="margin-left: 3%;">
+                    <img src="{% static 'images/rocketry/rocketry_team_with_hodge.webp' %}"
+                        alt="The Tufts Rocketry Team with HODGE">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="apo-testimonials apo-style-4" style="text-align: center;">
+                    <h3>HODGE</h3>
+                    <p>The Highly-Optimized Data-Gathering Explorer, or HODGE, is the Tufts Rocketry Team's 2024-25
+                        project, designed as the team's second entry into the 10k COTS category for the IREC. It is a
+                        6" diameter fiberglass rocket which stands 9.5' tall and flew to 10,203ft in competition. HODGE
+                        was the team's first foray into removable fins, and carried an electronics testbed payload.
+                        HODGE also represented a chance for the team to build upon skills learned the prior year with
+                        CARM, creating a much better fabricated and optimized rocket build.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <details class="subteam-details">
+                    <summary>HODGE Subteam Details</summary>
+
+                    <h5>Avionics and Electrical</h5>
+                    <p>To be updated...</p>
+
+                    <h5>Propulsion</h5>
+                    <p>To be updated...</p>
+
+                    <h5>Mechanical</h5>
+                    <p>To be updated...</p>
+
+                    <h5>Recovery</h5>
+                    <p>HODGE utilized a dual-deployment recovery scheme that was recovered in single bodied descent
+                        controlled by a COTS RRC3 computer controlling the Black Powder primary and backup energetic.
+                        HODGE utilized FFFFg black powder for primary and backup energetic, and the recovery system
+                        performed perfectly, with both charges firing during drogue and main deployment events (visible
+                        in on-board flight footage). HODGE utilized a 36 inch Ballistic Mach II CD 0.97 parachute that
+                        deployed at apogee, 10,000 feet. For the main parachute, a 84 inch hemispherical, nylon,
+                        Rocketman parachute was used, deploying at an altitude of 1,200 feet. HODGE descended with a
+                        target velocity around 36.8 m/s and 8.9 m/s under drogue and main, respectively. HODGE's drogue
+                        deployment separation occurred between the aft airframe and the avionics bay. HODGE's main
+                        parachute deployment separation occurred between the forward air frame and the nose cone (with
+                        the payload bay inside). HODGE's shock cords were made out of 11/16" tubular nylon and covered
+                        with kevlar cord protectors and SRAD sewn loops on either ends where quick links were attached.
+                        The sewn loops withstood a continuous force of 995 lbf. The length of each shock cord section
+                        was calculated based on the length of the section of rocket it is attached to and in which
+                        event it is deployed. These lengths were chosen to minimize cord entanglement and collisions
+                        between the rocket sections.</p>
+                </details>
+            </div>
+        </div>
+        <!-- End Project Entry -->
+        <br>
         <!-- Start Project Entry -->
         <div class="row">
             <div class="col-sm-6">
@@ -112,6 +407,7 @@
         </div>
         <!-- End Project Entry -->
         <br>
+    </div>
     </div>
 </div>
 {% endblock %}

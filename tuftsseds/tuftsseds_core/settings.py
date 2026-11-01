@@ -32,7 +32,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # In the case you must make "DEBUG = False" while running things on your local machine, this will be so
 #   that you can make run django commands to make changes to the database using the Railway client.
 DEBUG = os.environ.get("DEBUG", "True") == "True"
-WHITENOISE_AUTOREFRESH = False
+# Re-scan static/ on each request locally so newly added files are served without a restart
+WHITENOISE_AUTOREFRESH = DEBUG
 
 if not DEBUG:
     ALLOWED_HOSTS = [
