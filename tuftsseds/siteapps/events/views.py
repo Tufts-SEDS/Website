@@ -4,6 +4,10 @@ from django.views.generic.list import ListView
 
 from .models import Events
 
+# Only this many photos are shown on an event page. The rest are moved to
+# archive/ by `python manage.py archive_event_images`.
+MAX_EVENT_IMAGES = 4
+
 
 def get_substring_after_last_char(s, char):
     head, separator, tail = s.rpartition(char)
@@ -42,7 +46,7 @@ def get_event(request, slug):
     event = get_object_or_404(Events.objects.filter(slug=slug))
 
     # generating urls for the static images
-    image_count = event.total_images
+    image_count = min(event.total_images or 0, MAX_EVENT_IMAGES)
     static_image_path = (
         "/static/images/events/" + event.folder_name + "/" + event.image_prepend_name
     )
