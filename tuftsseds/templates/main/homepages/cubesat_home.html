@@ -155,7 +155,7 @@
                     <!-- Article-->
                     <article class="apo-entry">
                         <div class="apo-entry-inner">
-                            <div class="apo-entry-media"><a href="{{ result.get_absolute_url }}"><img src="{{ result.cover_image }}" alt="{{ result.title }}"></a></div>
+                            <div class="apo-entry-media"><a href="{{ result.get_absolute_url }}"><img src="{{ result.cover_thumb_url }}" onerror="this.onerror=null;this.src='{{ result.cover_url }}'" alt="{{ result.title }}"></a></div>
                             <div class="apo-entry-content-wrap">
                                 <div class="apo-aligner-outer">
                                     <div class="apo-aligner-inner">

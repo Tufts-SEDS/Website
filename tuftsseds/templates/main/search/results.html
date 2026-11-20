@@ -86,7 +86,7 @@
                         <!-- Article-->
                         <article class="apo-entry">
                             <div class="apo-entry-inner">
-                                <div class="apo-entry-media"><a href="{{ event.get_absolute_url }}"><img src="{{ event.cover_image }}" alt="{{ event.title }}"></a></div>
+                                <div class="apo-entry-media"><a href="{{ event.get_absolute_url }}"><img src="{{ event.cover_thumb_url }}" onerror="this.onerror=null;this.src='{{ event.cover_url }}'" alt="{{ event.title }}"></a></div>
                                 <div class="apo-entry-content-wrap">
                                     <div class="apo-aligner-outer">
                                         <div class="apo-aligner-inner">

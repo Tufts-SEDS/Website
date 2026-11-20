@@ -77,17 +77,14 @@
 	Newsletter.prototype.send = function() {
 		var $form = $(this),
 			config = $form.data('config');
-			var full = $form.serialize();
-			var token = full.split("token=").pop();
-			var email = full.substr(0, full.indexOf('&')); 
+		// No CSRF token: pages are cached at the CDN, so the signup view is
+		// csrf_exempt (it only stores an email address).
 		$.ajax({
 			url: config.url,
 			type: 'POST',
-			headers: {'X-CSRFToken': token},
 			mode: 'same-origin',
 			dataType: 'json',
-			data: email,
-			csrfmiddlewaretoken: token,
+			data: $form.serialize(),
 			success: function(data){
 				if(data.status && data.status == 'fail') {
 					$.Apolo.modules.alertMessage({

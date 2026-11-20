@@ -83,6 +83,8 @@ MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     # "debug_toolbar.middleware.DebugToolbarMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
+    # Before Session/CSRF so it can see cookies they set (see the class docstring)
+    "tuftsseds.tuftsseds_core.middleware.PublicPageCacheMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -140,6 +142,11 @@ else:
             "PASSWORD": os.environ["PGPASSWORD"],
             "HOST": os.environ["PGHOST"],
             "PORT": os.environ["PGPORT"],
+            # Reuse the connection across requests on a warm server instead of
+            # paying the TCP/TLS/auth handshake to Railway on every page view.
+            # Health checks discard connections Railway dropped while idle.
+            "CONN_MAX_AGE": 60,
+            "CONN_HEALTH_CHECKS": True,
         }
     }
 

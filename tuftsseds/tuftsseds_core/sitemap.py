@@ -1,5 +1,3 @@
-from datetime import datetime
-
 from django.contrib.sitemaps import Sitemap
 from django.urls import reverse
 
@@ -11,7 +9,9 @@ class EventsSitemap(Sitemap):
         return Events.objects.all().order_by("-date")
 
     def lastmod(self, obj):
-        return datetime.now()
+        # Event pages don't change after they're posted; the event date is the
+        # closest thing to a real modification date.
+        return obj.date
 
 
 class StaticViewSitemap(Sitemap):

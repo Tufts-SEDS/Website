@@ -15,7 +15,17 @@
   ],
   "routes": [
     {
+      "src": "/static/(.*\\.(?:webp|png|jpe?g|gif|ico|svg|woff2?|ttf|eot|pdf))",
+      "headers": {
+        "Cache-Control": "public, max-age=2592000, stale-while-revalidate=86400"
+      },
+      "dest": "/tuftsseds/static/$1"
+    },
+    {
       "src": "/static/(.*)",
+      "headers": {
+        "Cache-Control": "public, max-age=86400, stale-while-revalidate=604800"
+      },
       "dest": "/tuftsseds/static/$1"
     },
     {

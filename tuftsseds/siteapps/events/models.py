@@ -1,4 +1,5 @@
 from django.db import models
+from django.templatetags.static import static
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from taggit.managers import TaggableManager
@@ -38,3 +39,16 @@ class Events(models.Model):
 
     def get_absolute_url(self):
         return reverse("events:get_event", args={self.slug})
+
+    def _cover_static_path(self, suffix=""):
+        return f"images/events/{self.folder_name}/{self.cover_image}{suffix}.webp"
+
+    @property
+    def cover_url(self):
+        """Full-size cover photo."""
+        return static(self._cover_static_path())
+
+    @property
+    def cover_thumb_url(self):
+        """Small cover photo for cards and lists (made by optimize_images.py)."""
+        return static(self._cover_static_path("_thumb"))

@@ -21,7 +21,13 @@ description: Work with CSS, JS, images, and static files on the Tufts SEDS site,
 ## Deployment (Vercel)
 - `vercel.json` serves `tuftsseds/static/**` directly as static files at `/static/...`, and sends every other request to the Django app in `api/index.py`.
 - A file therefore only reaches production if it is committed under `tuftsseds/static/`.
-- Keep images small: convert them to `.webp` and resize before committing. Large binaries make the repo slow for everyone.
+- Browsers cache images, fonts and PDFs for 30 days and CSS/JS for 1 day (set per route in `vercel.json`). File names aren't hashed, so after changing a CSS/JS file some visitors see the old one for up to a day. To change an image right away, give it a new file name.
+- Public pages are also cached at Vercel's CDN for 5 minutes (`tuftsseds_core/middleware.py`), so admin edits can take that long to show up.
+
+## Adding photos
+1. Convert them to `.webp` (`python webp_converter.py`) and put event photos in `images/events/<folder_name>/`.
+2. Run `python optimize_images.py --apply` from the repo root. It shrinks photos to at most 1920 px (800 px for eboard headshots) and writes a `<name>_thumb.webp` next to every event photo. Event lists, search results and launch pages show the `_thumb` file (`Events.cover_thumb_url`), and fall back to the full photo if it's missing. Run it without `--apply` first to see what it will change; it skips files that are already done.
+3. Commit the photos and their `_thumb` files together.
 
 ## Debugging a missing file
 - Check that the path in `{% static %}` matches the file's real path and case. Vercel is case-sensitive, while Windows and macOS usually aren't.

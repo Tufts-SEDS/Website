@@ -2,6 +2,9 @@
 {% load static %}
 {% block title %} Home | Tufts SEDS {% endblock %}
 
+{% block before_mainstyle %}{% include 'includes/revslider_css.html' %}{% endblock %}
+{% block extra_js %}{% include 'includes/revslider_js.html' %}{% endblock %}
+
 {% block extrastylesheet %}
 <style>
   /* Crop the project tiles to the same shape so the row lines up */
@@ -219,8 +222,7 @@
       <div class="apo-item">
         <!-- Article-->
         <article class="apo-entry">
-          <div data-bg-img-src="{% static 'images/events/' %}{{ event.folder_name }}/{{ event.cover_image }}.webp"
-            loading="lazy" class="apo-entry-media"></div>
+          <div data-bg-img-src="{{ event.cover_url }}" class="apo-entry-media"></div>
           <div class="apo-entry-content-wrap">
             <div class="apo-aligner-outer">
               <div class="apo-aligner-inner apo-same-height">

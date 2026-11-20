@@ -55,6 +55,8 @@ class Command(BaseCommand):
                 cover = event.cover_image.rstrip("/").rsplit("/", 1)[-1]
                 keep.add(cover if cover.endswith(".webp") else cover + ".webp")
             keep |= {name for f, name in hardcoded if f == event.folder_name}
+            # Thumbnails made by optimize_images.py go wherever their photo goes
+            keep |= {name[: -len(".webp")] + "_thumb.webp" for name in keep}
 
             to_move = sorted(p for p in folder.glob("*.webp") if p.name not in keep)
             self.stdout.write(
