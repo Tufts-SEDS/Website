@@ -154,17 +154,6 @@ def rocket_gallery(request):
     }
     return render(request, "main/rocketry/gallery.html", {"metacontent": metacontent})
 
-# delete when done
-def burner(request):
-    metacontent = {
-        "description": """Explore our Tufts SEDS Rocketry's journey with stunning visuals. 
-                        View our photo gallery showcasing the milestones and achievements of our dedicated team.""",
-        "author": "",
-        "keywords": "rockets, rocketry, Tufts, launch, explosion, photo gallary, awesome pictures, space",
-    }
-    return render(request, "main/burner.html", {"metacontent": metacontent})
-
-
 def weatherball_hp(request):
     result_list = Events.objects.filter(related_proj_team="hab").order_by("date")
     metacontent = {

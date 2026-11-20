@@ -33,12 +33,14 @@ A new app also needs a line in `tuftsseds/tuftsseds_core/urls.py` (see the `djan
 ## 3. Template (`tuftsseds/templates/<app>/...`)
 Extend a base template and fill the `content` block. Copy the structure from a similar existing page. There are several bases:
 - `base.html`: the default site chrome
-- `base_about_us.html`, `base_astrophotography.html`, `base_burner.html`: section-specific variants
+- `base_astrophotography.html`: the astrophotography page's full-screen variant
+
+Pages with a Revolution Slider (`rev_slider`) must also include `includes/revslider_css.html` in `{% block before_mainstyle %}` and `includes/revslider_js.html` in `{% block extra_js %}` (see `main/index.html`); `base.html` no longer loads the slider on every page.
 
 ## 4. Navigation: every base template has its own nav
 The navbar and footer are copied into each base file, not shared. When you add or remove a nav link, update all of them:
 ```bash
-grep -n "events:events" tuftsseds/templates/base*.html tuftsseds/templates/baser
+grep -n "events:events" tuftsseds/templates/base*.html
 ```
 Some bases also have a small `curr_page.includes("...")` script that highlights the active tab. Add or remove that branch too.
 

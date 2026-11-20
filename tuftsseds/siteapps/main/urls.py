@@ -13,7 +13,6 @@ urlpatterns = [
     path("media", views.media, name="media"),
     path("about-us", views.about_us, name="about_us"),
     path("support-us", views.support_us, name="support_us"),
-    path("burner", views.burner, name="burner"),  # delete when done
     # Project team specific pages
     #############################
     path("rocketry", views.rocket_hp, name="rocket_hp"),
