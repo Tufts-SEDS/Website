@@ -2,6 +2,9 @@
 {% load static %}
 {% block title %} Home | Tufts SEDS {% endblock %}
 
+{% block before_mainstyle %}{% include 'includes/revslider_css.html' %}{% endblock %}
+{% block extra_js %}{% include 'includes/revslider_js.html' %}{% endblock %}
+
 {% block extrastylesheet %}
 <style>
   /* Crop the project tiles to the same shape so the row lines up */
