@@ -1,8 +1,9 @@
+from copy import copy
 from datetime import date
 from django.shortcuts import get_object_or_404, render
 from django.template.defaulttags import register
 from django.http import JsonResponse
-from django.db.models import Q
+from django.db.models import Prefetch, Q
 from django.conf import settings
 from django.urls import reverse
 
@@ -272,20 +273,28 @@ def leadership(request):
     }
 
     curr_year = settings.ACTIVE_YEAR
+
+    # One query for the members plus one for all of their roles this year.
+    # (Querying roles per member made this page take 15+ seconds.)
     active_members = (
-        ExecMembers.objects.filter(active=True).order_by("ordering").values()
+        ExecMembers.objects.filter(active=True)
+        .order_by("ordering")
+        .prefetch_related(
+            Prefetch(
+                "yearandrole_set",
+                queryset=YearAndRole.objects.filter(year=curr_year).order_by("id"),
+                to_attr="current_roles",
+            )
+        )
     )
 
     for member in active_members:
-        year_and_roles = YearAndRole.objects.filter(
-            seds_member=member["id"], year=curr_year
-        )
-        for item in year_and_roles:
+        for item in member.current_roles:
             if item.is_eboard:
-                member["eboard_role"] = item.role
+                member.eboard_role = item.role
 
             if item.is_project_lead:
-                member["chapter_role"] = item.role
+                member.chapter_role = item.role
 
     # Get the past years of exes of seds in a dict
     ## target year range, when Tufts SEDS chapter was founded
@@ -309,29 +318,34 @@ def leadership(request):
         "2021-2022"
     )  # this was the year the 1st gen seds eboard were handing the keys to us 2nd gens we dont know wtf happened here
 
-    # Creates a dictionary that organizes past members into a key:value pair with the key
-    # being their active years and the value being a queryset that contains member who were
-    # active that year
-    past_members_dict = {}
+    # Organizes past members by year: {year: [member, ...]}, in the order their
+    # roles were entered. Each member gets a "role" attribute; someone with more
+    # than one role that year shows as "Eboard Role and Project Role".
+    # All years come from a single query.
+    roles_by_year = {year: {} for year in year_list}
 
-    for year in year_list:
-        # past_eboard_members = ExecMembers.objects.filter(yearandrole__year=year, yearandrole__is_eboard=True).annotate(
-        #         role = Subquery(YearAndRole.objects.filter(seds_member=OuterRef('id'), year=year).values("role"))).values()
-        past_members = (
-            ExecMembers.objects.filter(yearandrole__year=year).distinct().values()
-        )
-        for member in past_members:
-            year_and_roles = YearAndRole.objects.filter(
-                seds_member=member["id"], year=year
+    past_roles = (
+        YearAndRole.objects.filter(year__in=year_list, seds_member__isnull=False)
+        .select_related("seds_member")
+        .order_by("id")
+    )
+    for item in past_roles:
+        members_that_year = roles_by_year[item.year]
+        if item.seds_member_id not in members_that_year:
+            # Separate copy per year, since the same person can appear in several years
+            members_that_year[item.seds_member_id] = (copy(item.seds_member), [])
+        members_that_year[item.seds_member_id][1].append(item)
+
+    past_members_dict = {}
+    for year, members_that_year in roles_by_year.items():
+        past_members_dict[year] = []
+        for member, roles in members_that_year.values():
+            roles.sort(key=lambda r: not r.is_eboard)  # eboard role first
+            names = [r.role for r in roles]
+            member.role = (
+                ", ".join(names[:-1]) + " and " + names[-1] if len(names) > 1 else names[0]
             )
-            # you can only be on the eboard and be a chapter lead in a single year so
-            if year_and_roles.count() > 1:
-                member["role"] = (
-                    year_and_roles[0].role + " and " + year_and_roles[1].role
-                )
-            else:
-                member["role"] = year_and_roles[0].role
-        past_members_dict[year] = past_members
+            past_members_dict[year].append(member)
 
     return render(
         request,
