@@ -18,7 +18,7 @@
     <div class="apo-parallax-grid-item">
       <!-- Article-->
       <article class="apo-project">
-        <div class="apo-project-media"><a href="#"><img src="{% static 'images/events/' %}{{ event.folder_name }}/{{ event.cover_image }}.webp" alt=""></a></div>
+        <div class="apo-project-media"><a href="#"><img src="{{ event.cover_thumb_url }}" onerror="this.onerror=null;this.src='{{ event.cover_url }}'" alt="{{ event.title }}"></a></div>
         <div class="apo-project-content-wrap">
           <div class="apo-aligner-outer">
             <div class="apo-aligner-inner">

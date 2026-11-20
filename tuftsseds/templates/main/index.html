@@ -222,8 +222,7 @@
       <div class="apo-item">
         <!-- Article-->
         <article class="apo-entry">
-          <div data-bg-img-src="{% static 'images/events/' %}{{ event.folder_name }}/{{ event.cover_image }}.webp"
-            loading="lazy" class="apo-entry-media"></div>
+          <div data-bg-img-src="{{ event.cover_url }}" class="apo-entry-media"></div>
           <div class="apo-entry-content-wrap">
             <div class="apo-aligner-outer">
               <div class="apo-aligner-inner apo-same-height">
