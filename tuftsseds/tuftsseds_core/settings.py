@@ -140,6 +140,11 @@ else:
             "PASSWORD": os.environ["PGPASSWORD"],
             "HOST": os.environ["PGHOST"],
             "PORT": os.environ["PGPORT"],
+            # Reuse the connection across requests on a warm server instead of
+            # paying the TCP/TLS/auth handshake to Railway on every page view.
+            # Health checks discard connections Railway dropped while idle.
+            "CONN_MAX_AGE": 60,
+            "CONN_HEALTH_CHECKS": True,
         }
     }
 
