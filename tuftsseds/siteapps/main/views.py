@@ -3,7 +3,12 @@ from datetime import date
 from django.shortcuts import get_object_or_404, render
 from django.template.defaulttags import register
 from django.http import JsonResponse
+from django.core.exceptions import ValidationError
+from django.core.validators import validate_email
+from django.db import IntegrityError
 from django.db.models import Prefetch, Q
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
 from django.conf import settings
 from django.urls import reverse
 
@@ -203,10 +208,14 @@ def astrophotography_helper(request):
     )
 
 
+# csrf_exempt: pages are cached at the CDN without a CSRF cookie, and this
+# view only reads public photo details.
+@csrf_exempt
+@require_POST
 def image_info(request):
     if request.POST.get("action") == "post":
         img_link = request.POST.get("src")
-        photo = AstrophotographyPhotos.objects.get(photo=img_link)
+        photo = get_object_or_404(AstrophotographyPhotos, photo=img_link)
         if photo.caption == None:
             photo.caption = ""
         return render(request, "main/modals/modal_photo_info.html", {"photo": photo})
@@ -370,9 +379,20 @@ def media(request):
     return render(request, "main/media.html")
 
 
-# Handles signing up new people for newsletter
+# Handles signing up new people for newsletter. csrf_exempt because public
+# pages are cached at the CDN without a CSRF cookie; the view only stores a
+# validated email address.
+@csrf_exempt
+@require_POST
 def newsletter_signup(request):
-    email = str(request.POST.get("email"))
+    email = (request.POST.get("email") or "").strip()
+    try:
+        validate_email(email)
+    except ValidationError:
+        return JsonResponse(
+            {"status": "fail", "errors": "Please enter a valid email address."},
+            safe=False,
+        )
     try:
         MailingList.objects.create(user_email=email)
         return JsonResponse(
@@ -382,7 +402,7 @@ def newsletter_signup(request):
             },
             safe=False,
         )
-    except:
+    except IntegrityError:
         return JsonResponse(
             {"status": "fail", "errors": "This email has already been used."},
             safe=False,
