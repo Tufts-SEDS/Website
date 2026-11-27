@@ -15,3 +15,12 @@ class VersionedStaticUrlTests(SimpleTestCase):
     @override_settings(STATIC_VERSION="")
     def test_no_version_leaves_urls_unchanged(self):
         self.assertEqual(static("css/style.min.css"), "/static/css/style.min.css")
+
+
+class SitemapTests(SimpleTestCase):
+    def test_sitemaps_use_https_and_events_have_no_lastmod(self):
+        from tuftsseds.tuftsseds_core.sitemap import EventsSitemap, StaticViewSitemap
+
+        self.assertEqual(EventsSitemap.protocol, "https")
+        self.assertEqual(StaticViewSitemap.protocol, "https")
+        self.assertFalse(hasattr(EventsSitemap, "lastmod"))
