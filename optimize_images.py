@@ -1,5 +1,5 @@
 """
-Shrink the site's static photos and make thumbnails for event cards.
+Shrink the site's static photos.
 
 Run this from the repo root after adding or replacing photos, and before
 committing them:
@@ -12,12 +12,13 @@ What it does:
      so their longest side is at most MAX_SIDE (EBOARD_MAX_SIDE for headshots),
      and re-compresses ones that are stored far larger than they need to be.
      File names and formats stay the same, so templates don't change.
-  2. Writes <name>_thumb.webp (THUMB_WIDTH wide) next to every event photo in
-     static/images/events/<folder>/. Event lists, search results and launch
-     pages show these instead of the full photo.
 
-It is safe to run repeatedly: already-optimized images and up-to-date
-thumbnails are skipped. Originals stay in git history and in Google Drive.
+Thumbnails of event covers are made separately, by
+`python manage.py make_cover_thumbs`, because only covers need one and finding
+them takes the database.
+
+It is safe to run repeatedly: already-optimized images are skipped, and so are
+the _thumb files. Originals stay in git history and in Google Drive.
 """
 
 import argparse
@@ -29,13 +30,10 @@ from PIL import Image, ImageOps
 
 STATIC = Path(__file__).resolve().parent / "tuftsseds" / "static"
 ROOTS = [STATIC / "images", STATIC / "WEBP_IMAGES"]
-EVENTS_DIR = STATIC / "images" / "events"
 
 MAX_SIDE = 1920
 EBOARD_MAX_SIDE = 800  # headshots are shown at ~300 px
-THUMB_WIDTH = 800  # cards are ~400 px wide, so this is sharp on 2x screens
 WEBP_QUALITY = 80
-THUMB_QUALITY = 75
 JPEG_QUALITY = 82
 # Re-encode files that use more bytes per pixel than this even if they're small
 # enough already. A typical photo at the qualities above lands well below it,
@@ -105,20 +103,6 @@ def optimize(path, apply):
     return size - len(data)
 
 
-def make_thumb(path, apply):
-    """Write <name>_thumb.webp next to an event photo. Returns 1 if written."""
-    thumb = path.with_name(path.stem + "_thumb.webp")
-    if thumb.exists() and thumb.stat().st_mtime >= path.stat().st_mtime:
-        return 0
-    if apply:
-        with load(path) as img:
-            img.load()
-            if img.width > THUMB_WIDTH:
-                img.thumbnail((THUMB_WIDTH, THUMB_WIDTH * 10), Image.LANCZOS)
-            thumb.write_bytes(encode(img, ".webp", quality=THUMB_QUALITY))
-    return 1
-
-
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--apply", action="store_true", help="rewrite files (default is a dry run)")
@@ -133,14 +117,8 @@ def main():
                 if path.suffix.lower() in EXTENSIONS and not is_thumb(path):
                     saved += optimize(path, args.apply)
 
-    thumbs = 0
-    for path in sorted(EVENTS_DIR.glob("*/*.webp")):
-        if not is_thumb(path):
-            thumbs += make_thumb(path, args.apply)
-
     verb = "Saved" if args.apply else "Would save"
-    print(f"\n{verb} {saved / 1024 / 1024:.1f} MB; {thumbs} event thumbnail(s) "
-          f"{'written' if args.apply else 'to write'}.")
+    print(f"\n{verb} {saved / 1024 / 1024:.1f} MB.")
     if not args.apply:
         print("Run again with --apply to make these changes.")
 

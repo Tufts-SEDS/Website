@@ -28,8 +28,9 @@ description: Work with CSS, JS, images, and static files on the Tufts SEDS site,
 
 ## Adding photos
 1. Convert them to `.webp` (`python webp_converter.py`) and put event photos in `images/events/<folder_name>/`.
-2. Run `python optimize_images.py --apply` from the repo root. It shrinks photos to at most 1920 px (800 px for eboard headshots) and writes a `<name>_thumb.webp` next to every event photo. Event lists, search results and launch pages show the `_thumb` file (`Events.cover_thumb_url`), and fall back to the full photo if it's missing. Run it without `--apply` first to see what it will change; it skips files that are already done.
-3. Commit the photos and their `_thumb` files together.
+2. Run `python optimize_images.py --apply` from the repo root. It shrinks photos to at most 1920 px (800 px for eboard headshots). Run it without `--apply` first to see what it will change; it skips files that are already done.
+3. After the event exists in the admin, run `python manage.py make_cover_thumbs --apply`. It writes `<cover>_thumb.webp` for each event's cover photo and deletes thumbnails no cover uses. Event lists, search results and launch pages show the thumbnail (`Events.cover_thumb_url`) and fall back to the full photo if it's missing. Only covers get one; event pages show full photos.
+4. Commit the photos and the cover thumbnail together.
 
 ## Debugging a missing file
 - Check that the path in `{% static %}` matches the file's real path and case. Vercel is case-sensitive, while Windows and macOS usually aren't.
