@@ -4,7 +4,6 @@ from django.conf import settings
 UNCACHED_PREFIXES = (
     "/admin",
     "/account",
-    "/newsletter-signup",
     "/get-image-info",
 )
 

@@ -41,7 +41,6 @@ urlpatterns = [
     path("cubesat", views.cubesat_hp, name="cubesat_hp"),
     # Ajax forms
     #############################
-    path("newsletter-signup", views.newsletter_signup, name="newsletter_signup"),
     path("get-image-info/", views.image_info, name="image_info"), # this is what gets the image info that astrophotography_helper displays in the modal
     # Search bar function
     #############################
