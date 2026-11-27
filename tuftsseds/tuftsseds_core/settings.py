@@ -185,7 +185,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
+STATICFILES_STORAGE = "tuftsseds.tuftsseds_core.storage.VersionedStaticFilesStorage"
+# Added as ?v= to CSS/JS URLs so each deploy busts browser caches (see storage.py).
+# Vercel sets VERCEL_GIT_COMMIT_SHA; locally it's empty and URLs stay plain.
+STATIC_VERSION = os.environ.get("VERCEL_GIT_COMMIT_SHA", "")[:8]
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATIC_URL = "/static/"
 

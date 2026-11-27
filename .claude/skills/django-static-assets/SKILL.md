@@ -21,7 +21,9 @@ description: Work with CSS, JS, images, and static files on the Tufts SEDS site,
 ## Deployment (Vercel)
 - `vercel.json` serves `tuftsseds/static/**` directly as static files at `/static/...`, and sends every other request to the Django app in `api/index.py`.
 - A file therefore only reaches production if it is committed under `tuftsseds/static/`.
-- Browsers cache images, fonts and PDFs for 30 days and CSS/JS for 1 day (set per route in `vercel.json`). File names aren't hashed, so after changing a CSS/JS file some visitors see the old one for up to a day. To change an image right away, give it a new file name.
+- Browsers cache images, fonts and PDFs for 30 days and CSS/JS for 1 day (set per route in `vercel.json`).
+- `{% static %}` adds `?v=<commit>` to every `.css` and `.js` URL on Vercel (`tuftsseds_core/storage.py`, using `VERCEL_GIT_COMMIT_SHA`), so each deploy makes browsers fetch fresh CSS/JS. Always link CSS/JS through `{% static %}`; a hard-coded `/static/...` path gets no version and can stay stale for a day.
+- Images get no version, so to change an image right away, give it a new file name.
 - Public pages are also cached at Vercel's CDN for 5 minutes (`tuftsseds_core/middleware.py`), so admin edits can take that long to show up.
 
 ## Adding photos
