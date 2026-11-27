@@ -1,7 +1,13 @@
 from django.db import models
+from django.templatetags.static import static
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from taggit.managers import TaggableManager
+
+from .images import cover_stem, thumb_name
+
+# Shown instead of a cover photo when an event has none
+FALLBACK_COVER = "images/logo.png"
 
 
 class Author(models.Model):
@@ -38,3 +44,20 @@ class Events(models.Model):
 
     def get_absolute_url(self):
         return reverse("events:get_event", args={self.slug})
+
+    def _cover_static_path(self, thumb=False):
+        stem = cover_stem(self.cover_image)
+        if not stem or not self.folder_name:
+            return FALLBACK_COVER
+        name = thumb_name(stem) if thumb else f"{stem}.webp"
+        return f"images/events/{self.folder_name}/{name}"
+
+    @property
+    def cover_url(self):
+        """Full-size cover photo, or the site logo if the event has none."""
+        return static(self._cover_static_path())
+
+    @property
+    def cover_thumb_url(self):
+        """Small cover photo for cards and lists (made by `manage.py make_cover_thumbs`)."""
+        return static(self._cover_static_path(thumb=True))

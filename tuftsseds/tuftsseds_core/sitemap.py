@@ -1,20 +1,24 @@
-from datetime import datetime
-
 from django.contrib.sitemaps import Sitemap
 from django.urls import reverse
 
 from tuftsseds.siteapps.events.models import Events
 
 
+# The domain comes from the Sites framework (Django admin > Sites, SITE_ID = 1),
+# which must say sedstufts.org, not example.com.
+
+
 class EventsSitemap(Sitemap):
+    protocol = "https"
+    # No lastmod: events have no "last updated" field, and the event date would
+    # give future events a future modification date.
+
     def items(self):
         return Events.objects.all().order_by("-date")
 
-    def lastmod(self, obj):
-        return datetime.now()
-
 
 class StaticViewSitemap(Sitemap):
+    protocol = "https"
     priority = 0.5
     changefreq = "daily"
 

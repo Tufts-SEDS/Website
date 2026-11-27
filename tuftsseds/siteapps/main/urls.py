@@ -13,7 +13,6 @@ urlpatterns = [
     path("media", views.media, name="media"),
     path("about-us", views.about_us, name="about_us"),
     path("support-us", views.support_us, name="support_us"),
-    path("burner", views.burner, name="burner"),  # delete when done
     # Project team specific pages
     #############################
     path("rocketry", views.rocket_hp, name="rocket_hp"),
@@ -42,7 +41,6 @@ urlpatterns = [
     path("cubesat", views.cubesat_hp, name="cubesat_hp"),
     # Ajax forms
     #############################
-    path("newsletter-signup", views.newsletter_signup, name="newsletter_signup"),
     path("get-image-info/", views.image_info, name="image_info"), # this is what gets the image info that astrophotography_helper displays in the modal
     # Search bar function
     #############################

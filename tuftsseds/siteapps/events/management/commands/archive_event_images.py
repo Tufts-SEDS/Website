@@ -5,6 +5,7 @@ from pathlib import Path
 from django.conf import settings
 from django.core.management.base import BaseCommand
 
+from tuftsseds.siteapps.events.images import cover_stem, thumb_name
 from tuftsseds.siteapps.events.models import Events
 from tuftsseds.siteapps.events.views import MAX_EVENT_IMAGES
 
@@ -51,9 +52,10 @@ class Command(BaseCommand):
                 f"{event.image_prepend_name}_{i}.webp"
                 for i in range(1, MAX_EVENT_IMAGES + 1)
             }
-            if event.cover_image:
-                cover = event.cover_image.rstrip("/").rsplit("/", 1)[-1]
-                keep.add(cover if cover.endswith(".webp") else cover + ".webp")
+            stem = cover_stem(event.cover_image)
+            if stem:
+                # The cover and its thumbnail (from make_cover_thumbs) stay together
+                keep |= {f"{stem}.webp", thumb_name(stem)}
             keep |= {name for f, name in hardcoded if f == event.folder_name}
 
             to_move = sorted(p for p in folder.glob("*.webp") if p.name not in keep)

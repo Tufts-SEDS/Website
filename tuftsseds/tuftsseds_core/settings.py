@@ -83,6 +83,8 @@ MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     # "debug_toolbar.middleware.DebugToolbarMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
+    # Before Session/CSRF so it can see cookies they set (see the class docstring)
+    "tuftsseds.tuftsseds_core.middleware.PublicPageCacheMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -129,6 +131,9 @@ if DEBUG and REGULAR_DB:
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
             "NAME": BASE_DIR / "db.sqlite3",
+            # Some migrations use Postgres-only ArrayFields, so tests build the
+            # SQLite test database straight from the models instead.
+            "TEST": {"MIGRATE": False},
         }
     }
 else:
@@ -140,6 +145,11 @@ else:
             "PASSWORD": os.environ["PGPASSWORD"],
             "HOST": os.environ["PGHOST"],
             "PORT": os.environ["PGPORT"],
+            # Reuse the connection across requests on a warm server instead of
+            # paying the TCP/TLS/auth handshake to Railway on every page view.
+            # Health checks discard connections Railway dropped while idle.
+            "CONN_MAX_AGE": 60,
+            "CONN_HEALTH_CHECKS": True,
         }
     }
 
@@ -178,7 +188,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
+STATICFILES_STORAGE = "tuftsseds.tuftsseds_core.storage.VersionedStaticFilesStorage"
+# Added as ?v= to CSS/JS URLs so each deploy busts browser caches (see storage.py).
+# Vercel sets VERCEL_GIT_COMMIT_SHA; locally it's empty and URLs stay plain.
+STATIC_VERSION = os.environ.get("VERCEL_GIT_COMMIT_SHA", "")[:8]
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATIC_URL = "/static/"
 

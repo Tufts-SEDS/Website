@@ -21,7 +21,16 @@ description: Work with CSS, JS, images, and static files on the Tufts SEDS site,
 ## Deployment (Vercel)
 - `vercel.json` serves `tuftsseds/static/**` directly as static files at `/static/...`, and sends every other request to the Django app in `api/index.py`.
 - A file therefore only reaches production if it is committed under `tuftsseds/static/`.
-- Keep images small: convert them to `.webp` and resize before committing. Large binaries make the repo slow for everyone.
+- Browsers cache images, fonts and PDFs for 30 days and CSS/JS for 1 day (set per route in `vercel.json`).
+- `{% static %}` adds `?v=<commit>` to every `.css` and `.js` URL on Vercel (`tuftsseds_core/storage.py`, using `VERCEL_GIT_COMMIT_SHA`), so each deploy makes browsers fetch fresh CSS/JS. Always link CSS/JS through `{% static %}`; a hard-coded `/static/...` path gets no version and can stay stale for a day.
+- Images get no version, so to change an image right away, give it a new file name.
+- Public pages are also cached at Vercel's CDN for 5 minutes (`tuftsseds_core/middleware.py`), so admin edits can take that long to show up.
+
+## Adding photos
+1. Convert them to `.webp` (`python webp_converter.py`) and put event photos in `images/events/<folder_name>/`.
+2. Run `python optimize_images.py --apply` from the repo root. It shrinks photos to at most 1920 px (800 px for eboard headshots). Run it without `--apply` first to see what it will change; it skips files that are already done.
+3. After the event exists in the admin, run `python manage.py make_cover_thumbs --apply`. It writes `<cover>_thumb.webp` for each event's cover photo and deletes thumbnails no cover uses. Event lists, search results and launch pages show the thumbnail (`Events.cover_thumb_url`) and fall back to the full photo if it's missing. Only covers get one; event pages show full photos.
+4. Commit the photos and the cover thumbnail together.
 
 ## Debugging a missing file
 - Check that the path in `{% static %}` matches the file's real path and case. Vercel is case-sensitive, while Windows and macOS usually aren't.
