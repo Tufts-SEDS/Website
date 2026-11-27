@@ -2,7 +2,7 @@ from copy import copy
 from datetime import date
 from django.shortcuts import get_object_or_404, render
 from django.template.defaulttags import register
-from django.http import JsonResponse
+from django.http import HttpResponseBadRequest, JsonResponse
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
 from django.db import IntegrityError
@@ -202,12 +202,13 @@ def astrophotography_helper(request):
 @csrf_exempt
 @require_POST
 def image_info(request):
-    if request.POST.get("action") == "post":
-        img_link = request.POST.get("src")
-        photo = get_object_or_404(AstrophotographyPhotos, photo=img_link)
-        if photo.caption == None:
-            photo.caption = ""
-        return render(request, "main/modals/modal_photo_info.html", {"photo": photo})
+    img_link = request.POST.get("src")
+    if request.POST.get("action") != "post" or not img_link:
+        return HttpResponseBadRequest("Expected action=post and a photo src.")
+    photo = get_object_or_404(AstrophotographyPhotos, photo=img_link)
+    if photo.caption is None:
+        photo.caption = ""
+    return render(request, "main/modals/modal_photo_info.html", {"photo": photo})
 
 
 def cubesat_hp(request):

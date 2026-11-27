@@ -131,6 +131,9 @@ if DEBUG and REGULAR_DB:
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
             "NAME": BASE_DIR / "db.sqlite3",
+            # Some migrations use Postgres-only ArrayFields, so tests build the
+            # SQLite test database straight from the models instead.
+            "TEST": {"MIGRATE": False},
         }
     }
 else:
